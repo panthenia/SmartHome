@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="800dp">
+<TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/media_color"
+        android:textSize="30sp"
+        android:text="=asdasd"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/play_list_item"
+        ></TextView>
+
+
+</RelativeLayout>

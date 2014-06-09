@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@drawable/config_background"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <WebView
+            android:layout_width="320dp"
+            android:layout_height="240dp"
+            android:layout_x="470dp"
+            android:id="@+id/camera_content"
+            android:layout_y="230dp">
+            </WebView>
+    <WebView
+            android:visibility="invisible"
+            android:layout_width="320dp"
+            android:layout_height="240dp"
+            android:layout_x="0dp"
+            android:id="@+id/camera_control"
+            android:layout_y="0dp">
+    </WebView>
+
+    <ImageView
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:id="@+id/camera_left"
+            android:layout_x="288dp"
+            android:layout_y="315dp"
+            android:src="@drawable/btn_av_dpad_left"/>
+    <ImageView
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:id="@+id/camera_right"
+            android:layout_x="895dp"
+            android:layout_y="315dp"
+            android:src="@drawable/btn_av_dpad_right"/>
+    <ImageView
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:id="@+id/camera_up"
+            android:layout_x="590dp"
+            android:layout_y="91dp"
+            android:src="@drawable/btn_av_dpad_up"/>
+    <ImageView
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:id="@+id/camera_down"
+            android:layout_x="590dp"
+            android:layout_y="532dp"
+            android:src="@drawable/btn_av_dpad_down"/>
+    <RelativeLayout
+            android:background="@drawable/input_back"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_width="match_parent"
+            android:layout_height="60px"
+            android:layout_x="0dp"
+            android:layout_y="690dp">
+
+        <TextView
+                android:text="一号摄像头"
+                android:textSize="30sp"
+                android:textColor="#486a00"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+    </RelativeLayout>
+</AbsoluteLayout>

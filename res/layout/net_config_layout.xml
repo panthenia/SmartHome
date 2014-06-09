@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/config_background"
+                android:baselineAligned="false">
+    <!--
+    登录块
+    -->
+    <ImageView
+
+            android:layout_width="125px"
+            android:src="@drawable/big_net"
+            android:layout_height="125px"
+            android:id="@+id/imageView"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="64dp"/>
+    <EditText
+            android:hint=" 网关地址:"
+            android:textSize="22sp"
+            android:maxLength="27"
+            android:textColorHint="#486a00"
+            android:textColor="#555555"
+            android:textCursorDrawable="@null"
+            android:background="@drawable/input_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/net_ip"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"/>
+    <EditText
+            android:hint=" 网关端口:"
+            android:textSize="22sp"
+            android:maxLength="27"
+            android:textColorHint="#486a00"
+            android:textColor="#555555"
+            android:textCursorDrawable="@null"
+            android:background="@drawable/input_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/net_port"
+            android:layout_below="@+id/net_ip"
+            android:layout_alignLeft="@+id/net_ip"
+            android:layout_marginTop="20dp"/>
+    <ImageView
+            android:id="@+id/net_return"
+            android:scaleType="center"
+            android:onClick="onNetConfigCancel"
+            android:background="@drawable/circle_back"
+            android:src="@drawable/backa"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:layout_alignTop="@+id/net_submit"
+            android:layout_alignLeft="@+id/net_port"/>
+    <ImageView
+            android:scaleType="center"
+            android:onClick="onNetConfigSubmit"
+            android:background="@drawable/circle_back"
+            android:src="@drawable/submit"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:id="@+id/net_submit"
+            android:layout_marginTop="64dp"
+            android:layout_below="@+id/net_port"
+            android:layout_alignRight="@+id/net_port"/>
+    <RelativeLayout
+            android:background="@drawable/input_back"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_width="match_parent"
+            android:layout_height="60px">
+
+        <TextView
+                android:id="@+id/acitivity_name"
+                android:textSize="30sp"
+                android:text="网关配置"
+                android:textColor="#486a00"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+</RelativeLayout>

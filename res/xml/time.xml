@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<time>
+    <hour>06</hour>
+    <minute>29</minute>			//触发时间 即该规则何时开始有效
+    <startTime>1382082000</startTime>	//有效时间开始
+    <endTime>1383118800</endTime>		//有效时间结束
+    <repeats>
+        <type>weekly,daily</type>		//每周几重复执行
+        <daysOfWeek>1,2,3,4,5,6,7</daysOfWeek>
+        <interval>1</interval>
+    </repeats>
+</time>

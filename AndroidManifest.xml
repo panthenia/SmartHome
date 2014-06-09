@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+          package="com.SmartHome">
+    <uses-permission
+            android:name="android.permission.INTERNET"
+            />
+    <uses-sdk android:minSdkVersion="14"/>
+    <application
+            android:icon="@drawable/home"
+            android:label="@string/app_name"
+            android:name=".DataType.PublicState">
+        <activity android:name=".Activity.FinishActivity"
+                  android:theme="@android:style/Theme.NoDisplay"
+                  android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.LoginActivity"/>
+        <activity android:name=".Activity.NetConfigActivity"/>
+        <activity android:name=".Activity.MainActivity"/>
+        <activity android:name=".Activity.EnvironmenActivity"/>
+        <activity android:name="org.achartengine.GraphicalActivity" />
+        <activity android:name=".Activity.SettingActivity"/>
+        <activity android:name=".Activity.LightActivity"/>
+        <activity android:name=".Activity.SecureActivity"/>
+        <activity android:name=".Activity.MediaActivity"/>
+        <activity android:name=".Activity.AirActivity"/>
+        <activity android:name=".Activity.CameraActivity"/>
+        <activity android:name=".Activity.TelevisionActivity"/>
+        <activity android:name=".Activity.PlayerActivity"/>
+        <activity android:name=".Activity.PlayListActivity"/>
+        <activity android:name=".Activity.ModeActivity"/>
+        <activity android:name=".Activity.RuleActivity"/>
+        <activity android:name=".Activity.ModeDetailActivity"/>
+    </application>
+</manifest>

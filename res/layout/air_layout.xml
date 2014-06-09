@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:background="@drawable/config_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:background="@drawable/rect_back_big"
+            android:layout_width="1140dp"
+            android:layout_marginTop="30dp"
+            android:layout_height="640dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+
+
+        <View
+                android:layout_marginTop="160dp"
+                android:layout_height="1px"
+                android:background="#486a00"
+                android:layout_width="fill_parent"
+                android:id="@+id/view3">
+        </View>
+        <View
+                android:layout_marginTop="320dp"
+                android:layout_height="1px"
+                android:background="#486a00"
+                android:layout_width="380dp"
+                android:id="@+id/view7">
+        </View>
+        <View
+                android:layout_marginTop="320dp"
+                android:layout_height="1px"
+                android:background="#486a00"
+                android:layout_alignParentRight="true"
+                android:layout_width="380dp"
+                android:id="@+id/view4">
+
+        </View>
+        <View
+                android:layout_marginTop="480dp"
+                android:layout_height="1px"
+                android:background="#486a00"
+                android:layout_width="fill_parent"
+                android:id="@+id/view10">
+        </View>
+
+        <View
+                android:layout_height="480dp"
+                android:layout_width="1px"
+                android:background="#486a00"
+                android:layout_marginLeft="190dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/view2">
+
+        </View>
+
+        <View
+                android:layout_height="480dp"
+                android:layout_width="1px"
+                android:background="#486a00"
+                android:layout_marginLeft="760dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/view9">
+
+        </View>
+        <View
+                android:layout_height="480dp"
+                android:layout_width="1px"
+                android:background="#486a00"
+                android:layout_marginLeft="950dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/view8">
+
+        </View>
+        <View
+                android:layout_height="480dp"
+                android:layout_width="1px"
+                android:background="#486a00"
+                android:layout_marginLeft="380dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/view5">
+
+        </View>
+        <View
+                android:layout_height="160dp"
+                android:layout_width="1px"
+                android:background="#486a00"
+                android:layout_marginLeft="570dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/view">
+
+        </View>
+        <View
+                android:layout_height="160dp"
+                android:layout_width="1px"
+                android:visibility="invisible"
+                android:background="#486a00"
+                android:layout_marginLeft="570dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/view6">
+        </View>
+
+        <TextView
+
+                android:layout_width="380dp"
+                android:layout_height="320dp"
+                android:text="℃55"
+                android:gravity="center"
+                android:textColor="#486a00"
+                android:id="@+id/textView2"
+                android:textSize="140sp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"/>
+
+        <TextView
+                android:text="电源开"
+                android:textSize="25sp" android:gravity="center"
+                android:clickable="true"
+                android:textColor="@color/media_color"
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:id="@+id/t1"
+                android:onClick="onPowerOnClicked"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"/>
+        <TextView
+                android:text="电源关"
+                android:textSize="25sp" android:gravity="center"
+                android:clickable="true"
+                android:textColor="@color/media_color"
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:onClick="onPowerOffClicked"
+                android:id="@+id/t2"
+                android:layout_alignParentTop="true" android:layout_alignLeft="@+id/view2"/>
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="温度+"
+                android:textSize="25sp" android:gravity="center"
+                android:onClick="onTemAddClicked"
+                android:textColor="@color/media_color"
+                android:id="@+id/textView3"
+                android:layout_alignTop="@+id/view3" android:layout_toRightOf="@+id/view9"/>
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="温度-"
+                android:textSize="25sp" android:gravity="center"
+
+                android:textColor="@color/media_color"
+                android:id="@+id/textView6"
+                android:onClick="onTemMinusClicked"
+                android:layout_above="@+id/textView4" android:layout_toRightOf="@+id/view9"/>
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="高风速"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:id="@+id/t23"
+
+                android:onClick="onHSpeedClicked"
+                android:layout_alignBottom="@+id/view3" android:layout_toRightOf="@+id/view8"/>
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="中风速"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:id="@+id/t22"
+                android:onClick="onMSpeedClicked"
+                android:layout_alignTop="@+id/view3" android:layout_toRightOf="@+id/view8"/>
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="低风速"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:id="@+id/t24"
+                android:onClick="onSSpeedClicked"
+                android:layout_above="@+id/textView4" android:layout_alignParentRight="true"/>
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="左右扫风开"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:id="@+id/t27"
+                android:onClick="onLROpenClicked"
+                android:layout_below="@+id/t25" android:layout_toLeftOf="@+id/t28"/>
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="左右扫风关"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:id="@+id/t28"
+                android:onClick="onLRCloseClicked"
+                android:layout_alignBaseline="@+id/textView6" android:layout_alignBottom="@+id/textView6"
+                android:layout_alignRight="@+id/view7"/>
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="上下扫风开"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:id="@+id/t25"
+                android:onClick="onUDOpenClicked"
+                android:layout_below="@+id/t1" android:layout_toLeftOf="@+id/t28"/>
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="上下扫风关"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:id="@+id/t26"
+                android:onClick="onUDCloseClicked"
+                android:layout_below="@+id/t2" android:layout_alignLeft="@+id/view2"/>
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="制冷"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:id="@+id/t21"
+                android:onClick="onColdClicked"
+                android:layout_alignParentTop="true" android:layout_toRightOf="@+id/view5"/>
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="制热"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:id="@+id/t19"
+                android:onClick="onHotClicked"
+                android:layout_alignParentTop="true" android:layout_toRightOf="@+id/view"/>
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="除湿"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:id="@+id/t20"
+                android:onClick="onWetClicked"
+                android:layout_alignBottom="@+id/view3" android:layout_toRightOf="@+id/textView2"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="当前温度："
+                android:textSize="35sp"
+                android:gravity="center"
+                android:textColor="#486a00"
+                android:id="@+id/textView4"
+                android:layout_marginTop="50dp"
+                android:singleLine="false"
+                android:layout_below="@+id/view10"
+                android:layout_alignRight="@+id/view5"/>
+
+        <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textSize="35sp"
+                android:text="未知"
+                android:gravity="center"
+                android:textColor="#486a00"
+                android:id="@+id/textView5"
+                android:layout_alignTop="@+id/textView4"
+                android:layout_centerHorizontal="true"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:background="@drawable/input_back"
+            android:layout_width="fill_parent"
+            android:layout_height="60px"
+            android:id="@+id/relativeLayout"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true">
+
+        <TextView
+                android:id="@+id/acitivity_name"
+                android:textSize="30sp"
+                android:textColor="@color/media_color"
+                android:layout_centerInParent="true"
+                android:layout_width="190dp"
+                android:layout_height="160dp"/>
+    </RelativeLayout>
+</RelativeLayout>

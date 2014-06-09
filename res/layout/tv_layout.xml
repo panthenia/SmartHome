@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:background="@drawable/config_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:background="@drawable/rect_back_big"
+            android:layout_width="1140dp"
+            android:layout_marginTop="30dp"
+            android:layout_height="640dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+
+
+
+
+        <View
+                android:layout_marginTop="160dp"
+                android:layout_height="1px"
+                android:background="#486a00"
+                android:layout_width="fill_parent"
+                android:id="@+id/view3">
+        </View>
+        <View
+                android:layout_marginTop="320dp"
+                android:layout_height="1px"
+                android:background="#486a00"
+                android:layout_width="380dp"
+                android:id="@+id/view7">
+        </View>
+        <View
+                android:layout_marginTop="320dp"
+                android:layout_height="1px"
+                android:background="#486a00"
+                android:layout_alignParentRight="true"
+                android:layout_width="380dp"
+                android:id="@+id/view4">
+
+                </View>
+        <View
+                android:layout_marginTop="480dp"
+                android:layout_height="1px"
+                android:background="#486a00"
+                android:layout_width="fill_parent"
+                android:id="@+id/view10">
+        </View>
+
+        <View
+                android:layout_height="fill_parent"
+                android:layout_width="1px"
+                android:background="#486a00"
+                android:layout_marginLeft="190dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/view2">
+
+        </View>
+
+        <View
+                android:layout_height="fill_parent"
+                android:layout_width="1px"
+                android:background="#486a00"
+                android:layout_marginLeft="760dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/view9">
+
+        </View>
+        <View
+                android:layout_height="fill_parent"
+                android:layout_width="1px"
+                android:background="#486a00"
+                android:layout_marginLeft="950dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/view8">
+
+        </View>
+        <View
+                android:layout_height="fill_parent"
+                android:layout_width="1px"
+                android:background="#486a00"
+                android:layout_marginLeft="380dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/view5">
+
+        </View>
+        <View
+                android:layout_height="160dp"
+                android:layout_width="1px"
+                android:background="#486a00"
+                android:layout_marginLeft="570dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/view">
+
+                </View>
+        <View
+                android:layout_height="160dp"
+                android:layout_width="1px"
+                android:background="#486a00"
+                android:layout_marginLeft="570dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/view6">
+        </View>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:src="@drawable/btn_av_dpad_left"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/view5"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2"
+                android:layout_alignBottom="@+id/imageView"
+                android:layout_toLeftOf="@+id/view4"
+                android:src="@drawable/btn_av_dpad_right"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView3"
+                android:src="@drawable/btn_av_dpad_up"
+                android:layout_below="@+id/view3"
+                android:layout_centerHorizontal="true"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView4"
+                android:src="@drawable/btn_av_dpad_down"
+                android:layout_above="@+id/view6"
+                android:layout_centerHorizontal="true"/>
+        <TextView
+                android:text="电源开"
+                android:textSize="25sp" android:gravity="center"
+                android:clickable="true"
+                android:textColor="@color/media_color"
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:onClick="onPowerOnClicked"
+                android:id="@+id/textView"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"/>
+        <TextView
+                android:text="电源关"
+                android:textSize="25sp" android:gravity="center"
+                android:clickable="true"
+                android:textColor="@color/media_color"
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:onClick="onPowerOffClicked"
+                android:id="@+id/textView0"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@id/textView"/>
+        <TextView
+                android:background="@drawable/btn_av_dpad_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="选择"
+                android:gravity="center"
+                android:id="@+id/textView2"
+                android:textSize="30sp"
+                android:layout_centerVertical="true"
+                android:layout_alignLeft="@+id/imageView4"/>
+
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="静音"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:id="@+id/textView3"
+                android:layout_below="@+id/textView"
+                android:layout_toLeftOf="@+id/textView9"/>
+
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="环绕声"
+                android:id="@+id/textView4"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:layout_below="@+id/textView3"
+                android:layout_toLeftOf="@+id/textView8"/>
+
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="频道-"
+                android:id="@+id/textView5"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:layout_below="@+id/textView10"
+                android:layout_toRightOf="@+id/imageView2"/>
+
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="数字信号"
+                android:id="@+id/textView6"
+                android:onClick="onDigitalClicked"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/textView5"
+                android:singleLine="false"/>
+
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="模拟信号"
+                android:id="@+id/textView7"
+                android:onClick="onAnalogClicked"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:layout_below="@+id/textView6"
+                android:layout_toRightOf="@+id/textView10"/>
+
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="音量-"
+                android:id="@+id/textView8"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:layout_alignTop="@+id/view7"
+                android:layout_toLeftOf="@+id/imageView"/>
+
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="音量+"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:id="@+id/textView9"
+                android:layout_alignTop="@+id/imageView3"
+                android:layout_toRightOf="@+id/textView"/>
+
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="频道+"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:id="@+id/textView10"
+                android:layout_alignTop="@+id/imageView3"
+                android:layout_toRightOf="@+id/imageView2"/>
+
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="PC"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:id="@+id/textView11"
+                android:onClick="onPcClicked"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/textView5"/>
+
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:clickable="true" android:text="HDMI"
+                android:textSize="25sp" android:gravity="center"
+                android:textColor="@color/media_color"
+                android:onClick="onHdmiClicked"
+                android:id="@+id/textView11"
+                android:layout_below="@+id/textView7"
+                android:layout_toRightOf="@+id/textView5"/>
+
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="160dp"
+                android:text="3D模式"
+                android:textColor="@color/media_color"
+                android:clickable="true"
+                android:textSize="25sp" android:gravity="center"
+                android:id="@+id/textView12"
+                android:layout_below="@+id/view10"
+                android:layout_alignParentLeft="true"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:background="@drawable/input_back"
+            android:layout_width="fill_parent"
+            android:layout_height="60px"
+            android:id="@+id/relativeLayout"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true">
+
+        <TextView
+                android:id="@+id/acitivity_name"
+                android:textSize="30sp"
+                android:textColor="@color/media_color"
+                android:layout_centerInParent="true"
+                android:layout_width="190dp"
+                android:layout_height="160dp"/>
+    </RelativeLayout>
+</RelativeLayout>

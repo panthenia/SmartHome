@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:background="@drawable/config_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:background="@drawable/rect_back_big"
+            android:layout_width="1140dp"
+            android:layout_marginTop="30dp"
+            android:layout_height="640dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+
+
+        <TextView
+                android:text="所有"
+                android:textSize="35sp" android:gravity="center"
+                android:clickable="true"
+                android:textColor="@drawable/playlist_back"
+                android:onClick="onAllClicked"
+                android:layout_width="350dp"
+                android:layout_height="160dp"
+                android:id="@+id/textView1"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"/>
+        <TextView
+                android:text="艺术家"
+                android:textSize="35sp" android:gravity="center"
+                android:clickable="true"
+                android:textColor="@drawable/playlist_back"
+                android:layout_width="350dp"
+                android:onClick="onAuthorClicked"
+                android:layout_height="160dp"
+                android:layout_below="@id/textView1"
+                android:id="@+id/textView2"
+                android:layout_alignParentLeft="true"/>
+
+        <TextView
+                android:text="专辑"
+                android:textSize="35sp" android:gravity="center"
+                android:clickable="true"
+                android:onClick="onIssueClicked"
+                android:textColor="@drawable/playlist_back"
+                android:layout_width="350dp"
+                android:layout_below="@id/textView2"
+                android:layout_height="160dp"
+                android:id="@+id/textView3"
+                android:layout_alignParentLeft="true"/>
+        <TextView
+                android:text="流派"
+                android:textSize="35sp" android:gravity="center"
+                android:clickable="true"
+                android:textColor="@drawable/playlist_back"
+                android:layout_width="350dp"
+                android:onClick="onStyleClicked"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView3"
+                android:id="@+id/textView4"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"/>
+        <ImageView
+                android:id="@+id/pic1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bk1"
+                android:layout_width="30dp"
+                android:layout_marginLeft="350dp"
+                android:layout_height="fill_parent"/>
+        <ImageView
+                android:id="@+id/pic2"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bk2"
+                android:layout_width="30dp"
+                android:layout_marginLeft="350dp"
+                android:layout_height="fill_parent"/>
+        <ImageView
+                android:id="@+id/pic3"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bk3"
+                android:layout_width="30dp"
+                android:layout_marginLeft="350dp"
+                android:layout_height="fill_parent"/>
+        <ImageView
+                android:id="@+id/pic4"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bk4"
+                android:layout_width="30dp"
+                android:layout_marginLeft="350dp"
+                android:layout_height="fill_parent"/>
+        <ListView
+                android:id="@+id/list"
+                android:divider="#aaaaaa"
+                android:dividerHeight="0dp"
+                android:layout_width="760dp"
+                android:scrollbars="none"
+                android:layout_marginLeft="380dp"
+                android:layout_height="fill_parent"></ListView>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:background="@drawable/input_back"
+            android:layout_width="fill_parent"
+            android:layout_height="60px"
+            android:id="@+id/relativeLayout"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true">
+
+        <TextView
+                android:id="@+id/acitivity_name"
+                android:textSize="30sp"
+                android:textColor="@color/media_color"
+                android:layout_centerInParent="true"
+                android:layout_width="190dp"
+                android:layout_height="160dp"/>
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">智能家居</string>
+    <string name="DB_CRT_SENSOR_TB">create table if not exists sensor
+	    (area text,type text,time text,val text)</string>
+    <string name="database_name">data.db</string>
+    <string name="login_preference_name">login_preference</string>
+    <string-array name="SECURETY_CATEGORY">
+        <item>camera</item>
+    </string-array>
+    <string-array name="ENVIRONMENT_CATEGORY">
+        <item>air</item>
+        <item>water</item>
+    </string-array>
+    <string-array name="LIGHT_CATEGORY">
+        <item>curtain</item>
+        <item>lamp</item>
+        <item>light</item>
+    </string-array>
+    <string-array name="MEDIA_CATEGORY">
+        <item>player</item>
+        <item>television</item>
+    </string-array>
+</resources>

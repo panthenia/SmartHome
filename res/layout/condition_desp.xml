@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="温度"
+            android:id="@+id/grp_name"
+            android:textSize="35sp"
+            android:textColor="#486a00"
+            android:layout_centerInParent="true"
+            />
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当下列条件组"
+            android:textSize="30sp"
+            android:textColor="#486a00"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/grp_name"
+            android:layout_marginRight="20dp"
+            />
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本规则生效"
+            android:textSize="30sp"
+            android:textColor="#486a00"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/grp_name"
+            android:layout_marginLeft="20dp"
+            />
+</RelativeLayout>

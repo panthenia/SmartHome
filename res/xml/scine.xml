@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scenes>
+    <Scene>
+        <SceneId>1</SceneId>
+        <SceneName>Turn All Device On</SceneName>
+        <Description>---</Description>
+    </Scene>
+    <Scene>
+        <SceneId>2</SceneId>
+        <SceneName>Turn All Device Off</SceneName>
+        <Description>---</Description>
+    </Scene>
+    <Scene>
+        <SceneId>3</SceneId>
+        <SceneName>test</SceneName>
+        <Description>---</Description>
+    </Scene>
+    <Scene>
+        <SceneId>4</SceneId>
+        <SceneName>test2</SceneName>
+        <Description>test2</Description>
+        <Rule>
+            <RuleId></RuleId>
+        </Rule>
+    </Scene>
+</Scenes>

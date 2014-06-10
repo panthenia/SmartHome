@@ -114,10 +114,6 @@ public class RuleActivity extends Activity {
         con_list.setGroupIndicator(null);
         RuleConditionAdaptor ruleConditionAdaptor = new RuleConditionAdaptor(this,crule);
         con_list.setAdapter(ruleConditionAdaptor);
-
-
-
-
     }
     public void onRuleOpsClicked(View v){// 在 textviews 中对应的位置 0
         listView.setVisibility(View.VISIBLE);

@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,7 +15,6 @@ import com.SmartHome.DataType.Rule;
 import com.SmartHome.R;
 import com.SmartHome.Util.InfoParser;
 import com.SmartHome.Util.ServiceRequest;
-import org.w3c.dom.Text;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -79,7 +77,7 @@ public class RuleConditionAdaptor extends BaseExpandableListAdapter {
 
         v = inflater.inflate(R.layout.condition_group,null);
         TextView tv = (TextView)v.findViewById(R.id.grp_name);
-        tv.setText("组-"+i);
+        tv.setText("条件-"+(i+1));
         if(i != 0){
             tv = (TextView)v.findViewById(R.id.grp_condition);
             if(crule.getGroupRelation(i-1).contains("and"))
@@ -97,7 +95,7 @@ public class RuleConditionAdaptor extends BaseExpandableListAdapter {
         ArrayList<String> cd = crule.getGroupCondition(grp,cdt);
         String op;
         TextView vname = (TextView)v.findViewById(R.id.val_name);
-        vname.setText("条件"+cdt+":"+cd.get(0));
+        vname.setText("当:"+cd.get(0));
 
         if(cdt != 0){
             vname = (TextView)v.findViewById(R.id.cdt_relation);
@@ -131,7 +129,7 @@ public class RuleConditionAdaptor extends BaseExpandableListAdapter {
                         String getmode_url="http://"+ps.getNetAddress();
                         String new_rule = "";
                         try {
-                            new_rule = InfoParser.makeConditionInfo(crule,grp,cdt);
+                            new_rule = InfoParser.makeRuleConditionInfo(crule, grp, cdt);
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (XmlPullParserException e) {
@@ -144,7 +142,7 @@ public class RuleConditionAdaptor extends BaseExpandableListAdapter {
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }
-                        ServiceRequest sr2=new ServiceRequest("getmode");
+                        ServiceRequest sr2=new ServiceRequest("control");
                         sr2.execute(rf2);
                         dialogInterface.dismiss();
                     }
@@ -168,7 +166,7 @@ public class RuleConditionAdaptor extends BaseExpandableListAdapter {
                         String getmode_url="http://"+ps.getNetAddress();
                         String new_rule = "";
                         try {
-                            new_rule = InfoParser.makeConditionInfo(crule,grp,cdt);
+                            new_rule = InfoParser.makeRuleConditionInfo(crule, grp, cdt);
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (XmlPullParserException e) {
@@ -181,7 +179,7 @@ public class RuleConditionAdaptor extends BaseExpandableListAdapter {
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }
-                        ServiceRequest sr2=new ServiceRequest("getmode");
+                        ServiceRequest sr2=new ServiceRequest("control");
                         sr2.execute(rf2);
 
                         tv.setText(text);

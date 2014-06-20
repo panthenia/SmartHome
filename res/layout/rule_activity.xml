@@ -83,7 +83,9 @@
                 android:layout_width="760dp"
                 android:scrollbars="none"
                 android:layout_marginLeft="380dp"
-                android:layout_height="fill_parent"></ListView>
+                android:layout_height="fill_parent">
+
+                </ListView>
 
         <RelativeLayout
                 android:id="@+id/time_triger"
@@ -188,8 +190,9 @@
                     android:textSize="25sp"
                     android:textColor="#486a00"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="450dp"
-                    android:layout_width="wrap_content"
+                    android:layout_marginTop="400dp"
+                    android:gravity="center"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"/>
             <ToggleButton
                     android:id="@+id/tb4"
@@ -264,6 +267,15 @@
                     android:layout_toRightOf="@id/tb6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+            <Button android:layout_width="150dp" android:layout_height="100dp"
+                    android:textSize="40sp"
+                    android:textColor="#486a00"
+                    android:text="保存"
+                    android:layout_below="@id/tb4"
+                    android:layout_alignLeft="@id/chong_fu"
+                    android:layout_marginTop="20dp"
+                    android:onClick="onTimeSaveClicked"
+                    />
         </RelativeLayout>
 
         <RelativeLayout

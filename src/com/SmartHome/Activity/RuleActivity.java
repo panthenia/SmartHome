@@ -3,6 +3,7 @@ package com.SmartHome.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -11,9 +12,16 @@ import android.widget.*;
 import com.SmartHome.Adaptor.RuleConditionAdaptor;
 import com.SmartHome.Adaptor.RuleOpsAdaptor;
 import com.SmartHome.DataType.PublicState;
+import com.SmartHome.DataType.RequestInfo;
 import com.SmartHome.DataType.Rule;
 import com.SmartHome.R;
+import com.SmartHome.Util.InfoParser;
+import com.SmartHome.Util.ServiceRequest;
+import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.TooManyListenersException;
 import java.util.zip.Inflater;
 
@@ -191,6 +199,39 @@ public class RuleActivity extends Activity {
         }
         else mini = mini-1;
         start_mini.setText(String.valueOf(mini));
+    }
+    public void onTimeSaveClicked(View v){
+        String new_timer = "";
+        String weeks = "";
+        String getmode_url="http://"+ps.getNetAddress();
+        ArrayList<String> tri_time = new ArrayList<String>();
+        tri_time.add(start_hour.getText().toString());
+        tri_time.add(start_mini.getText().toString());
+        for(int i=0;i<toggleButtons.length;++i){
+            if(toggleButtons[i].isChecked()){
+                weeks += ((i+1)+",");
+            }
+        }
+        weeks = weeks.substring(0,weeks.length()-1);
+        tri_time.add(weeks);
+        try {
+            new_timer = InfoParser.makeRuleTimeInfo(crule,tri_time);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+        Log.d("tri_timer",new_timer);
+        getmode_url+="/wsnRest/schedulerUpdate/username=bupt/sdfd";
+        RequestInfo rf2= null;
+        try {
+            rf2 = new RequestInfo(getmode_url, new_timer);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        ServiceRequest sr2=new ServiceRequest("control");
+        sr2.execute(rf2);
+        Toast.makeText(this,"保存成功",Toast.LENGTH_SHORT).show();
     }
     public void onEndHourUpClicked(View v){
 

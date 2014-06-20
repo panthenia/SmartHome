@@ -11,6 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -295,8 +296,74 @@ public class InfoParser {
         for(int i=0;i<ps.device_list.size();++i)
             Log.d("device_list",ps.device_list.get(i).id);
     }
+    public static String makeRuleTimeInfo(Rule crule,ArrayList<String> tri_time) throws IOException,XmlPullParserException{
+        XmlSerializer serializer = Xml.newSerializer();
+        StringWriter rst = new StringWriter();
 
-    public static String makeConditionInfo(Rule crule,int grp,int cdt) throws IOException,XmlPullParserException{
+
+        try {
+            serializer.setOutput(rst);
+            serializer.startDocument("utf-8", true);
+
+            serializer.startTag(null, "Rule");
+            serializer.startTag(null, "RuleId");
+            serializer.text(crule.id);
+            serializer.endTag(null, "RuleId");
+
+            serializer.startTag(null, "RuleName");
+            serializer.text(crule.name);
+            serializer.endTag(null, "RuleName");
+
+            serializer.startTag(null, "timeXML");
+            serializer.startTag(null, "time");
+
+            serializer.startTag(null, "hour");
+            serializer.text(tri_time.get(0));
+            serializer.endTag(null, "hour");
+
+            serializer.startTag(null, "minute");
+            serializer.text(tri_time.get(1));
+            serializer.endTag(null, "minute");
+
+            serializer.startTag(null, "startTime");
+            serializer.text("1388505661");
+            serializer.endTag(null, "startTime");
+            serializer.startTag(null, "endTime");
+            serializer.text("7384233661");
+            serializer.endTag(null, "endTime");
+
+            serializer.startTag(null, "repeats");
+
+            serializer.startTag(null, "type");
+            serializer.text("weekly");
+            serializer.endTag(null, "type");
+
+            serializer.startTag(null, "daysOfWeek");
+            serializer.text(tri_time.get(2));
+            serializer.endTag(null, "daysOfWeek");
+
+            serializer.endTag(null, "repeats");
+
+            serializer.endTag(null, "time");
+            serializer.endTag(null, "timeXML");
+
+            serializer.endTag(null, "Rule");
+            serializer.endDocument();
+            rst.flush();
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        String r=rst.toString();
+        return r;
+    }
+    public static String makeRuleConditionInfo(Rule crule, int grp, int cdt) throws IOException,XmlPullParserException{
         XmlSerializer serializer = Xml.newSerializer();
         StringWriter rst = new StringWriter();
         ArrayList<String> condition_info = crule.getGroupCondition(grp,cdt);

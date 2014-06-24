@@ -184,16 +184,6 @@
                         android:src="@drawable/btn_av_dpad_down"/>
             </RelativeLayout>
 
-            <TextView
-                    android:id="@+id/chong_fu"
-                    android:text="规则重复"
-                    android:textSize="25sp"
-                    android:textColor="#486a00"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="400dp"
-                    android:gravity="center"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"/>
             <ToggleButton
                     android:id="@+id/tb4"
                     android:textOn="周四"
@@ -201,7 +191,7 @@
                     android:textSize="25sp"
                     android:textColor="#486a00"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@id/chong_fu"
+                    android:layout_marginTop="420dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <ToggleButton
@@ -267,15 +257,75 @@
                     android:layout_toRightOf="@id/tb6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-            <Button android:layout_width="150dp" android:layout_height="100dp"
+            <TextView
+                    android:id="@+id/chong_fu"
+                    android:text="规则重复模式:"
+                    android:textSize="25sp"
+                    android:textColor="#486a00"
+                    android:layout_marginTop="380dp"
+                    android:gravity="center"
+                    android:layout_alignLeft="@id/tb1"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    />
+            <EditText android:layout_width="220dp"
+                      android:layout_height="60dp"
+                      android:layout_centerHorizontal="true"
+                      android:layout_marginTop="420dp"
+                      android:id="@+id/inter_day"
+                      android:textSize="30sp"
+                      android:hint="输入间隔天数"
+                      android:textColor="#486a00"
+                      android:textColorHint="#486a00"
+                    />
+            <Button android:layout_width="150dp" android:layout_height="90dp"
                     android:textSize="40sp"
                     android:textColor="#486a00"
                     android:text="保存"
-                    android:layout_below="@id/tb4"
-                    android:layout_alignLeft="@id/chong_fu"
-                    android:layout_marginTop="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="480dp"
+
                     android:onClick="onTimeSaveClicked"
                     />
+            <RadioGroup android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="370dp"
+                        android:layout_toRightOf="@id/chong_fu"
+                        android:orientation="horizontal"
+                        android:id="@+id/radiogrp"
+                    >
+                <RadioButton android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_marginTop="10dp"
+                             android:textSize="25sp"
+                             android:textColor="#486a00"
+                             android:text="间隔重复"
+                             android:id="@+id/cycle_day"
+                        />
+                <RadioButton android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:textSize="25sp"
+                             android:layout_marginTop="10dp"
+                             android:textColor="#486a00"
+                             android:text="按周重复"
+                             android:id="@+id/cycle_week"
+                        />
+
+            </RadioGroup>
+            <Button android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25sp"
+                    android:onClick="onSetStartDateClicked"
+                    android:textColor="#486a00"
+                    android:text="起始日期"
+                    />
+            <Button android:layout_width="wrap_content"
+                    android:text="结束日期"
+                    android:textSize="25sp"
+                    android:onClick="onSetEndDateClicked"
+                    android:textColor="#486a00"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="wrap_content"/>
         </RelativeLayout>
 
         <RelativeLayout

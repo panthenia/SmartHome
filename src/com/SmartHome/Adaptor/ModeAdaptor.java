@@ -33,7 +33,9 @@ public class ModeAdaptor extends BaseAdapter {
         mlist = ps.mode_list;
         mode_state = new boolean[mlist.size()];
         for(int i=0;i<mode_state.length;++i)
-            mode_state[i] = false;
+            if(mlist.get(i).status.contains("true"))
+                mode_state[i] = true;
+            else mode_state[i] = false;
     }
     public void changeRoom(){
 
@@ -73,11 +75,13 @@ public class ModeAdaptor extends BaseAdapter {
                 String url="http://"+ps.getNetAddress();
                 if(mode_state[i] == true){
                     mode_state[i] = false;
+                    cmode.status = "false";
                     url += "/wsnRest/sceneClose/"+cmode.id+"/asd/sad";
                     Toast.makeText(context, cmode.name+"已关闭", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     mode_state[i] = true;
+                    cmode.status = "true";
                     Toast.makeText(context, cmode.name+"已启动", Toast.LENGTH_SHORT).show();
                     url += "/wsnRest/sceneAdopt/"+cmode.id+"/asd/sad";
                 }

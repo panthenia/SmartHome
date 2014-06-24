@@ -44,6 +44,10 @@ public class InfoParser {
                     text = parser.nextText().trim();
                     if(cmode != null)
                         cmode.id = text;
+                }else if(tagnm.equals("Status")){
+                    text = parser.nextText().trim();
+                    if(cmode != null)
+                        cmode.status = text;
                 }else if(tagnm.equals("SceneName")){
                     text = parser.nextText().trim();
                     if(cmode != null)
@@ -107,6 +111,14 @@ public class InfoParser {
                     text = parser.nextText().trim();
                     if(crule != null)
                         crule.cycle_type = text;
+                }else if(tagnm.equals("startTime")){
+                    text = parser.nextText().trim();
+                    if(crule != null)
+                        crule.saveStartDate(text);
+                }else if(tagnm.equals("endTime")){
+                    text = parser.nextText().trim();
+                    if(crule != null)
+                        crule.saveEndDate(text);
                 }else if(tagnm.equals("daysOfWeek")){
                     text = parser.nextText().trim();
                     if(crule != null)
@@ -204,7 +216,7 @@ public class InfoParser {
         }
         if(crule == null){
             Log.d("rule_info:","crule==null");
-        }else Log.d("rule_info:","crule@=null");
+        }else Log.d("rule_info:","crule!=null");
         ps.rule_list = rlist;
 
     }
@@ -310,9 +322,9 @@ public class InfoParser {
             serializer.text(crule.id);
             serializer.endTag(null, "RuleId");
 
-            serializer.startTag(null, "RuleName");
-            serializer.text(crule.name);
-            serializer.endTag(null, "RuleName");
+            //serializer.startTag(null, "RuleName");
+            //serializer.text(crule.name);
+            //serializer.endTag(null, "RuleName");
 
             serializer.startTag(null, "timeXML");
             serializer.startTag(null, "time");
@@ -326,24 +338,28 @@ public class InfoParser {
             serializer.endTag(null, "minute");
 
             serializer.startTag(null, "startTime");
-            serializer.text("1388505661");
+            serializer.text(tri_time.get(4));
             serializer.endTag(null, "startTime");
             serializer.startTag(null, "endTime");
-            serializer.text("7384233661");
+            serializer.text(tri_time.get(5));
             serializer.endTag(null, "endTime");
 
             serializer.startTag(null, "repeats");
 
             serializer.startTag(null, "type");
-            serializer.text("weekly");
+            serializer.text(tri_time.get(2));
             serializer.endTag(null, "type");
 
-            serializer.startTag(null, "daysOfWeek");
-            serializer.text(tri_time.get(2));
-            serializer.endTag(null, "daysOfWeek");
-
+            if(tri_time.get(2).contains("weekly")){
+                serializer.startTag(null, "daysOfWeek");
+                serializer.text(tri_time.get(3));
+                serializer.endTag(null, "daysOfWeek");
+            }else{
+                serializer.startTag(null, "interval");
+                serializer.text(tri_time.get(3));
+                serializer.endTag(null, "interval");
+            }
             serializer.endTag(null, "repeats");
-
             serializer.endTag(null, "time");
             serializer.endTag(null, "timeXML");
 
@@ -377,9 +393,9 @@ public class InfoParser {
             serializer.text(crule.id);
             serializer.endTag(null, "RuleId");
 
-            serializer.startTag(null, "RuleName");
-            serializer.text(crule.name);
-            serializer.endTag(null, "RuleName");
+            //serializer.startTag(null, "RuleName");
+            //serializer.text(crule.name);
+            //serializer.endTag(null, "RuleName");
 
             serializer.startTag(null, "RuleContent");
             serializer.startTag(null, "condition");

@@ -14,17 +14,19 @@ import java.util.ArrayList;
  * Created by p on 2014/6/2.
  */
 public class RuleOpsAdaptor extends BaseAdapter {
-    String[] content = null;
+    ArrayList<ArrayList<String>> content = null;
     Context context = null;
     LayoutInflater inflater = null;
-    public RuleOpsAdaptor(Context ctx,String[] ar){
+    public RuleOpsAdaptor(Context ctx,ArrayList<ArrayList<String>> ar){
         content = ar;
         context = ctx;
         inflater = LayoutInflater.from(ctx);
     }
     @Override
     public int getCount() {
-        return content.length;
+        if(content != null)
+            return content.size();
+        else return 0;
     }
 
     @Override
@@ -41,7 +43,9 @@ public class RuleOpsAdaptor extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         View v = inflater.inflate(R.layout.rule_ops_layout,null);
         TextView tv =  (TextView)v.findViewById(R.id.rule_ops);
-        tv.setText(content[i]);
+        TextView tv2 = (TextView)v.findViewById(R.id.ops_name);
+        tv.setText(content.get(i).get(1));
+        tv2.setText(content.get(i).get(0));
         return v;
     }
 }

@@ -4,6 +4,7 @@
         <SceneId>1</SceneId>
         <SceneName>Turn All Device On</SceneName>
         <Description>---</Description>
+        <Status>true/false</Status>
     </Scene>
     <Scene>
         <SceneId>2</SceneId>

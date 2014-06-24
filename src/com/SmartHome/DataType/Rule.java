@@ -3,6 +3,8 @@ package com.SmartHome.DataType;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by p on 14-5-16.
@@ -13,7 +15,9 @@ public class Rule {
     RuleOperation temopt = null;
     ConditionGroup temgrp = null;
     PublicState ps = PublicState.getInstance();
-    public String id,name,hour="",minute="",cycle_type="",cycle_content="";
+    public String id,name,hour="",minute="",cycle_type="",cycle_content="",st_stamp="",ed_stamp="";
+    public int[] st_date = new int[3];
+    public int[] ed_date = new int[3];
     public boolean has_time = false;
     public ArrayList<ConditionGroup> cdt_groups = null;
     public ArrayList<RuleOperation> rule_ops = null;
@@ -90,8 +94,29 @@ public class Rule {
         if(temgrp != null)
             cdt_groups.add(temgrp);
     }
-    public String getOpStr(int i){
-        return ps.getDeviceById(rule_ops.get(i).device_id).name+":"+rule_ops.get(i).opname;
+    public ArrayList<String> getOpStr(int i){
+        ArrayList<String> al = new ArrayList<String>();
+        al.add(ps.getDeviceById(rule_ops.get(i).device_id).name);
+        al.add(rule_ops.get(i).opname);
+        return al;
+    }
+    public void saveStartDate(String st){
+        st_stamp = st;
+        Calendar date = Calendar.getInstance();
+        date.setTimeInMillis(Long.valueOf(st)*1000);
+        ed_date[0] = date.get(Calendar.YEAR);
+        ed_date[1] = date.get(Calendar.MONTH);
+        ed_date[2] = date.get(Calendar.DAY_OF_MONTH);
+
+    }
+    public void saveEndDate(String st){
+        ed_stamp = st;
+        Calendar date = Calendar.getInstance();
+        date.setTimeInMillis(Long.valueOf(st)*1000);
+        ed_date[0] = date.get(Calendar.YEAR);
+        ed_date[1] = date.get(Calendar.MONTH);
+        ed_date[2] = date.get(Calendar.DAY_OF_MONTH);
+
     }
     public int getGroupConditionlength(int i){
         return cdt_groups.get(i).conditions.size();

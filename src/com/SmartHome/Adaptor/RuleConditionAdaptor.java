@@ -95,7 +95,7 @@ public class RuleConditionAdaptor extends BaseExpandableListAdapter {
         ArrayList<String> cd = crule.getGroupCondition(grp,cdt);
         String op;
         TextView vname = (TextView)v.findViewById(R.id.val_name);
-        vname.setText("当:"+cd.get(0));
+        vname.setText("当:"+crule.name+"的 "+cd.get(0));
 
         if(cdt != 0){
             vname = (TextView)v.findViewById(R.id.cdt_relation);
@@ -115,7 +115,7 @@ public class RuleConditionAdaptor extends BaseExpandableListAdapter {
         voper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String op[]={">","=","<",">=","<="};
+                final String op[]={">","=","<",">=","<=","!="};
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("修改比较方式");
                 builder.setIcon(android.R.drawable.ic_dialog_info);

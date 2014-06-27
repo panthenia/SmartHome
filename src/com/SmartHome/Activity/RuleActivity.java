@@ -280,7 +280,7 @@ public class RuleActivity extends Activity {
             e.printStackTrace();
         }
         Log.d("tri_timer",new_timer);
-        getmode_url+="/wsnRest/schedulerUpdate/username=bupt/sdfd";
+        getmode_url+="/wsnRest/schedulerUpdate/username="+ps.user_act+"/sdfd";
         RequestInfo rf2= null;
         try {
             rf2 = new RequestInfo(getmode_url, new_timer);

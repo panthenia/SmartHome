@@ -15,10 +15,13 @@
  */
 package com.SmartHome.Achat;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint.Align;
+import android.util.Log;
+import android.widget.DatePicker;
 import com.SmartHome.DataType.EnviSensor;
 import com.SmartHome.DataType.PublicState;
 import org.achartengine.ChartFactory;
@@ -29,16 +32,18 @@ import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
  * Average temperature demo chart.
  */
 public class PortLineChart extends AbstractDemoChart {
-	String envi_type;
-	public PortLineChart(String type){
+	String envi_type,date;
+	public PortLineChart(String type,String date){
 		super();
 		envi_type=type;
+        this.date = date;
 	}
 	
 	public String getName() {
@@ -63,18 +68,19 @@ public class PortLineChart extends AbstractDemoChart {
 	 */
 	public Intent execute(Context context) {
 		PublicState ps = PublicState.getInstance();
-		ArrayList<EnviSensor> sensor_list=ps.getSensorInfo(envi_type);
+		ArrayList<EnviSensor> sensor_list=ps.getSensorInfo(envi_type,date);
 
         if(sensor_list.size() == 0)//当无数据是就返回null
             return null;
 
 		String[] titles = new String[1];
-		titles[0]=ps.selected_room.name;
+		titles[0]=ps.selected_room.name+"("+date+")";
 
 		List<double[]> x = new ArrayList<double[]>();
 		List<double[]> values = new ArrayList<double[]>();
 		double[] tx=new double[sensor_list.size()];
 		double[] ty=new double[sensor_list.size()];
+        Log.d("sensor-size=",String.valueOf(sensor_list.size()));
 		for(int i=0;i<sensor_list.size();++i){
 			tx[i]=i+1;
 			String envi_val = sensor_list.get(i).envi_value;
@@ -83,14 +89,23 @@ public class PortLineChart extends AbstractDemoChart {
             if(envi_val.length()==0)
                 ty[i]=0;
             else {
-                boolean none_num=false;
-                for(int temi=0;temi<envi_val.length();++temi)
-                    if(!Character.isDigit(envi_val.charAt(temi))) {
-                        none_num = true;
+                if(envi_val.contains("null"))
+                    ty[i] = 0;
+                else{
+                    String [] res = envi_val.split(".");
+                    if(res.length == 0)
+                        ty[i] = Float.valueOf(envi_val);
+                    else ty[i] = Float.valueOf(res[0]);
+                    if(envi_type.contains("Light")){
+                        if(ty[i] > 1500)
+                            ty[i] = 1500;
                     }
-                if(none_num)
-                    ty[i]=0;
-                else ty[i]=Double.valueOf(envi_val);
+                    if(envi_type.contains("Temperature") || envi_type.contains("Humidity")){
+                        if(ty[i] > 100)
+                            ty[i] = 100;
+                    }
+                }
+
             }
 		}
 		x.add(tx);
@@ -106,36 +121,44 @@ public class PortLineChart extends AbstractDemoChart {
 			((XYSeriesRenderer) renderer.getSeriesRendererAt(i))
 					.setFillPoints(true);
 		}
-        String e_type="";
-        if(envi_type.contains("Temperature"))
+        String e_type="",ee_type="";
+        if(envi_type.contains("Temperature")){
             e_type="值(℃)";
-        else if(envi_type.contains("Humidity"))
+            ee_type = "平均温度";
+        }
+        else if(envi_type.contains("Humidity")){
+            ee_type = "平均湿度";
             e_type="值(%rh)";
-        else if(envi_type.contains("Light"))
+        }
+        else if(envi_type.contains("Light")){
+            ee_type = "平均光照强度";
             e_type="值(LUX)";
+        }
         else e_type="";
-		setChartSettings(renderer,envi_type, "时间",e_type, 0.5, 12.5,
+		setChartSettings(renderer,ee_type, "时间",e_type, 0.5, 12.5,
 				-10, 40, Color.LTGRAY, Color.LTGRAY);
-		renderer.setXLabels(sensor_list.size());
+		renderer.setXLabels(sensor_list.size());//
 		renderer.setYLabels(10);
 		renderer.setShowGrid(true);
-		renderer.setYAxisMin(0);//设置y轴最小值是0  
-        renderer.setYAxisMax(40);  
+		renderer.setYAxisMin(0);//设置y轴最小值是0
+        if(envi_type.contains("Light"))
+            renderer.setYAxisMax(1500);
+        else renderer.setYAxisMax(100);
 		renderer.setApplyBackgroundColor(true);
 		renderer.setBackgroundColor(Color.BLACK);
 		renderer.setXLabelsAlign(Align.RIGHT);
 		renderer.setYLabelsAlign(Align.RIGHT);
 		renderer.setZoomButtonsVisible(true);
-		renderer.setPanLimits(new double[] { -10, 20, -10, 40 });
-		renderer.setZoomLimits(new double[] { -10, 20, -10, 40 });
+		renderer.setPanLimits(null);//new double[] { -10, 20, -10, 40}
+		renderer.setZoomLimits(null);//new double[] { -10, 20, -10, 40}
 		renderer.setXLabelsAlign(Align.CENTER);
 		for(int i=0;i<sensor_list.size();++i)
-			renderer.addXTextLabel(i+1,sensor_list.get(i).envi_time.substring(2,13));
+			renderer.addXTextLabel(i+1,sensor_list.get(i).envi_time);
 		renderer.setXLabels(0);
 
 		XYMultipleSeriesDataset dataset = buildDataset(titles, x, values);
 		XYSeries series = dataset.getSeriesAt(0);
-		//ries.addAnnotation("Vacation", 6, 30);
+		//series.addAnnotation("Vacation", 6, 30);
 		Intent intent = ChartFactory.getLineChartIntent(context, dataset,
 				renderer, "环境数据");
 		return intent;

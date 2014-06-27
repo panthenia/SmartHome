@@ -20,7 +20,8 @@ public class PlayListActivity extends Activity {
     TextView textViews[] = new TextView[4] ;//四个媒体类型
     ImageView imageView[] = new ImageView[4];//四个括号
 
-    String play_list[] = {"上山打老虎","上山打老虎","上山打老虎","上山打老虎","上山打老虎","上山打老虎","上山打老虎"};
+    String play_list[]={"smb://DLINK/Volume_1/a.mp4","smb://DLINK/Volume_1/2.mp4",
+            "smb://DLINK/Volume_1/3.mp4","smb://DLINK/Volume_1/4.mp4"};
     String author_list[] = {"老虎不在家","小松鼠","大老虎"};
     ListView listView;
     PlayListAdaptor list_adapter;

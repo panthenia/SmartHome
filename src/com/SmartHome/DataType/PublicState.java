@@ -3,6 +3,7 @@ package com.SmartHome.DataType;
 import android.app.Application;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.hardware.Camera;
 import android.util.Log;
 import com.SmartHome.R;
 import com.SmartHome.Util.DataUtil;
@@ -23,6 +24,7 @@ public class PublicState extends Application {
 
 
     public String net_ip="",net_port="";
+    public String user_act = "";
     public Area selected_room=null;
     public ArrayList<Area> room_list = null;
     public ArrayList<Rule> rule_list = null;
@@ -81,14 +83,17 @@ public class PublicState extends Application {
                 return device_list.get(i);
         return null;
     }
+    public ArrayList<Area> getRoomList(){
+        return room_list;
+    }
     public void saveSensorInfo(EnviSensor ev){
         SQLiteDatabase db = du.getReadableDatabase();
         String sql;
         // area text,type text,time text,val text
 
-        sql = "insert into sensor values(";
-        sql += ev.area_name + "," + ev.envi_type + "," + ev.envi_time
-                    + "," + ev.envi_value + ")";
+        sql = "insert into sensor values('";
+        sql += ev.area_name + "','" + ev.envi_type + "','" + ev.envi_time
+                    + "','" + ev.envi_value + "','" + ev.envi_date+"')";
         db.execSQL(sql);
         db.close();
     }
@@ -98,6 +103,13 @@ public class PublicState extends Application {
             Log.d("rule_info:","print rule-"+i);
             rule_list.get(i).printInfo();
         }
+    }
+    public String getIdByType(String type){
+        for(int i=0;i<device_list.size();++i){
+            if(device_list.get(i).type.contains(type))
+                return device_list.get(i).id;
+        }
+        return null;
     }
     public void printModes(){
         for(int i=0;i<mode_list.size();++i)
@@ -141,18 +153,19 @@ public class PublicState extends Application {
         ServiceRequest sr=new ServiceRequest("control");
         sr.execute(rf);
     }
-    public ArrayList<EnviSensor> getSensorInfo(String type){
+    public ArrayList<EnviSensor> getSensorInfo(String type,String date){
         SQLiteDatabase db = du.getReadableDatabase();
         String sql;
         ArrayList<EnviSensor> sensor_list = new ArrayList<EnviSensor>();
 
         Cursor rst = db.rawQuery("select * from sensor "+"where area = '"+selected_room.name+
-                "' and type = '"+type+"'", null);
+                "' and type = '"+type+"' and date ='"+date+"'", null);
         int time_dx = rst.getColumnIndex("time");
         int val_dx = rst.getColumnIndex("val");
+        int date_dx = rst.getColumnIndex("date");
         for (rst.moveToFirst(); !(rst.isAfterLast()); rst.moveToNext()) {
             // String tp,String tm,String area,String val
-            EnviSensor sr = new EnviSensor(type,rst.getString(time_dx),
+            EnviSensor sr = new EnviSensor(type,rst.getString(date_dx),rst.getString(time_dx),
                     selected_room.name,rst.getString(val_dx));
             //sr.print();
             sensor_list.add(sr);

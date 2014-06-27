@@ -14,10 +14,12 @@ import android.view.WindowManager;
 import com.SmartHome.DataType.Area;
 import com.SmartHome.DataType.PublicState;
 import com.SmartHome.R;
+import com.SmartHome.Util.EnvironmentTask;
 import com.SmartHome.Util.InfoParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.util.Timer;
 
 /**
  * Created by p on 14-4-24.
@@ -65,6 +67,10 @@ public class MainActivity extends Activity {
         if(ps.room_list.size()>0)
             ps.selected_room = ps.room_list.get(0);
         else ps.selected_room = new Area("未知区域","null");
+
+        Timer timer=new Timer(true);
+        EnvironmentTask mtask=new EnvironmentTask(ps);
+        timer.schedule(mtask, 5000,1000*60*20);
     }
 
    public void printDevices(){

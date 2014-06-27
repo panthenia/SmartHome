@@ -254,7 +254,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="当前温度："
+                android:text="当前室内温度："
                 android:textSize="35sp"
                 android:gravity="center"
                 android:textColor="#486a00"

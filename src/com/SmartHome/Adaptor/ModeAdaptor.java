@@ -76,14 +76,14 @@ public class ModeAdaptor extends BaseAdapter {
                 if(mode_state[i] == true){
                     mode_state[i] = false;
                     cmode.status = "false";
-                    url += "/wsnRest/sceneClose/"+cmode.id+"/asd/sad";
+                    url += "/wsnRest/sceneClose/"+cmode.id+"/"+ps.user_act+"/sad";
                     Toast.makeText(context, cmode.name+"已关闭", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     mode_state[i] = true;
                     cmode.status = "true";
                     Toast.makeText(context, cmode.name+"已启动", Toast.LENGTH_SHORT).show();
-                    url += "/wsnRest/sceneAdopt/"+cmode.id+"/asd/sad";
+                    url += "/wsnRest/sceneAdopt/"+cmode.id+"/"+ps.user_act+"/sad";
                 }
                 Log.d("start-scine:",url);
                 ps.controlRequest(url);

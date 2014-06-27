@@ -104,9 +104,9 @@ public class Rule {
         st_stamp = st;
         Calendar date = Calendar.getInstance();
         date.setTimeInMillis(Long.valueOf(st)*1000);
-        ed_date[0] = date.get(Calendar.YEAR);
-        ed_date[1] = date.get(Calendar.MONTH);
-        ed_date[2] = date.get(Calendar.DAY_OF_MONTH);
+        st_date[0] = date.get(Calendar.YEAR);
+        st_date[1] = date.get(Calendar.MONTH);
+        st_date[2] = date.get(Calendar.DAY_OF_MONTH);
 
     }
     public void saveEndDate(String st){
@@ -133,7 +133,11 @@ public class Rule {
         RuleCondition rcdt = cdt_groups.get(grp).conditions.get(cdt);
         cd.add(rcdt.varname);cd.add(rcdt.oper);cd.add(rcdt.val);
         cd.add(rcdt.nodeid);cd.add(rcdt.varid);cd.add(rcdt.id);
-
+        for(int i=0;i<ps.device_list.size();++i)
+            if(ps.device_list.get(i).id.contains(rcdt.nodeid)){
+                cd.add(ps.device_list.get(i).name);
+                break;
+            }
         return cd;
     }
     public void printInfo(){

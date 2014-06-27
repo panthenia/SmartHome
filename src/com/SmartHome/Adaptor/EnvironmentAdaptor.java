@@ -1,15 +1,14 @@
 package com.SmartHome.Adaptor;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.SmartHome.Achat.PortLineChart;
 import com.SmartHome.Activity.AirActivity;
 import com.SmartHome.Activity.TelevisionActivity;
@@ -18,6 +17,7 @@ import com.SmartHome.DataType.PublicState;
 import com.SmartHome.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by p on 14-4-25.
@@ -33,6 +33,7 @@ public class EnvironmentAdaptor extends BaseAdapter {
     ArrayList<Device> room_devices = null;
     ArrayList<Device> devices = null;
     Device temperatrue,light,humidy;
+
 
     public EnvironmentAdaptor(Context ctx) {
 
@@ -106,7 +107,7 @@ public class EnvironmentAdaptor extends BaseAdapter {
 }
 
 class EnvironmentStateClicked implements View.OnClickListener {
-
+    int click_time;
     Context context = null;
     String environment_type = "";
     public EnvironmentStateClicked(Context ctx ,String type){
@@ -115,13 +116,39 @@ class EnvironmentStateClicked implements View.OnClickListener {
     }
     @Override
     public void onClick(View view) {
+        click_time = 1;
 
-        PortLineChart tr = new PortLineChart(environment_type);
-        Intent intent = tr.execute(context);
-        if (intent == null) {
-            Toast toast = Toast.makeText(context, "当前区域无该类型数据！", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
-        } else context.startActivity(intent);
+       DatePickerDialog datePickerDialog = new DatePickerDialog(context,
+                // 绑定监听器
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        if(click_time == 0)
+                            return;
+                        else{
+                            click_time -= 1;
+                        }
+                        String date = year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+                        Log.d("selected-date",date);
+                        PortLineChart tr = new PortLineChart(environment_type,date);
+                        Intent intent = tr.execute(context);
+                        if (intent == null) {
+                            Toast toast = Toast.makeText(context, "当前区域无该类型数据！", Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                        } else context.startActivity(intent);
+                    }
+                }
+                // 设置初始日期
+                ,Calendar.YEAR, Calendar.MONTH+1, Calendar.DAY_OF_MONTH);//.show();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2013, Calendar.JANUARY,1);
+        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
+        datePickerDialog.getDatePicker().setMaxDate(Calendar.getInstance().getTimeInMillis());
+
+        datePickerDialog.show();
+
     }
 }

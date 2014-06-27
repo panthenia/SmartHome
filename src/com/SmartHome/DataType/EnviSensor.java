@@ -7,11 +7,12 @@ import android.util.Log;
  */
 
 public class EnviSensor {
-    public String envi_type,envi_time,area_name,envi_value;
+    public String envi_type,envi_time,area_name,envi_value,envi_date;
 
-    public EnviSensor(String tp,String tm,String area,String val){
+    public EnviSensor(String tp,String date,String time,String area,String val){
         envi_type=tp;
-        envi_time=tm;
+        envi_date = date;
+        envi_time=time;
         area_name=area;
         envi_value=val;
     }

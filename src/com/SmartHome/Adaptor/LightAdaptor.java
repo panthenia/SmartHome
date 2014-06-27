@@ -90,8 +90,12 @@ public class LightAdaptor extends BaseAdapter {
                         room_devices.get(device_sequense).status.put("power",String.valueOf(true));
                     else room_devices.get(device_sequense).status.put("power",String.valueOf(false));
                     String url="http://"+ps.getNetAddress();
+                    if(i == 0){
+                        url += "/wsnRest/control/"+room_devices.get(device_sequense).id+"/2/"+ps.user_act+"/2434";
+                    }else{
                     url += "/wsnRest/control/"+room_devices.get(device_sequense).id+"/3/"
-                            +String.valueOf(i * 2)+"/bupt/2434";
+                            +String.valueOf(i * 2)+"/"+ps.user_act+"/2434";
+                    }
                     Log.d("request-url:",url);
 
                     ps.controlRequest(url);
@@ -115,9 +119,9 @@ public class LightAdaptor extends BaseAdapter {
                     url += "/wsnRest/control/" + room_devices.get(device_sequense).id;
 
                     if(b){
-                        url += "/1/bupt/2434";
+                        url += "/1/"+ps.user_act+"/2434";
                     }
-                    else url += "/2/bupt/2434";
+                    else url += "/2/"+ps.user_act+"/2434";
                     Log.d("request-url:",url);
 
                      ps.controlRequest(url);
@@ -140,8 +144,8 @@ public class LightAdaptor extends BaseAdapter {
                     String url = "http://" + ps.getNetAddress()
                             + "/wsnRest/control/" + room_devices.get(device_sequense).id;
                     if(b){
-                        url += "/1/bupt/2434";
-                    }else url += "/2/bupt/2434";
+                        url += "/1/"+ps.user_act+"/2434";
+                    }else url += "/2/"+ps.user_act+"/2434";
                     Log.d("request-url:",url);
                     ps.controlRequest(url);
 

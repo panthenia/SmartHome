@@ -58,6 +58,7 @@ public class LoginActivity extends Activity implements Observer{
     }
     public void getInputText(){//该函数获取当前activity上的EditText控件输入的文本
         account = String.valueOf(accountEditText.getText());
+        PublicState.getInstance().user_act = account;
         password = String.valueOf(passwordEditText.getText());
     }
 
@@ -98,7 +99,7 @@ public class LoginActivity extends Activity implements Observer{
     public void onLoginSubmitClicked(View v){
         PublicState ps = (PublicState)getApplication();
 
-        if(saved_info == false){//没有保存的信息，则在登录前检测需要的信息是否输入完全
+       // if(saved_info == false){//没有保存的信息，则在登录前检测需要的信息是否输入完全
             getInputText();
             if(account.length() == 0 || password.length() == 0){//账户信息有问题
                 Toast toast = Toast.makeText(getApplicationContext(),"用户信息输入错误，请重新填写", Toast.LENGTH_SHORT);
@@ -112,12 +113,12 @@ public class LoginActivity extends Activity implements Observer{
                 toast.show();
                 return;
             }
-        }
+       // }
         showLoginDialog();
         saveLoginInfo(ps);
 
         String getmode_url="http://"+ps.getNetAddress();
-        getmode_url+="/wsnRest/scene/username=bupt/sdfd";
+        getmode_url+="/wsnRest/scene/"+account+"/sdfd";
         RequestInfo rf2= null;
         try {
             rf2 = new RequestInfo(getmode_url);
@@ -130,7 +131,7 @@ public class LoginActivity extends Activity implements Observer{
         sr2.execute(rf2);
 
         String getrule_url="http://"+ps.getNetAddress();
-        getrule_url+="/wsnRest/scheduler/bupt/sdfd";
+        getrule_url+="/wsnRest/scheduler/"+account+"/sdfd";
         RequestInfo rf1= null;
         try {
             rf1 = new RequestInfo(getrule_url);

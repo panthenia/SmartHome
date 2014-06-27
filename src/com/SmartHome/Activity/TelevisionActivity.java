@@ -36,32 +36,32 @@ public class TelevisionActivity extends Activity {
     }
     public void onPowerOnClicked(View v){
         String url = "http://" +ps.getNetAddress()
-                + "/wsnRest/control/" + device_id+"/1/bupt/2434";
+                + "/wsnRest/control/" + device_id+"/1/"+ps.user_act+"/2434";
         Log.d("request-url", url);ps.controlRequest(url);
     }
     public void onPowerOffClicked(View v){
         String url = "http://" +ps.getNetAddress()
-                + "/wsnRest/control/" + device_id+"/2/bupt/2434";
+                + "/wsnRest/control/" + device_id+"/2/"+ps.user_act+"/2434";
         Log.d("request-url", url);ps.controlRequest(url);
     }
     public void onDigitalClicked(View v){
         String url = "http://" +ps.getNetAddress()
-                + "/wsnRest/control/" + device_id+"/3/bupt/2434";
+                + "/wsnRest/control/" + device_id+"/3/"+ps.user_act+"/2434";
         Log.d("request-url", url);ps.controlRequest(url);
     }
     public void onAnalogClicked(View v){
         //String url = "http://" +ps.getNetAddress()
-               // + "/wsnRest/control/" + device_id+"/3/bupt/2434";
+               // + "/wsnRest/control/" + device_id+"/3/"+ps.user_act+"/2434";
         //Log.d("request-url", url);ps.controlRequest(url);
     }
     public void onHdmiClicked(View v){
         String url = "http://" +ps.getNetAddress()
-                + "/wsnRest/control/" + device_id+"/4/bupt/2434";
+                + "/wsnRest/control/" + device_id+"/4/"+ps.user_act+"/2434";
         Log.d("request-url", url);ps.controlRequest(url);
     }
     public void onPcClicked(View v){
         String url = "http://" +ps.getNetAddress()
-                + "/wsnRest/control/" + device_id+"/5/bupt/2434";
+                + "/wsnRest/control/" + device_id+"/5/"+ps.user_act+"/2434";
         Log.d("request-url", url);ps.controlRequest(url);
     }
 }

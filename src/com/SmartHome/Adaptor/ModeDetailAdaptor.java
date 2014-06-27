@@ -14,6 +14,8 @@ import com.SmartHome.DataType.PublicState;
 import com.SmartHome.DataType.Rule;
 import com.SmartHome.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by p on 14-5-18.
  */
@@ -22,18 +24,29 @@ public class ModeDetailAdaptor extends BaseAdapter {
     PublicState ps = PublicState.getInstance();
     LayoutInflater inflater = null;
     Mode cmode = null;
+    ArrayList<String> filtered_rules = new ArrayList<String>();
     public ModeDetailAdaptor(Context ctx,Mode mode){
         context = ctx;
         inflater = LayoutInflater.from(ctx);
         cmode = mode;
+        filterRule();
 
+    }
+    public void filterRule(){
+
+        Rule crule ;
+        for(int i=0;i<cmode.rules.size();++i){
+            crule = ps.getRuleById(cmode.rules.get(i));
+            if(crule != null)
+                filtered_rules.add(cmode.rules.get(i));
+        }
     }
     public void changeRoom(){
 
     }
     @Override
     public int getCount() {
-        return cmode.rules.size();
+        return filtered_rules.size();
     }
 
     @Override
@@ -52,7 +65,7 @@ public class ModeDetailAdaptor extends BaseAdapter {
         ImageView icon = (ImageView) v.findViewById(R.id.block_icon);
         TextView text = (TextView) v.findViewById(R.id.block_text);
         icon.setImageResource(R.drawable.rulers);
-        final Rule crule = ps.getRuleById(cmode.rules.get(i));
+        final Rule crule = ps.getRuleById(filtered_rules.get(i));
         if(crule != null){
             text.setText(crule.name);
             v.setOnClickListener(new View.OnClickListener() {

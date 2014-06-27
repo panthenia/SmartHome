@@ -48,32 +48,32 @@ public class CameraActivity extends Activity {
         left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                web_control.loadUrl("http://192.168.1.104:50000/nphControlCamera?Direction=PanLeft");
+                web_control.loadUrl("http://192.168.1.103:50000/nphControlCamera?Direction=PanLeft");
             }
         });
         right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                web_control.loadUrl("http://192.168.1.104:50000/nphControlCamera?Direction=PanRight");
+                web_control.loadUrl("http://192.168.1.103:50000/nphControlCamera?Direction=PanRight");
 
             }
         });
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                web_control.loadUrl("http://192.168.1.104:50000/nphControlCamera?Direction=TiltUp");
+                web_control.loadUrl("http://192.168.1.103:50000/nphControlCamera?Direction=TiltUp");
 
             }
         });
         down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                web_control.loadUrl("http://192.168.1.104:50000/nphControlCamera?Direction=TiltDown");
+                web_control.loadUrl("http://192.168.1.103:50000/nphControlCamera?Direction=TiltDown");
 
             }
         });
         //web.loadUrl("http://192.168.1.110:50000/SnapshotJPEG?Resolution=[640x480]&amp;Quality=[Clarity]");
-        web.loadUrl("http://192.168.1.104:50000/SnapshotJPEG?Resolution=[640x480]&amp;Quality=[Clarity]");
+        web.loadUrl("http://192.168.1.103:50000/SnapshotJPEG?Resolution=[640x480]&amp;Quality=[Clarity]");
 
         mThread = new Thread(runnable);
         mThread.start();

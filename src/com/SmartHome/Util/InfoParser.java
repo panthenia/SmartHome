@@ -258,8 +258,9 @@ public class InfoParser {
                         care.name = text;
                 }else if(tagnm.equals("AreaID")){
                     text = parser.nextText().trim();
-                    if(cdevice!=null)
+                    if(cdevice!=null){
                         cdevice.room = text;
+                    }
                 } else if(tagnm.equals("RoomID")){
                     text = parser.nextText().trim();
                         if(care!=null)

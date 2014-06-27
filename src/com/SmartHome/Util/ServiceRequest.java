@@ -10,6 +10,7 @@ import com.SmartHome.DataType.RequestInfo;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -158,10 +159,22 @@ public class ServiceRequest extends AsyncTask<RequestInfo, Void, String> {
             PublicState.getInstance().saveDevieInfo(rst);
             Log.d("getdevice", rst);
         } else if (request_mode.contains("getenvi")) {
-            Time time = new Time("GMT+8");
-            time.setToNow();
-            PublicState.getInstance().saveSensorInfo(
-                    new EnviSensor(envi_type, time.format2445(), area_nm, rst));
+            Calendar calendar = Calendar.getInstance();
+            String date = ""+calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)
+                    +"-"+calendar.get(Calendar.DAY_OF_MONTH);
+            String time = ""+calendar.get(Calendar.HOUR_OF_DAY)+":"+calendar.get(Calendar.MINUTE);
+            PublicState ps = PublicState.getInstance();
+            ps.saveSensorInfo(//时间格式 2014-6-3 ,18:00
+                    new EnviSensor(envi_type,date,time, area_nm, rst));
+            if(envi_type.contains("Temperature")){
+                for(int i=0;i<ps.room_list.size();++i){
+                    if(ps.room_list.get(i).name.contains(area_nm))
+                        ps.room_list.get(i).temrature = rst;
+                }
+                if(ps.selected_room.name.contains(area_nm))
+                    ps.selected_room.temrature = rst;
+            }
+            Log.d("envitask-url=type="+envi_type+"result=",rst);
         } else if(request_mode.contains("control")) {
             Log.d("control:",rst);
         }else if(request_mode.contains("getrule")){

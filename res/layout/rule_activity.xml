@@ -364,7 +364,7 @@
                 android:textSize="30sp"
                 android:textColor="@color/media_color"
                 android:layout_centerInParent="true"
-                android:layout_width="190dp"
+                android:layout_width="290dp"
                 android:layout_height="160dp"/>
 
     </RelativeLayout>

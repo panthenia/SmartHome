@@ -95,7 +95,7 @@ public class RuleConditionAdaptor extends BaseExpandableListAdapter {
         ArrayList<String> cd = crule.getGroupCondition(grp,cdt);
         String op;
         TextView vname = (TextView)v.findViewById(R.id.val_name);
-        vname.setText("当:"+crule.name+"的 "+cd.get(0));
+        vname.setText("当:"+cd.get(cd.size()-1)+"的 "+cd.get(0));
 
         if(cdt != 0){
             vname = (TextView)v.findViewById(R.id.cdt_relation);
@@ -135,7 +135,7 @@ public class RuleConditionAdaptor extends BaseExpandableListAdapter {
                         } catch (XmlPullParserException e) {
                             e.printStackTrace();
                         }
-                        getmode_url+="/wsnRest/schedulerUpdate/username=bupt/sdfd";
+                        getmode_url+="/wsnRest/schedulerUpdate/username="+ps.user_act+"/sdfd";
                         RequestInfo rf2= null;
                         try {
                             rf2 = new RequestInfo(getmode_url, new_rule);
@@ -172,7 +172,7 @@ public class RuleConditionAdaptor extends BaseExpandableListAdapter {
                         } catch (XmlPullParserException e) {
                             e.printStackTrace();
                         }
-                        getmode_url+="/wsnRest/schedulerUpdate/username=bupt/sdfd";
+                        getmode_url+="/wsnRest/schedulerUpdate/username="+ps.user_act+"/sdfd";
                         RequestInfo rf2= null;
                         try {
                             rf2 = new RequestInfo(getmode_url, new_rule);

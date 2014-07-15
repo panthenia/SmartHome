@@ -30,7 +30,8 @@ public class EnvironmenActivity extends Activity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.second_level_layout);
-
+        TextView textView = (TextView)findViewById(R.id.current_user);
+        textView.setText("当前用户："+ps.user_act);
         environmentAdaptor = new EnvironmentAdaptor(this);
         GridView gridView = (GridView) findViewById(R.id.content_grid);
         TextView editText = (TextView) findViewById(R.id.acitivity_name);

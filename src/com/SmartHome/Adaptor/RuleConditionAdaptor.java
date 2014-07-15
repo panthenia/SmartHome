@@ -135,10 +135,17 @@ public class RuleConditionAdaptor extends BaseExpandableListAdapter {
                         } catch (XmlPullParserException e) {
                             e.printStackTrace();
                         }
-                        getmode_url+="/wsnRest/schedulerUpdate/username="+ps.user_act+"/sdfd";
+                        getmode_url+="/wsnRest/schedulerUpdate/"+ps.user_act+"/sdfd";
                         RequestInfo rf2= null;
+                        String encode_rule = null;
                         try {
-                            rf2 = new RequestInfo(getmode_url, new_rule);
+                            encode_rule = ps.securityDemo.getEncodeData(new_rule);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        try {
+                            rf2 = new RequestInfo(getmode_url, encode_rule);
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }
@@ -172,10 +179,16 @@ public class RuleConditionAdaptor extends BaseExpandableListAdapter {
                         } catch (XmlPullParserException e) {
                             e.printStackTrace();
                         }
-                        getmode_url+="/wsnRest/schedulerUpdate/username="+ps.user_act+"/sdfd";
+                        getmode_url+="/wsnRest/schedulerUpdate/"+ps.user_act+"/sdfd";
                         RequestInfo rf2= null;
+                        String encode_rule = null;
                         try {
-                            rf2 = new RequestInfo(getmode_url, new_rule);
+                            encode_rule = ps.securityDemo.getEncodeData(new_rule);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            rf2 = new RequestInfo(getmode_url, encode_rule);
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }

@@ -9,6 +9,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.TextView;
+import com.SmartHome.DataType.PublicState;
 import com.SmartHome.R;
 /**
  * Created by p on 14-4-11.
@@ -17,7 +19,8 @@ public class CameraActivity extends Activity {
 
     WebView web,web_control;
     ImageView left,right,up,down;
-    String cam_de;
+    String cam_de;String cam_ip;
+    PublicState ps = PublicState.getInstance();
     private Thread mThread;
     private Handler mHandler = new Handler(){
         @Override
@@ -44,36 +47,51 @@ public class CameraActivity extends Activity {
         right = (ImageView) findViewById(R.id.camera_right);
         up = (ImageView) findViewById(R.id.camera_up);
         down = (ImageView) findViewById(R.id.camera_down);
+        TextView textView = (TextView)findViewById(R.id.current_user);
+        textView.setText("当前用户："+ps.user_act);
+        if(ps.net_ip.contains("192.168.1."))
+            cam_ip = "192.168.1.103";
+        else cam_ip = "10.103.240.23";
 
         left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                web_control.loadUrl("http://192.168.1.103:50000/nphControlCamera?Direction=PanLeft");
+                String url = "http://"+cam_ip+":50000"+"/nphControlCamera?Direction=PanLeft";
+                web_control.loadUrl(url);
+                //"http://192.168.1.103:50000/nphControlCamera?Direction=PanLeft"
             }
         });
         right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                web_control.loadUrl("http://192.168.1.103:50000/nphControlCamera?Direction=PanRight");
+                String url = "http://"+cam_ip+":50000"+"/nphControlCamera?Direction=PanRight";
+                web_control.loadUrl(url);
+                //web_control.loadUrl("http://192.168.1.103:50000/nphControlCamera?Direction=PanRight");
 
             }
         });
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                web_control.loadUrl("http://192.168.1.103:50000/nphControlCamera?Direction=TiltUp");
+                String url = "http://"+cam_ip+":50000"+"/nphControlCamera?Direction=TiltUp";
+                web_control.loadUrl(url);
+
+                //web_control.loadUrl("http://192.168.1.103:50000/nphControlCamera?Direction=TiltUp");
 
             }
         });
         down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                web_control.loadUrl("http://192.168.1.103:50000/nphControlCamera?Direction=TiltDown");
+                String url = "http://"+cam_ip+":50000"+"/nphControlCamera?Direction=TiltDown";
+                web_control.loadUrl(url);
+                //web_control.loadUrl("http://192.168.1.103:50000/nphControlCamera?Direction=TiltDown");
 
             }
         });
         //web.loadUrl("http://192.168.1.110:50000/SnapshotJPEG?Resolution=[640x480]&amp;Quality=[Clarity]");
-        web.loadUrl("http://192.168.1.103:50000/SnapshotJPEG?Resolution=[640x480]&amp;Quality=[Clarity]");
+        String url = "http://"+cam_ip+":50000"+"/SnapshotJPEG?Resolution=[640x480]&amp;Quality=[Clarity]";
+        web.loadUrl(url);
 
         mThread = new Thread(runnable);
         mThread.start();

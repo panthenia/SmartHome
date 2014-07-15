@@ -66,7 +66,7 @@ public class ServiceRequest extends AsyncTask<RequestInfo, Void, String> {
 
     }
 
-    private String usePost(RequestInfo rf) {
+    private  String usePost(RequestInfo rf) {
         URL url = rf.getUrl();
         rst_ok = true;
         Log.d("post-url=",url.toString());
@@ -116,7 +116,7 @@ public class ServiceRequest extends AsyncTask<RequestInfo, Void, String> {
         return rst;
     }
 
-    private String useGet(RequestInfo rf) {
+    private  String useGet(RequestInfo rf) {
         Log.d("servicerequest", "into useGet");
         URL url = rf.getUrl();
         rst_ok = true;
@@ -143,17 +143,21 @@ public class ServiceRequest extends AsyncTask<RequestInfo, Void, String> {
         }
         return rst;
     }
-
+    private synchronized String doRequest(RequestInfo... infos){
+        String rst = "";
+        for (int i = 0; i < infos.length; ++i) {
+            if (infos[i].hasXml())
+                rst = usePost(infos[i]);
+            else
+                rst = useGet(infos[i]);
+        }
+        return rst;
+    }
     @Override
     protected String doInBackground(RequestInfo... info) {
         // TODO Auto-generated method stub
-        String rst = "";
-        for (int i = 0; i < info.length; ++i) {
-            if (info[i].hasXml())
-                rst = usePost(info[i]);
-            else
-                rst = useGet(info[i]);
-        }
+        String rst = null;
+        rst = doRequest(info);
         Log.d("request_result:",rst);
         if (request_mode.contains("getDevice")) {
             PublicState.getInstance().saveDevieInfo(rst);

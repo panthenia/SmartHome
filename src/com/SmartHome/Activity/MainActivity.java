@@ -11,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import com.SmartHome.DataType.Area;
 import com.SmartHome.DataType.PublicState;
 import com.SmartHome.R;
@@ -35,7 +36,8 @@ public class MainActivity extends Activity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.main_layout);
-
+        TextView textView = (TextView)findViewById(R.id.current_user);
+        textView.setText("当前用户："+ps.user_act);
         //ps.rule_info = "";//"<Rules><Rule><RuleId>序号</RuleId><RuleName>模式名</RuleName><timeXML>xml</timeXML><RuleContent><RuleCondition><groupRelation>and</groupRelation><conditionGroup><conditionRelation>or</conditionRelation><condition><ConditionID>8</ConditionID><NodeID>变量所属节点</NodeID><VarID>变量序号</VarID><VarName>变量名称</VarName><VarOper>比较运算符</VarOper><VarValue>比较数值</VarValue></condition></conditionGroup><conditionGroup><conditionRelation>or</conditionRelation><condition><ConditionID>7</ConditionID><NodeID>变量所属节点</NodeID><VarID>变量序号</VarID><VarName>变量名称</VarName><VarOper>比较运算符</VarOper><VarValue>比较数值</VarValue></condition><condition><ConditionID>6</ConditionID><NodeID>变量所属节点</NodeID><VarID>变量序号</VarID><VarName>变量名称</VarName><VarOper>比较运算符</VarOper><VarValue>比较数值</VarValue></condition></conditionGroup></RuleCondition><RuleCommand><DeviceId>设备编号2</DeviceId><Operator>操作命令2</Operator><CommandName>操作名称</CommandName></RuleCommand><RuleCommand><DeviceId>设备编号2</DeviceId><Operator>操作命令2</Operator><CommandName>操作名称</CommandName></RuleCommand></RuleContent></Rule></Rules>";
 
        // Log.d("rule_info:","start");

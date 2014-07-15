@@ -13,6 +13,7 @@ public class RequestInfo {
     public RequestInfo(String url) throws MalformedURLException {
         this.url=new URL(url);
         xml=null;
+
     }
     public RequestInfo(String url,String xml) throws MalformedURLException{
         this.url=new URL(url);

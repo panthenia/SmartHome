@@ -10,7 +10,14 @@
             android:layout_alignParentLeft="true"
             android:layout_width="match_parent"
             android:layout_height="60px">
-
+            <TextView android:layout_width="wrap_content"
+                      android:textSize="30sp"
+                      android:textColor="#486a00"
+                      android:id="@+id/current_user"
+                      android:layout_alignParentLeft="true"
+                      android:layout_centerVertical="true"
+                      android:layout_marginLeft="20dp"
+                      android:layout_height="wrap_content"/>
             <TextView
                     android:text="主面板"
                     android:textSize="30sp"

@@ -65,7 +65,7 @@ public class ModeAdaptor extends BaseAdapter {
         final Mode cmode = mlist.get(i);
         final int mode_index = i;
         text.setText(cmode.name);
-        if(mode_state[i] == true){
+        if(mode_state[i]){
             text.setTextColor(Color.rgb(107, 193, 242));
         }else text.setTextColor(Color.rgb(0x48,0x6a,0x00));
 
@@ -73,20 +73,26 @@ public class ModeAdaptor extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 String url="http://"+ps.getNetAddress();
-                if(mode_state[i] == true){
+                if(mode_state[i]){
                     mode_state[i] = false;
                     cmode.status = "false";
-                    url += "/wsnRest/sceneClose/"+cmode.id+"/"+ps.user_act+"/sad";
+                    url += "/wsnRest/sceneClose/"+ps.user_act+"/sad";
                     Toast.makeText(context, cmode.name+"已关闭", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     mode_state[i] = true;
                     cmode.status = "true";
                     Toast.makeText(context, cmode.name+"已启动", Toast.LENGTH_SHORT).show();
-                    url += "/wsnRest/sceneAdopt/"+cmode.id+"/"+ps.user_act+"/sad";
+                    url += "/wsnRest/sceneAdopt/"+ps.user_act+"/sad";
                 }
                 Log.d("start-scine:",url);
-                ps.controlRequest(url);
+                String edata = null;
+                try {
+                    edata = ps.securityDemo.getEncodeData(cmode.id);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                ps.controlRequest(url,edata);
                 notifyDataSetChanged();
             }
         });

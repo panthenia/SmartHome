@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Camera;
 import android.util.Log;
+import com.SmartHome.Cription.security.SecurityDemo;
 import com.SmartHome.R;
 import com.SmartHome.Util.DataUtil;
 import com.SmartHome.Util.ServiceRequest;
@@ -26,6 +27,7 @@ public class PublicState extends Application {
     public String net_ip="",net_port="";
     public String user_act = "";
     public Area selected_room=null;
+    public SecurityDemo securityDemo = null;
     public ArrayList<Area> room_list = null;
     public ArrayList<Rule> rule_list = null;
     public ArrayList<Mode> mode_list = null;
@@ -37,12 +39,21 @@ public class PublicState extends Application {
     public String mode_info = "";
     public DataUtil du;
     public void onCreate(){
+
         publicStateself = this;
         du = new DataUtil(this, this.getString(R.string.database_name), null, 1);
         room_list = new ArrayList<Area>();
         device_list = new ArrayList<Device>();
         rule_list = new ArrayList<Rule>();
         mode_list = new ArrayList<Mode>();
+
+        try {
+            securityDemo = new SecurityDemo();
+            securityDemo.getDESKey();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         //此处为测试临时使用代码，room_list以后是通过解析获得
        // Mode mode = new Mode();
         //mode.name = "fuck";
@@ -134,14 +145,52 @@ public class PublicState extends Application {
         return dl;
     }
     public void controlRequest(String url){
-        RequestInfo rf= null;
-        try {
-            rf = new RequestInfo(url);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+
+        String[] split_url = url.split("/");
+        if(split_url.length == 7 ){//不带参数的get-url
+            RequestInfo rf= null;
+            try {
+                rf = new RequestInfo(url);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            ServiceRequest sr=new ServiceRequest("control");
+            sr.execute(rf);
+        }else if(split_url.length == 9){//两个参数的url
+            String new_url = "";
+            String data = "";
+            for(int i=0;i<5;++i){
+                new_url += (split_url[i]+"/");
+            }
+            new_url += (split_url[7]+"/");
+            new_url += split_url[8];
+
+            data += (split_url[5]+"|"+split_url[6]);
+            String edata = null;
+            try {
+                edata = securityDemo.getEncodeData(data);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            controlRequest(new_url,edata);
+        }else if(split_url.length == 10){//三个参数的url
+            String new_url = "";
+            String data = "";
+            for(int i=0;i<5;++i){
+                new_url += (split_url[i]+"/");
+            }
+            new_url += (split_url[8]+"/");
+            new_url += split_url[9];
+
+            data += (split_url[5]+"|"+split_url[6]+"|"+split_url[7]);
+            String edata = null;
+            try {
+                edata = securityDemo.getEncodeData(data);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            controlRequest(new_url,edata);
         }
-        ServiceRequest sr=new ServiceRequest("control");
-        sr.execute(rf);
     }
     public void controlRequest(String url,String data){
         RequestInfo rf= null;

@@ -28,7 +28,8 @@ public class SecureActivity extends Activity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.second_level_layout);
-
+        TextView textView = (TextView)findViewById(R.id.current_user);
+        textView.setText("当前用户："+ps.user_act);
         adaptor = new SecureAdaptor(this);
         room_name = (TextView)findViewById(R.id.room_name);
         room_name.setText(ps.selected_room.name);

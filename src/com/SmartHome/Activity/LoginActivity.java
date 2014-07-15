@@ -75,6 +75,7 @@ public class LoginActivity extends Activity implements Observer{
         }
     }
     public void testDecode() throws Exception {
+        //传递key接口：ip:port/wsnRest/key/:key
         Log.d("public_key","intotest");
         SecurityDemo securityDemo = new SecurityDemo();
         Log.d("public_key", Base64.encodeToString(securityDemo.getRSAPublicKey(),Base64.DEFAULT));
@@ -116,6 +117,31 @@ public class LoginActivity extends Activity implements Observer{
        // }
         showLoginDialog();
         saveLoginInfo(ps);
+
+        String key_url = null;
+        try {
+            key_url = "http://"+ps.getNetAddress()+"/wsnRest/getkey/";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String deskey = null;
+        try {
+            deskey = ps.securityDemo.getRSAEnceodeKey(ps.securityDemo.getDESKey());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        RequestInfo rf_key= null;
+        try {
+            rf_key = new RequestInfo(key_url,deskey);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        Log.d("key_url:",key_url);
+        ServiceRequest sr_key = new ServiceRequest("control");
+        //sr_key.setObserverble();
+        //sr_key.addObserver(LoginActivity.this);
+        sr_key.execute(rf_key);
+
 
         String getmode_url="http://"+ps.getNetAddress();
         getmode_url+="/wsnRest/scene/"+account+"/sdfd";

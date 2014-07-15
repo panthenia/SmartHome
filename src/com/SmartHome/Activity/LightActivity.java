@@ -35,10 +35,11 @@ public class LightActivity extends Activity {
         TextView editText = (TextView) findViewById(R.id.acitivity_name);
         room_name = (TextView)findViewById(R.id.room_name);
         room_name.setText(ps.selected_room.name);
+        TextView textView = (TextView)findViewById(R.id.current_user);
+        textView.setText("当前用户："+ps.user_act);
         editText.setText("光照");
         lightAdaptor = new LightAdaptor(this);
         gridView.setAdapter(lightAdaptor);
-
     }
     public void onRoomSelectorClicked(View v){
 

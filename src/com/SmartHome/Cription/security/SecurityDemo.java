@@ -49,6 +49,7 @@ public class SecurityDemo {
 	 * @return byte[] �������
 	 * */
 	public String getEncodeData(String data) throws Exception{
+		//data = data+"|"+time.getStringDate()  +"|"+ MD5Coder.sign(data.getBytes());//��Ԫ����м���ʱ���
 		data = time.getStringDate()  +"|"+ MD5Coder.sign(data.getBytes())+"|"+data;//��Ԫ����м���ʱ���
 		byte[] encodedData = DESCoder.encrypt(data.getBytes(), DESkey);
 		return base64Demo.encode(encodedData);

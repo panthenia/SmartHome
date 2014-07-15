@@ -147,7 +147,7 @@
                 android:layout_width="190dp"
                 android:layout_height="160dp"
                 android:onClick="onPowerOnClicked"
-                android:id="@+id/textView"
+                android:id="@+id/textView0"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"/>
         <TextView
@@ -158,9 +158,9 @@
                 android:layout_width="190dp"
                 android:layout_height="160dp"
                 android:onClick="onPowerOffClicked"
-                android:id="@+id/textView0"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@id/textView"/>
+                android:id="@+id/textView"
+                android:layout_alignBottom="@+id/view3"
+                android:layout_toRightOf="@+id/view2"/>
         <TextView
                 android:background="@drawable/btn_av_dpad_center"
                 android:layout_width="wrap_content"
@@ -179,18 +179,20 @@
                 android:textSize="25sp" android:gravity="center"
                 android:textColor="@color/media_color"
                 android:id="@+id/textView3"
-                android:layout_below="@+id/textView"
-                android:layout_toLeftOf="@+id/textView9"/>
+                android:onClick="onMuteClicked"
+                android:layout_below="@+id/view3"
+                android:layout_alignRight="@+id/view2"/>
 
         <TextView
                 android:layout_width="190dp"
                 android:layout_height="160dp"
                 android:clickable="true" android:text="环绕声"
                 android:id="@+id/textView4"
+                android:onClick="onRoundSoundClicked"
                 android:textSize="25sp" android:gravity="center"
                 android:textColor="@color/media_color"
-                android:layout_below="@+id/textView3"
-                android:layout_toLeftOf="@+id/textView8"/>
+                android:layout_below="@+id/view7"
+                android:layout_alignRight="@+id/view2"/>
 
         <TextView
                 android:layout_width="190dp"
@@ -242,8 +244,8 @@
                 android:textSize="25sp" android:gravity="center"
                 android:textColor="@color/media_color"
                 android:id="@+id/textView9"
-                android:layout_alignTop="@+id/imageView3"
-                android:layout_toRightOf="@+id/textView"/>
+                android:layout_below="@+id/textView0"
+                android:layout_toRightOf="@+id/textView0"/>
 
         <TextView
                 android:layout_width="190dp"
@@ -273,7 +275,7 @@
                 android:textSize="25sp" android:gravity="center"
                 android:textColor="@color/media_color"
                 android:onClick="onHdmiClicked"
-                android:id="@+id/textView11"
+                android:id="@+id/textView12"
                 android:layout_below="@+id/textView7"
                 android:layout_toRightOf="@+id/textView5"/>
 
@@ -281,10 +283,11 @@
                 android:layout_width="190dp"
                 android:layout_height="160dp"
                 android:text="3D模式"
+                android:onClick="onThreeDimensionClicked"
                 android:textColor="@color/media_color"
                 android:clickable="true"
                 android:textSize="25sp" android:gravity="center"
-                android:id="@+id/textView12"
+                android:id="@+id/textView13"
                 android:layout_below="@+id/view10"
                 android:layout_alignParentLeft="true"/>
 

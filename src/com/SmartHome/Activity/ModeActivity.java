@@ -29,6 +29,8 @@ public class ModeActivity extends Activity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.second_level_layout);
+        TextView textView = (TextView)findViewById(R.id.current_user);
+        textView.setText("当前用户："+ps.user_act);
         TextView tv = (TextView)findViewById(R.id.acitivity_name);
         tv.setText("场景");
         RelativeLayout rs = (RelativeLayout)findViewById(R.id.room_selector);

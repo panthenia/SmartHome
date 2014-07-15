@@ -280,10 +280,16 @@ public class RuleActivity extends Activity {
             e.printStackTrace();
         }
         Log.d("tri_timer",new_timer);
-        getmode_url+="/wsnRest/schedulerUpdate/username="+ps.user_act+"/sdfd";
+        getmode_url+="/wsnRest/schedulerUpdate/"+ps.user_act+"/sdfd";
+        String encode_data = null;
+        try {
+            encode_data = ps.securityDemo.getEncodeData(new_timer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         RequestInfo rf2= null;
         try {
-            rf2 = new RequestInfo(getmode_url, new_timer);
+            rf2 = new RequestInfo(getmode_url, encode_data);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class PlayListAdaptor extends BaseAdapter {
 
     ArrayList<String> list_content = null;
+    ArrayList<String> file_names = new ArrayList<String>();
     ArrayList<String> sub_content = null;
     Context context =null;
     View.OnClickListener listener = null;
@@ -41,6 +42,9 @@ public class PlayListAdaptor extends BaseAdapter {
         list_content = new ArrayList<String>();
         for(int i=0;i<lst.length;++i)
             list_content.add(lst[i]);
+        file_names.add("control4驱动设计教学");
+        file_names.add("2nix激战系列宣传片");
+        file_names.add("红尘客栈");
         show_level = level;
         context = ctx;
         playListActivity = act;
@@ -85,21 +89,25 @@ public class PlayListAdaptor extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         View v = inflater.inflate(R.layout.play_list_item,null);
         TextView textView = (TextView)v.findViewById(R.id.play_list_item);
-        textView.setText(list_content.get(i));
+        textView.setText(file_names.get(i));
 
         if(show_level == 0)
-            v.setOnClickListener(new ZeroLevelClicked());
+            v.setOnClickListener(new ZeroLevelClicked(i));
         else if(show_level == 1)
                 v.setOnClickListener(new OneLevelCliced());
         return v;
     }
     public class ZeroLevelClicked implements View.OnClickListener{
-
+        int ci;
+        public ZeroLevelClicked(int i){
+            ci =i;
+        }
         @Override
         public void onClick(View view) {
             Intent intent = playListActivity.getIntent();
             TextView textView = (TextView)view.findViewById(R.id.play_list_item);
             intent.putExtra("file_name",textView.getText());
+            intent.putExtra("file_path",list_content.get(ci));
             playListActivity.setResult(0,intent);
             playListActivity.finish();
         }

@@ -142,9 +142,9 @@ class EnvironmentStateClicked implements View.OnClickListener {
                     }
                 }
                 // 设置初始日期
-                ,Calendar.YEAR, Calendar.MONTH+1, Calendar.DAY_OF_MONTH);//.show();
+                ,2014, 6, 27);//.show();
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2013, Calendar.JANUARY,1);
+        calendar.set(2014, Calendar.JANUARY,1);
         datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
         datePickerDialog.getDatePicker().setMaxDate(Calendar.getInstance().getTimeInMillis());
 

@@ -23,7 +23,7 @@ public class EnvironmentTask extends TimerTask{
 
 		for(int i=0;i<area_list.size();++i){
 			for(int j=0;j<envi_type.length;++j){
-				String url=url_pre+cs.user_act+"/2013";//+area_list.get(i).id+"/"+envi_type[j]+
+				String url=url_pre+cs.user_act+"/"+cs.getMd5();//+area_list.get(i).id+"/"+envi_type[j]+
                 String decode_data = null;
                 try {
                     decode_data = cs.securityDemo.getEncodeData(area_list.get(i).id+"|"+envi_type[j]);

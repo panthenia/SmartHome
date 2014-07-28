@@ -93,9 +93,20 @@ public class PortLineChart extends AbstractDemoChart {
                     ty[i] = 0;
                 else{
                     String [] res = envi_val.split(".");
-                    if(res.length == 0)
-                        ty[i] = Float.valueOf(envi_val);
-                    else ty[i] = Float.valueOf(res[0]);
+                    if(res.length == 0){
+                        try{ty[i] = Float.valueOf(envi_val);}
+                        catch (Exception e){
+                            ty[i] = 0;
+                        }
+                    }
+                    else {
+                        try{
+                            ty[i] = Float.valueOf(res[0]);
+                        }
+                        catch (Exception e){
+                            ty[i] = 0;
+                        }
+                    }
                     if(envi_type.contains("Light")){
                         if(ty[i] > 1500)
                             ty[i] = 1500;

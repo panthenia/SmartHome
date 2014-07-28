@@ -36,7 +36,7 @@
             android:layout_marginTop="60dp"/>
     <EditText
             android:hint=" 密码:"
-            android:numeric="integer"
+
             android:password="true"
             android:maxLength="27"
             android:textSize="22sp"

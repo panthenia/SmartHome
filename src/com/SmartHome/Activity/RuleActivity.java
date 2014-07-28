@@ -280,7 +280,7 @@ public class RuleActivity extends Activity {
             e.printStackTrace();
         }
         Log.d("tri_timer",new_timer);
-        getmode_url+="/wsnRest/schedulerUpdate/"+ps.user_act+"/sdfd";
+        getmode_url+="/wsnRest/schedulerUpdate/"+ps.user_act+"/"+ps.getMd5();
         String encode_data = null;
         try {
             encode_data = ps.securityDemo.getEncodeData(new_timer);

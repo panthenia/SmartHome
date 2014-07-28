@@ -59,7 +59,7 @@ public class PlayerActivity extends Activity {
                 String fpath = intent.getStringExtra("file_path");
                 current_text.setText(fname);
                 String url = "http://" + ps.getNetAddress()
-                        + "/wsnRest/control/"+ps.user_act+"/2434";
+                        + "/wsnRest/control/"+ps.user_act+"/"+ps.getMd5();
                 Log.d("play-file-name=",fpath.trim());
                 if(fpath.length() > 0){
                     String data = device_id+"|3"+"|"+fpath;

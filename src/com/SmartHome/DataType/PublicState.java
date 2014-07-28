@@ -4,13 +4,17 @@ import android.app.Application;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Camera;
+import android.util.Base64;
 import android.util.Log;
 import com.SmartHome.Cription.security.SecurityDemo;
 import com.SmartHome.R;
 import com.SmartHome.Util.DataUtil;
 import com.SmartHome.Util.ServiceRequest;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -25,7 +29,7 @@ public class PublicState extends Application {
 
 
     public String net_ip="",net_port="";
-    public String user_act = "";
+    public String user_act = "",user_psw = "";
     public Area selected_room=null;
     public SecurityDemo securityDemo = null;
     public ArrayList<Area> room_list = null;
@@ -37,7 +41,9 @@ public class PublicState extends Application {
     public String device_info = "";
     public String rule_info = "";
     public String mode_info = "";
+    public String md5 = "";
     public DataUtil du;
+    public MessageDigest md5_encriptor = null;
     public void onCreate(){
 
         publicStateself = this;
@@ -46,6 +52,11 @@ public class PublicState extends Application {
         device_list = new ArrayList<Device>();
         rule_list = new ArrayList<Rule>();
         mode_list = new ArrayList<Mode>();
+        try {
+            md5_encriptor = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
 
         try {
             securityDemo = new SecurityDemo();
@@ -147,6 +158,7 @@ public class PublicState extends Application {
     public void controlRequest(String url){
 
         String[] split_url = url.split("/");
+        split_url[split_url.length-1] = getMd5();
         if(split_url.length == 7 ){//不带参数的get-url
             RequestInfo rf= null;
             try {
@@ -201,6 +213,28 @@ public class PublicState extends Application {
         }
         ServiceRequest sr=new ServiceRequest("control");
         sr.execute(rf);
+    }
+    public String getMd5(){
+        Log.d("md5:",md5);
+        return md5;
+    }
+    public void makeMd5(){
+        String data = user_act+user_psw;
+        md5_encriptor.reset();
+        byte[] data_byte = null;
+        data_byte = data.getBytes();
+
+        byte[] hash_data = md5_encriptor.digest(data_byte);
+        StringBuffer md5StrBuff = new StringBuffer();
+
+        for (int i = 0; i < hash_data.length; i++) {
+            if (Integer.toHexString(0xFF & hash_data[i]).length() == 1)
+                md5StrBuff.append("0").append(Integer.toHexString(0xFF & hash_data[i]));
+            else
+                md5StrBuff.append(Integer.toHexString(0xFF & hash_data[i]));
+        }
+
+        md5 = md5StrBuff.toString();
     }
     public ArrayList<EnviSensor> getSensorInfo(String type,String date){
         SQLiteDatabase db = du.getReadableDatabase();

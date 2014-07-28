@@ -135,7 +135,7 @@ public class RuleConditionAdaptor extends BaseExpandableListAdapter {
                         } catch (XmlPullParserException e) {
                             e.printStackTrace();
                         }
-                        getmode_url+="/wsnRest/schedulerUpdate/"+ps.user_act+"/sdfd";
+                        getmode_url+="/wsnRest/schedulerUpdate/"+ps.user_act+"/"+ps.getMd5();
                         RequestInfo rf2= null;
                         String encode_rule = null;
                         try {
@@ -179,7 +179,7 @@ public class RuleConditionAdaptor extends BaseExpandableListAdapter {
                         } catch (XmlPullParserException e) {
                             e.printStackTrace();
                         }
-                        getmode_url+="/wsnRest/schedulerUpdate/"+ps.user_act+"/sdfd";
+                        getmode_url+="/wsnRest/schedulerUpdate/"+ps.user_act+"/"+ps.getMd5();
                         RequestInfo rf2= null;
                         String encode_rule = null;
                         try {

@@ -44,9 +44,10 @@ public class SecureAdaptor extends BaseAdapter {
     }
     @Override
     public int getCount() {
-        if(ps.user_act.contains("host") && ps.selected_room.name.contains("902"))
-            return 1;
-        else return 0;
+//        if(ps.user_act.contains("bupt") && ps.selected_room.name.contains("902"))
+//            return 1;
+//        else return 0;
+        return 1;
     }
 
     @Override

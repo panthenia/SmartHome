@@ -35,9 +35,9 @@ public class LightAdaptor extends BaseAdapter {
     public void changeRoom(){
         room_devices.clear();
 
-        for(int i=0;i<devices.size();++i)
-            if(devices.get(i).room.equals(ps.selected_room.id)){
-                room_devices.add(devices.get(i));
+        for (Device device : devices)
+            if (device.room.equals(ps.selected_room.id)) {
+                room_devices.add(device);
             }
     }
     @Override
@@ -59,11 +59,11 @@ public class LightAdaptor extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         Device dv = room_devices.get(i);
         final int device_sequense=i;
-        SeekBar seekBar = null;
-        ImageView icon = null;
-        ToggleButton toggleButton = null;
-        TextView text = null;
-        Switch swt = null;
+        SeekBar seekBar;
+        ImageView icon;
+        ToggleButton toggleButton ;
+        TextView text;
+        Switch swt ;
         View v=null;
         if(dv.type.equals("light")){
             v = inflater.inflate(R.layout.light_layout,null);
@@ -91,10 +91,10 @@ public class LightAdaptor extends BaseAdapter {
                     else room_devices.get(device_sequense).status.put("power",String.valueOf(false));
                     String url="http://"+ps.getNetAddress();
                     if(i == 0){
-                        url += "/wsnRest/control/"+room_devices.get(device_sequense).id+"/2/"+ps.user_act+"/2434";
+                        url += "/wsnRest/control/"+room_devices.get(device_sequense).id+"/2/"+ps.user_act+"/"+ps.getMd5();
                     }else{
                     url += "/wsnRest/control/"+room_devices.get(device_sequense).id+"/3/"
-                            +String.valueOf(i * 2)+"/"+ps.user_act+"/2434";
+                            +String.valueOf(i * 2)+"/"+ps.user_act+"/"+ps.getMd5();
                     }
                     Log.d("request-url:",url);
 
@@ -157,11 +157,12 @@ public class LightAdaptor extends BaseAdapter {
 
         }
 
-        icon = (ImageView) v.findViewById(R.id.block_icon);
-        text = (TextView) v.findViewById(R.id.block_text);
-        text.setText(dv.name);
-        icon.setImageResource(dv.getIcon());
-
+        if (v != null) {
+            icon = (ImageView) v.findViewById(R.id.block_icon);
+            text = (TextView) v.findViewById(R.id.block_text);
+            text.setText(dv.name);
+            icon.setImageResource(dv.getIcon());
+        }
         return v;
     }
 }

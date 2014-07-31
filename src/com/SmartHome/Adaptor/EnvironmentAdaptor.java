@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.*;
 import com.SmartHome.Achat.PortLineChart;
 import com.SmartHome.Activity.AirActivity;
-import com.SmartHome.Activity.TelevisionActivity;
 import com.SmartHome.DataType.Device;
 import com.SmartHome.DataType.PublicState;
 import com.SmartHome.R;
@@ -60,9 +59,9 @@ public class EnvironmentAdaptor extends BaseAdapter {
         //插入测试数据
 
         //
-        for(int i=0;i<devices.size();++i)
-            if(devices.get(i).room.equals(ps.selected_room.id)){
-                room_devices.add(devices.get(i));
+        for (Device device : devices)
+            if (device.room.equals(ps.selected_room.id)) {
+                room_devices.add(device);
             }
     }
     @Override
@@ -117,7 +116,11 @@ class EnvironmentStateClicked implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         click_time = 1;
-
+        int y,m,d;
+        Calendar cal=Calendar.getInstance();
+        y=cal.get(Calendar.YEAR);
+        m=cal.get(Calendar.MONTH);
+        d=cal.get(Calendar.DATE);
        DatePickerDialog datePickerDialog = new DatePickerDialog(context,
                 // 绑定监听器
                 new DatePickerDialog.OnDateSetListener() {
@@ -142,7 +145,7 @@ class EnvironmentStateClicked implements View.OnClickListener {
                     }
                 }
                 // 设置初始日期
-                ,2014, 6, 27);//.show();
+                ,y, m, d);//.show();
         Calendar calendar = Calendar.getInstance();
         calendar.set(2014, Calendar.JANUARY,1);
         datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());

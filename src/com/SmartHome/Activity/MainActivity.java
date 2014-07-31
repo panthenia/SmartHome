@@ -27,7 +27,6 @@ import java.util.Timer;
  */
 public class MainActivity extends Activity {
 
-    ProgressDialog pro_dialog;
     PublicState ps = PublicState.getInstance();
     public void onCreate(Bundle savedInstanceState) {
 
@@ -72,7 +71,7 @@ public class MainActivity extends Activity {
 
         Timer timer=new Timer(true);
         EnvironmentTask mtask=new EnvironmentTask(ps);
-        timer.schedule(mtask, 5000,1000*60*20);
+        timer.schedule(mtask, 5000,1000*90);
     }
 
    public void printDevices(){

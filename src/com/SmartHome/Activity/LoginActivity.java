@@ -46,7 +46,7 @@ public class LoginActivity extends Activity implements Observer{
         accountEditText = (EditText)findViewById(R.id.login_account);
         passwordEditText = (EditText)findViewById(R.id.login_password);
 
-        if(saved_info == true){//有保存的信息
+        if(saved_info){//有保存的信息
             accountEditText.setText(account);
             passwordEditText.setText(password);
 
@@ -129,11 +129,16 @@ public class LoginActivity extends Activity implements Observer{
         }
         String deskey = null;
         try {
-            deskey = ps.securityDemo.getRSAEnceodeKey(ps.securityDemo.getDESKey());
+            //deskey = ps.securityDemo.getRSAEnceodeKey(ps.securityDemo.getDESKey());
+//            deskey = new String(ps.securityDemo.getDESKey());
+              deskey = Base64Demo.encode(ps.securityDemo.getDESKey());
+              Log.d("decoded-deskey:",deskey);
+//            Log.d("decoded-deskey:",Base64Demo.encode(new String("ssssssss").getBytes()));
         } catch (Exception e) {
             e.printStackTrace();
         }
         RequestInfo rf_key= null;
+        Log.d("des-key:",deskey);
         try {
             rf_key = new RequestInfo(key_url,deskey);
         } catch (MalformedURLException e) {

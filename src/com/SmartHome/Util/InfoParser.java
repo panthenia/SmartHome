@@ -21,6 +21,64 @@ import java.util.ArrayList;
  *
  */
 public class InfoParser {
+    public static void parseStatusInfo() throws IOException, XmlPullParserException {
+
+        ArrayList<DeviceSatus> status = new ArrayList<DeviceSatus>();
+        XmlPullParser parser = Xml.newPullParser();
+        DeviceSatus cdevice =  null;
+        String vname = "";
+        PublicState ps = PublicState.getInstance();
+        int eventType = 0;
+
+
+        InputStream xml = new ByteArrayInputStream(ps.status_info.getBytes());
+        parser.setInput(xml, "UTF-8");
+        eventType = parser.getEventType();
+
+        while (eventType != XmlPullParser.END_DOCUMENT) {
+            if (eventType == XmlPullParser.START_DOCUMENT) {
+                Log.d("XML", "Start document");
+            } else if (eventType == XmlPullParser.START_TAG) {
+                String tagnm = parser.getName();
+                String text ;
+
+                if (tagnm.equals("NodeId")) {
+
+                    text = parser.nextText().trim();
+                    cdevice = new DeviceSatus(text);
+
+                }else if (tagnm.equals("VarName")) {
+
+                    vname = parser.nextText().trim();
+
+                } else if (tagnm.equals("VarValue")) {
+                    text = parser.nextText().trim();
+                    if(cdevice != null){
+                        cdevice.addVar(vname,text);
+                    }
+
+                }
+            } else if (eventType == XmlPullParser.TEXT) {
+                // Log.d("XML", "Text ");
+            } else if (eventType == XmlPullParser.END_TAG) {
+                String tagnm = parser.getName();
+                if(tagnm.equals("NodeStatus")){
+                    if(cdevice != null)
+                        status.add(cdevice);
+                }
+            }
+
+            eventType = parser.next();
+
+        }
+        if(ps.status_list == null)
+            ps.status_list = status;
+        else{
+            synchronized (ps.status_list){
+            ps.status_list = status;
+            }
+        }
+    }
     public static void parseModeInfo() throws IOException,XmlPullParserException{
         PublicState ps = PublicState.getInstance();
         Mode cmode = null;
@@ -226,6 +284,7 @@ public class InfoParser {
         ArrayList<Area> rooms = new ArrayList<Area>();
         XmlPullParser parser = Xml.newPullParser();
         Device cdevice =  null;
+        String vname = "";
         Area care = null;
         PublicState ps = PublicState.getInstance();
         int eventType = 0;
@@ -285,8 +344,13 @@ public class InfoParser {
                 } else if (tagnm.equals("NodeVariables")) {
 
                 } else if (tagnm.equals("VariableName")) {
+                    vname = parser.nextText().trim();
 
                 } else if (tagnm.equals("VariableValue")) {
+                    text = parser.nextText().trim();
+                    if(cdevice != null){
+                        cdevice.status.put(vname,text);
+                    }
                 }
             } else if (eventType == XmlPullParser.TEXT) {
                 // Log.d("XML", "Text ");

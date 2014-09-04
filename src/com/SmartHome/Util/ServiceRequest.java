@@ -64,6 +64,10 @@ public class ServiceRequest extends AsyncTask<RequestInfo, Void, String> {
     protected void onPostExecute(String rst) {
         Log.d("request-result:", rst);
 
+        //如果是状态信息更细 则要刷新界面
+        if(request_mode.contains("getstatus")){
+            PublicState.getInstance().updateUi();
+        }
     }
 
     private  String usePost(RequestInfo rf) {
@@ -187,6 +191,11 @@ public class ServiceRequest extends AsyncTask<RequestInfo, Void, String> {
         }else if(request_mode.contains("getmode")){
             PublicState.getInstance().saveModeInfo(rst);
             Log.d("get-mode:",rst);
+        }else if(request_mode.contains("getstatus")){
+            //PublicState.getInstance().saveStatusInfo(rst);
+            Log.d("status-info",rst);
+            PublicState.getInstance().handleStatusInfo(rst);
+
         }
         if (isobservable) {
             myobservable.setflag();

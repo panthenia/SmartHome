@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Status>
+    <NodeStatus>
+        <NodeId>108</NodeId>
+        <Variables>
+            <Variable>
+                <VarName>LIGHT_LEVEL</VarName>
+                <VarValue>200</VarValue>
+            </Variable>
+            <Variable>
+                <VarName>DEVICE_STATUS</VarName>
+                <VarValue>unknown</VarValue>
+            </Variable>
+        </Variables>
+    </NodeStatus>
+    <NodeStatus>
+        <NodeId>121</NodeId>
+        <Variables>
+            <Variable>
+                <VarName>CAMERA_STATUS</VarName>
+                <VarValue>0</VarValue>
+            </Variable>
+            <Variable>
+                <VarName>CAMERA_GETIMAGE</VarName>
+                <VarValue>/SnapshotJPEG?Resolution=[640x480]&amp;amp;Quality=[Clarity]</VarValue>
+            </Variable>
+            <Variable>
+                <VarName>DEVICE_STATUS</VarName>
+                <VarValue>online</VarValue>
+            </Variable>
+        </Variables>
+    </NodeStatus>
+</Status>

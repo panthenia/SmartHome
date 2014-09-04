@@ -3,6 +3,7 @@ package com.SmartHome.Adaptor;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.*;
 import com.SmartHome.Achat.PortLineChart;
 import com.SmartHome.Activity.AirActivity;
 import com.SmartHome.DataType.Device;
+import com.SmartHome.DataType.DeviceSatus;
 import com.SmartHome.DataType.PublicState;
 import com.SmartHome.R;
 
@@ -84,20 +86,31 @@ public class EnvironmentAdaptor extends BaseAdapter {
         View v = inflater.inflate(R.layout.normal_block_layout, null);
 
         final Device dv = room_devices.get(i);
+        DeviceSatus status = ps.getDeviceStatusById(room_devices.get(i).id);
 
         ImageView icon = (ImageView) v.findViewById(R.id.block_icon);
         TextView text = (TextView) v.findViewById(R.id.block_text);
         icon.setImageResource(dv.getIcon());
         text.setText(dv.name);
         if(dv.type.equals("air")){
-            v.setOnClickListener(new View.OnClickListener() {
+            if(status.getVar("DEVICE_STATUS").contains("online")){
+                v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, AirActivity.class);
-                    intent.putExtra("device_id",dv.id);
-                    context.startActivity(intent);
-                }
-            });
+                        Intent intent = new Intent(context, AirActivity.class);
+                        intent.putExtra("device_id",dv.id);
+                        context.startActivity(intent);
+                    }
+                });
+            }else{
+                text.setTextColor(Color.rgb(0x2e, 0x2e, 0x2e));
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(context, "当前设备已离线", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         }
         else v.setOnClickListener(new EnvironmentStateClicked(context,dv.type));
 

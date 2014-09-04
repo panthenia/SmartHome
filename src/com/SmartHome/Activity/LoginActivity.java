@@ -120,7 +120,7 @@ public class LoginActivity extends Activity implements Observer{
        // }
         showLoginDialog();
         saveLoginInfo(ps);
-
+//http://192.168.1.100/wsnRest/checkUserLogin/bupt/b8bdfc1b16aadd837da025cb0b014e3a
         String key_url = null;
         try {
             key_url = "http://"+ps.getNetAddress()+"/wsnRest/getkey/";
@@ -149,6 +149,17 @@ public class LoginActivity extends Activity implements Observer{
         //sr_key.setObserverble();
         //sr_key.addObserver(LoginActivity.this);
         sr_key.execute(rf_key);
+
+        String getstate="http://"+ps.getNetAddress();
+        getstate+="/wsnRest/getDeviceVar/"+account+"/"+ps.getMd5();
+        RequestInfo rf3= null;
+        try {
+            rf3 = new RequestInfo(getstate);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        ServiceRequest sr3=new ServiceRequest("getstatus");
+        sr3.execute(rf3);
 
 
         String getmode_url="http://"+ps.getNetAddress();

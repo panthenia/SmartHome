@@ -6,11 +6,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Camera;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.BaseAdapter;
+import com.SmartHome.Adaptor.*;
 import com.SmartHome.Cription.security.SecurityDemo;
 import com.SmartHome.R;
 import com.SmartHome.Util.DataUtil;
+import com.SmartHome.Util.InfoParser;
 import com.SmartHome.Util.ServiceRequest;
+import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.security.MessageDigest;
@@ -35,13 +40,23 @@ public class PublicState extends Application {
     public ArrayList<Area> room_list = null;
     public ArrayList<Rule> rule_list = null;
     public ArrayList<Mode> mode_list = null;
+    public ArrayList<DeviceSatus> status_list = null;
     public ArrayList<Device> device_list = null;
     public boolean login_result = false;
 
     public String device_info = "";
     public String rule_info = "";
     public String mode_info = "";
+    public String status_info = "";
     public String md5 = "";
+
+    public MediaAdaptor media_adp = null;
+    public LightAdaptor light_adp = null;
+    public SecureAdaptor secure_adp = null;
+    public EnvironmentAdaptor envi_adp = null ;
+    public ModeAdaptor mode_adp = null;
+    public int current_adp = -1;
+
     public DataUtil du;
     public MessageDigest md5_encriptor = null;
     public void onCreate(){
@@ -90,6 +105,68 @@ public class PublicState extends Application {
     public void saveModeInfo(String df){
         mode_info = df;
     }
+    public void saveStatusInfo(String info){
+        status_info = info;
+    }
+    public void updateUi(){
+        switch (current_adp){
+            case 1:
+                if(media_adp != null){
+                    media_adp.notifyDataSetChanged();
+                }
+                break;
+            case 2:
+                if(light_adp != null){
+                    light_adp.notifyDataSetChanged();
+                }
+                break;
+            case 3:
+                if(secure_adp != null){
+                    secure_adp.notifyDataSetChanged();
+                }
+                break;
+            case 4:
+                if(envi_adp != null){
+                    envi_adp.notifyDataSetChanged();
+                }
+                break;
+            case 5:
+                if(mode_adp != null){
+                    mode_adp.notifyDataSetChanged();
+                }
+                break;
+            case -1:break;
+        }
+    }
+    public void validMediaAdaptor(){
+        current_adp = 1;
+    }
+    public void validLightAdaptor(){
+        current_adp = 2;
+    }
+    public void validSecureAdaptor(){
+        current_adp = 3;
+    }
+    public void validEnviAdaptor(){
+        current_adp = 4;
+    }
+    public void validModeAdaptor(){
+        current_adp = 5;
+    }
+
+    public void invalidCurrentAdaptor(){
+        current_adp = -1;
+    }
+    public void handleStatusInfo(String info){
+        status_info = info;
+        try {
+            InfoParser.parseStatusInfo();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+    }
     public String getNetAddress(){
         return net_ip+":"+net_port;
     }
@@ -104,6 +181,15 @@ public class PublicState extends Application {
             if(device_list.get(i).id.equals(id))
                 return device_list.get(i);
         return null;
+    }
+    public DeviceSatus getDeviceStatusById(String id){
+
+        synchronized (status_list){
+            for(int i=0;i<status_list.size();++i)
+                if(status_list.get(i).device_id.equals(id))
+                    return status_list.get(i);
+            return null;
+        }
     }
     public ArrayList<Area> getRoomList(){
         return room_list;

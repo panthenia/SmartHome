@@ -3,7 +3,9 @@ package com.SmartHome.Activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,7 +21,6 @@ import com.SmartHome.R;
 public class SecureActivity extends Activity {
 
     public PublicState ps = PublicState.getInstance();
-    SecureAdaptor adaptor = null;
     TextView room_name = null;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,13 +31,14 @@ public class SecureActivity extends Activity {
         setContentView(R.layout.second_level_layout);
         TextView textView = (TextView)findViewById(R.id.current_user);
         textView.setText("当前用户："+ps.user_act);
-        adaptor = new SecureAdaptor(this);
+        ps.secure_adp = new SecureAdaptor(this);
+        ps.validSecureAdaptor();
         room_name = (TextView)findViewById(R.id.room_name);
         room_name.setText(ps.selected_room.name);
         GridView gridView = (GridView) findViewById(R.id.content_grid);
         TextView editText = (TextView) findViewById(R.id.acitivity_name);
         editText.setText("安防");
-        gridView.setAdapter(adaptor);
+        gridView.setAdapter(ps.secure_adp);
 
     }
     public void onRoomSelectorClicked(View v){
@@ -53,12 +55,21 @@ public class SecureActivity extends Activity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         ps.selected_room = ps.room_list.get(i);
                         room_name.setText(ps.selected_room.name);
-                        adaptor.changeRoom();
-                        adaptor.notifyDataSetChanged();
+                        ps.secure_adp.changeRoom();
+                        ps.secure_adp.notifyDataSetChanged();
                         dialogInterface.dismiss();
                     }
                 })
                 .setNegativeButton("取消",null);
         builder.create().show();
+    }
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK ){
+            ps.invalidCurrentAdaptor();
+            this.finish();
+        }
+        return false;
+
     }
 }

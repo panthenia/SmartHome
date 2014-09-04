@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -23,7 +24,6 @@ public class EnvironmenActivity extends Activity {
 
     public PublicState ps = PublicState.getInstance();
     TextView area_name = null;
-    EnvironmentAdaptor environmentAdaptor = null;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -32,12 +32,13 @@ public class EnvironmenActivity extends Activity {
         setContentView(R.layout.second_level_layout);
         TextView textView = (TextView)findViewById(R.id.current_user);
         textView.setText("当前用户："+ps.user_act);
-        environmentAdaptor = new EnvironmentAdaptor(this);
+        ps.envi_adp = new EnvironmentAdaptor(this);
+        ps.validEnviAdaptor();
         GridView gridView = (GridView) findViewById(R.id.content_grid);
         TextView editText = (TextView) findViewById(R.id.acitivity_name);
         area_name = (TextView)findViewById(R.id.room_name);
         editText.setText("环境");
-        gridView.setAdapter(environmentAdaptor);
+        gridView.setAdapter(ps.envi_adp);
     }
     public void onRoomSelectorClicked(View v){
 
@@ -54,11 +55,20 @@ public class EnvironmenActivity extends Activity {
                         ps.selected_room = ps.room_list.get(i);
                         dialogInterface.dismiss();
                         area_name.setText(ps.selected_room.name);
-                        environmentAdaptor.changeRoom();
-                        environmentAdaptor.notifyDataSetChanged();
+                        ps.envi_adp.changeRoom();
+                        ps.envi_adp.notifyDataSetChanged();
                     }
                 })
                 .setNegativeButton("取消",null);
         builder.create().show();
+    }
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK ){
+            ps.invalidCurrentAdaptor();
+            this.finish();
+        }
+        return false;
+
     }
 }

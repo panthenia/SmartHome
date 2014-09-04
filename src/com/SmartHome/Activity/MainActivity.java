@@ -34,9 +34,7 @@ public class MainActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.main_layout);
-        TextView textView = (TextView)findViewById(R.id.current_user);
-        textView.setText("当前用户："+ps.user_act);
+
         //ps.rule_info = "";//"<Rules><Rule><RuleId>序号</RuleId><RuleName>模式名</RuleName><timeXML>xml</timeXML><RuleContent><RuleCondition><groupRelation>and</groupRelation><conditionGroup><conditionRelation>or</conditionRelation><condition><ConditionID>8</ConditionID><NodeID>变量所属节点</NodeID><VarID>变量序号</VarID><VarName>变量名称</VarName><VarOper>比较运算符</VarOper><VarValue>比较数值</VarValue></condition></conditionGroup><conditionGroup><conditionRelation>or</conditionRelation><condition><ConditionID>7</ConditionID><NodeID>变量所属节点</NodeID><VarID>变量序号</VarID><VarName>变量名称</VarName><VarOper>比较运算符</VarOper><VarValue>比较数值</VarValue></condition><condition><ConditionID>6</ConditionID><NodeID>变量所属节点</NodeID><VarID>变量序号</VarID><VarName>变量名称</VarName><VarOper>比较运算符</VarOper><VarValue>比较数值</VarValue></condition></conditionGroup></RuleCondition><RuleCommand><DeviceId>设备编号2</DeviceId><Operator>操作命令2</Operator><CommandName>操作名称</CommandName></RuleCommand><RuleCommand><DeviceId>设备编号2</DeviceId><Operator>操作命令2</Operator><CommandName>操作名称</CommandName></RuleCommand></RuleContent></Rule></Rules>";
 
        // Log.d("rule_info:","start");
@@ -63,15 +61,22 @@ public class MainActivity extends Activity {
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
-        ps.printModes();
+
+        setContentView(R.layout.main_layout);
+        TextView textView = (TextView)findViewById(R.id.current_user);
+        textView.setText("当前用户："+ps.user_act);
         ps.printAreas();
         if(ps.room_list.size()>0)
             ps.selected_room = ps.room_list.get(0);
         else ps.selected_room = new Area("未知区域","null");
 
-        Timer timer=new Timer(true);
+        Timer envi_timer=new Timer(true);
         EnvironmentTask mtask=new EnvironmentTask(ps);
-        timer.schedule(mtask, 5000,1000*90);
+        envi_timer.schedule(mtask, 100,1000*90);
+
+        Timer fresh_timer=new Timer(true);
+        EnvironmentTask mtask2=new EnvironmentTask(ps);
+        fresh_timer.schedule(mtask2, 10,1000*60*10);
     }
 
    public void printDevices(){
@@ -108,7 +113,6 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(MainActivity.this,MediaActivity.class);
         startActivity(intent);
     }
-
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
         if (keyCode == KeyEvent.KEYCODE_BACK )

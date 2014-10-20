@@ -40,9 +40,9 @@ public class LoginActivity extends Activity implements Observer{
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         getSavedInfo();
-
+        PublicState.getInstance().current_ui_content = this;
         setContentView(R.layout.login_layout);
-
+        PublicState.getInstance().activitis.put(getClass().getName(),this);
         accountEditText = (EditText)findViewById(R.id.login_account);
         passwordEditText = (EditText)findViewById(R.id.login_password);
 
@@ -123,17 +123,18 @@ public class LoginActivity extends Activity implements Observer{
 //http://192.168.1.100/wsnRest/checkUserLogin/bupt/b8bdfc1b16aadd837da025cb0b014e3a
         String key_url = null;
         try {
-            key_url = "http://"+ps.getNetAddress()+"/wsnRest/getkey/";
+            key_url = "http://"+ps.getNetAddress()+"/wsnRest/getkey/"+ps.user_act;
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         String deskey = null;
         try {
             //deskey = ps.securityDemo.getRSAEnceodeKey(ps.securityDemo.getDESKey());
 //            deskey = new String(ps.securityDemo.getDESKey());
               deskey = Base64Demo.encode(ps.securityDemo.getDESKey());
-              Log.d("decoded-deskey:",deskey);
-//            Log.d("decoded-deskey:",Base64Demo.encode(new String("ssssssss").getBytes()));
+              //Log.d("en-deskey",deskey);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -188,11 +189,25 @@ public class LoginActivity extends Activity implements Observer{
         //sr1.addObserver(LoginActivity.this);
         sr1.execute(rf1);
 
+        String getplay_url="http://"+ps.getNetAddress();
+        getplay_url+="/wsnRest/DNSFiles/"+account+"/"+ps.getMd5();
+        RequestInfo rf5= null;
+        try {
+            rf5 = new RequestInfo(getplay_url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        ServiceRequest sr5=new ServiceRequest("getplay");
+        //sr1.setObserverble();
+        //sr1.addObserver(LoginActivity.this);
+        sr5.execute(rf5);
+
+
         String url="http://"+ps.getNetAddress();
         url+="/wsnRest/checkLogin/username=" +account+
                 "/isFirst=yes/"+ps.getMd5();
         //login_url+="/test.xml";
-        Log.d("getDeviceUrl", url);
+        //Log.d("getDeviceUrl", url);
         RequestInfo rf= null;
         try {
             rf = new RequestInfo(url);

@@ -5,23 +5,39 @@
         <SceneName>Turn All Device On</SceneName>
         <Description>---</Description>
         <Status>true/false</Status>
+        <Rule>
+            <RuleId>110</RuleId>
+            <RuleId>114</RuleId>
+            <RuleId>129</RuleId>
+        </Rule>
     </Scene>
     <Scene>
         <SceneId>2</SceneId>
         <SceneName>Turn All Device Off</SceneName>
         <Description>---</Description>
+        <Rule>
+            <RuleId>113</RuleId>
+            <RuleId>114</RuleId>
+            <RuleId>122</RuleId>
+        </Rule>
     </Scene>
     <Scene>
         <SceneId>3</SceneId>
         <SceneName>test</SceneName>
         <Description>---</Description>
+        <Rule>
+            <RuleId>113</RuleId>
+            <RuleId>114</RuleId>
+        </Rule>
     </Scene>
     <Scene>
         <SceneId>4</SceneId>
         <SceneName>test2</SceneName>
         <Description>test2</Description>
         <Rule>
-            <RuleId></RuleId>
+            <RuleId>113</RuleId>
+            <RuleId>114</RuleId>
+            <RuleId>129</RuleId>
         </Rule>
     </Scene>
 </Scenes>

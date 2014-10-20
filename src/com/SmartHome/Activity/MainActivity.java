@@ -2,7 +2,6 @@ package com.SmartHome.Activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +15,7 @@ import com.SmartHome.DataType.Area;
 import com.SmartHome.DataType.PublicState;
 import com.SmartHome.R;
 import com.SmartHome.Util.EnvironmentTask;
+import com.SmartHome.Util.FreshStatusTask;
 import com.SmartHome.Util.InfoParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
         //ps.rule_info = "";//"<Rules><Rule><RuleId>序号</RuleId><RuleName>模式名</RuleName><timeXML>xml</timeXML><RuleContent><RuleCondition><groupRelation>and</groupRelation><conditionGroup><conditionRelation>or</conditionRelation><condition><ConditionID>8</ConditionID><NodeID>变量所属节点</NodeID><VarID>变量序号</VarID><VarName>变量名称</VarName><VarOper>比较运算符</VarOper><VarValue>比较数值</VarValue></condition></conditionGroup><conditionGroup><conditionRelation>or</conditionRelation><condition><ConditionID>7</ConditionID><NodeID>变量所属节点</NodeID><VarID>变量序号</VarID><VarName>变量名称</VarName><VarOper>比较运算符</VarOper><VarValue>比较数值</VarValue></condition><condition><ConditionID>6</ConditionID><NodeID>变量所属节点</NodeID><VarID>变量序号</VarID><VarName>变量名称</VarName><VarOper>比较运算符</VarOper><VarValue>比较数值</VarValue></condition></conditionGroup></RuleCondition><RuleCommand><DeviceId>设备编号2</DeviceId><Operator>操作命令2</Operator><CommandName>操作名称</CommandName></RuleCommand><RuleCommand><DeviceId>设备编号2</DeviceId><Operator>操作命令2</Operator><CommandName>操作名称</CommandName></RuleCommand></RuleContent></Rule></Rules>";
 
        // Log.d("rule_info:","start");
-
+        ps.current_ui_content = this;
         try {
             InfoParser.parseDeviceInfo();
         } catch (IOException e) {
@@ -62,21 +62,45 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
 
+        if(!ps.login_result){
+            AlertDialog lfail = new AlertDialog.Builder(this)
+                    .setPositiveButton("确定",new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("取消",new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(MainActivity.this,FinishActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                        }
+                    })
+                    .create();
+            lfail.setTitle("系统提示：登录失败！");
+            lfail.setMessage("登录失败\n确定重新登录，取消退出程序。");
+
+            lfail.show();
+        }
         setContentView(R.layout.main_layout);
         TextView textView = (TextView)findViewById(R.id.current_user);
         textView.setText("当前用户："+ps.user_act);
-        ps.printAreas();
+        //ps.printAreas();
         if(ps.room_list.size()>0)
             ps.selected_room = ps.room_list.get(0);
         else ps.selected_room = new Area("未知区域","null");
-
+        ps.activitis.put(getClass().getName(),this);
         Timer envi_timer=new Timer(true);
         EnvironmentTask mtask=new EnvironmentTask(ps);
-        envi_timer.schedule(mtask, 100,1000*90);
+        envi_timer.schedule(mtask, 100,1000*60*10);
 
         Timer fresh_timer=new Timer(true);
-        EnvironmentTask mtask2=new EnvironmentTask(ps);
-        fresh_timer.schedule(mtask2, 10,1000*60*10);
+        FreshStatusTask mtask2=new FreshStatusTask(ps);
+        fresh_timer.schedule(mtask2, 10,1000*60*5);
     }
 
    public void printDevices(){

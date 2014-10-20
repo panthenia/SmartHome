@@ -1,8 +1,10 @@
 package com.SmartHome.Util;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
-import android.text.format.Time;
 import android.util.Log;
+import com.SmartHome.Activity.GlobalDialogActivity;
 import com.SmartHome.DataType.EnviSensor;
 import com.SmartHome.DataType.PublicState;
 import com.SmartHome.DataType.RequestInfo;
@@ -38,10 +40,15 @@ public class ServiceRequest extends AsyncTask<RequestInfo, Void, String> {
 
     String current_area, area_nm;
     String envi_type;
-
+    Context context = null;
     public ServiceRequest(String rm) {
         super();
         request_mode = rm;
+    }
+    public ServiceRequest(String rm,Context ctx) {
+        super();
+        request_mode = rm;
+        context = ctx;
     }
 
     public ServiceRequest(String rm, String envi_type, String area_id,
@@ -62,18 +69,53 @@ public class ServiceRequest extends AsyncTask<RequestInfo, Void, String> {
     }
 
     protected void onPostExecute(String rst) {
-        Log.d("request-result:", rst);
+        Log.d("request-result:"+request_mode, rst);
 
         //如果是状态信息更细 则要刷新界面
         if(request_mode.contains("getstatus")){
             PublicState.getInstance().updateUi();
+        }
+        if(request_mode.contains("control")){
+            PublicState ps = PublicState.getInstance();
+            if(!rst_ok){
+                if(context != null){
+                    Intent intent = new Intent(context,GlobalDialogActivity.class);
+                    intent.putExtra("msg","按确定键以退出程序！");
+                    intent.putExtra("title","网关无法连接！");
+                    context.startActivity(intent);
+                }
+            }else{
+                String[] crst = rst.split("-");
+
+                if(crst[0].contains("scene")){
+                    for(int i=0;i<ps.mode_list.size();++i){
+                        if(ps.mode_list.get(i).id.contains(crst[1])){
+                            if(crst[2].contains("success")){
+                                if(crst[0].contains("adopt")){
+                                    ps.mode_list.get(i).status = "true";
+                                }else{
+                                    ps.mode_list.get(i).status = "false";
+                                }
+                            }else {
+
+                            }
+                        }
+                    }
+                    Log.d("mode-debug",String.valueOf(ps.current_adp));
+                    if(ps.current_adp == 5){
+                        ps.mode_adp.notifyDataSetChanged();
+                        ps.mode_adp.showResult(crst[2],crst[3]);
+                    }
+                }
+            }
+
         }
     }
 
     private  String usePost(RequestInfo rf) {
         URL url = rf.getUrl();
         rst_ok = true;
-        Log.d("post-url=",url.toString());
+        //Log.d("post-url=",url.toString());
         HttpURLConnection httpConnection = null;
         String rst = "", tl;
         try {
@@ -94,7 +136,7 @@ public class ServiceRequest extends AsyncTask<RequestInfo, Void, String> {
             data.writeBytes(rf.getXml());
             data.flush();
             data.close();
-            Log.d("ServiceRequet-usePost", "POST:" + rf.getXml());
+            //Log.d("ServiceRequet-usePost", "POST:" + rf.getXml());
 
             InputStream rtstrm = httpConnection.getInputStream();
             BufferedReader buff = new BufferedReader(new InputStreamReader(
@@ -121,7 +163,7 @@ public class ServiceRequest extends AsyncTask<RequestInfo, Void, String> {
     }
 
     private  String useGet(RequestInfo rf) {
-        Log.d("servicerequest", "into useGet");
+        //Log.d("servicerequest", "into useGet");
         URL url = rf.getUrl();
         rst_ok = true;
         HttpURLConnection httpConnection = null;
@@ -162,10 +204,17 @@ public class ServiceRequest extends AsyncTask<RequestInfo, Void, String> {
         // TODO Auto-generated method stub
         String rst = null;
         rst = doRequest(info);
-        Log.d("request_result:",rst);
+      //Log.d("request_result:",rst);
         if (request_mode.contains("getDevice")) {
-            PublicState.getInstance().saveDevieInfo(rst);
-            Log.d("getdevice", rst);
+            //PublicState ps = PublicState.getInstance();
+            try {
+                //String after_str = PublicState.getInstance().securityDemo.getData(PublicState.getInstance().securityDemo.getDecodeData(rst));
+                //Log.d("after:",after_str);
+                PublicState.getInstance().saveDevieInfo(rst);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            //Log.d("getdevice", rst);
         } else if (request_mode.contains("getenvi")) {
             Calendar calendar = Calendar.getInstance();
             String date = ""+calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)
@@ -182,20 +231,23 @@ public class ServiceRequest extends AsyncTask<RequestInfo, Void, String> {
                 if(ps.selected_room.name.contains(area_nm))
                     ps.selected_room.temrature = rst;
             }
-            Log.d("envitask-url=type="+envi_type+"result=",rst);
+            //Log.d("envitask-url=type="+envi_type+"result=",rst);
         } else if(request_mode.contains("control")) {
-            Log.d("control:",rst);
+            //Log.d("control:",rst);
         }else if(request_mode.contains("getrule")){
             PublicState.getInstance().saveRuleInfo(rst);
-            Log.d("get-rule:",rst);
+            //Log.d("get-rule:",rst);
         }else if(request_mode.contains("getmode")){
             PublicState.getInstance().saveModeInfo(rst);
-            Log.d("get-mode:",rst);
+            //Log.d("get-mode:",rst);
         }else if(request_mode.contains("getstatus")){
             //PublicState.getInstance().saveStatusInfo(rst);
             Log.d("status-info",rst);
             PublicState.getInstance().handleStatusInfo(rst);
 
+        }else if(request_mode.contains("getplay")){
+            //Log.d("files",rst);
+            PublicState.getInstance().handlePlayListInfo(rst);
         }
         if (isobservable) {
             myobservable.setflag();

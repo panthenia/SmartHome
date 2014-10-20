@@ -34,11 +34,10 @@ public class PlayerActivity extends Activity {
         if(intent.hasExtra("device_id"))
             device_id = intent.getStringExtra("device_id");
         else finish();
-
+        ps.activitis.put(getClass().getName(),this);
         init_ui();
-
     }
-    public void init_ui(){
+    public void init_ui()   {
         power_views[0] = (TextView)findViewById(R.id.textView0);
         power_views[1] = (TextView)findViewById(R.id.textView);
         current_text = (TextView)findViewById(R.id.textView5);
@@ -69,7 +68,7 @@ public class PlayerActivity extends Activity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    ps.controlRequest(url,edata);
+                    ps.controlRequest(url,edata,this);
                 }
             }
             else current_text.setText("");
@@ -100,10 +99,10 @@ public class PlayerActivity extends Activity {
                     + "/wsnRest/control/" + tv_id + "/4/" + ps.user_act + "/2434";
         }
         Log.d("request-url", url);
-        ps.controlRequest(url);
+        ps.controlRequest(url,this);
         if(tv_url != null){
-            ps.controlRequest(tv_url);
-            ps.controlRequest(tv_hdmi);
+            ps.controlRequest(tv_url,this);
+            ps.controlRequest(tv_hdmi,this);
         }
     }
     public void onPowerOffClicked(View v){
@@ -111,22 +110,22 @@ public class PlayerActivity extends Activity {
         power_views[0].setTextColor(Color.rgb(0x48,0x6a,0x00));
         String url = "http://" +ps.getNetAddress()
                 + "/wsnRest/control/" + device_id+"/2/"+ps.user_act+"/2434";
-        Log.d("request-url", url);ps.controlRequest(url);
+        Log.d("request-url", url);ps.controlRequest(url,this);
     }
     public void onPauseClicked(View v){
         String url = "http://" + ps.getNetAddress()
                 + "/wsnRest/control/" + device_id+"/5/"+ps.user_act+"/2434";
-        Log.d("request-url", url);ps.controlRequest(url);
+        Log.d("request-url", url);ps.controlRequest(url,this);
     }
     public void onStartClicked(View v){
         String url = "http://" + ps.getNetAddress()
                 + "/wsnRest/control/" + device_id+"/6/"+ps.user_act+"/2434";
-        Log.d("request-url",url);ps.controlRequest(url);
+        Log.d("request-url",url);ps.controlRequest(url,this);
     }
     public void onStopClicked(View v){
         String url = "http://" + ps.getNetAddress()
                 + "/wsnRest/control/" + device_id+"/4/"+ps.user_act+"/2434";
-        Log.d("request-url",url);ps.controlRequest(url);
+        Log.d("request-url",url);ps.controlRequest(url,this);
     }
 
 }

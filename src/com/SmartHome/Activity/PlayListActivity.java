@@ -3,6 +3,7 @@ package com.SmartHome.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.SmartHome.Adaptor.PlayListAdaptor;
+import com.SmartHome.DataType.PublicState;
 import com.SmartHome.R;
 
 /**
@@ -19,9 +21,10 @@ public class PlayListActivity extends Activity {
 
     TextView textViews[] = new TextView[4] ;//四个媒体类型
     ImageView imageView[] = new ImageView[4];//四个括号
-
-    String play_list[]={"smb://DLINK/Volume_1/3.mp4",
-            "smb://DLINK/Volume_1/a.mp4","smb://DLINK/Volume_1/4.mp4"};
+    PublicState ps = PublicState.getInstance();
+    String file_prefix = "smb://DLINK/Volume_1/";
+    String play_list[] = null;
+            //= {"smb://DLINK/Volume_1/3.mp4","smb://DLINK/Volume_1/4.mp4","smb://DLINK/Volume_1/a.mp4"};
     String author_list[] = {"老虎不在家","小松鼠","大老虎"};
     ListView listView;
     PlayListAdaptor list_adapter;
@@ -31,6 +34,15 @@ public class PlayListActivity extends Activity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.play_list);
+        ps.current_ui_content = this;
+        ps.activitis.put(getClass().getName(),this);
+        play_list = new String[ps.play_list.size()];
+        for(int i=0;i<play_list.length;++i){
+            //play_list[i] = file_prefix + ps.play_list.get(i);
+            play_list[i] = ps.play_list.get(i);
+            Log.d("file-name:",play_list[i]);
+
+        }
 
         textViews[0]=(TextView)findViewById(R.id.textView1);
         textViews[1]=(TextView)findViewById(R.id.textView2);

@@ -1,8 +1,8 @@
-<Rules>
-    <Rule>
-        <RuleId>113</RuleId>
-        <RuleName>定时关影音</RuleName>
-        <timeXML>
+<rules>
+    <rule>
+        <ruleid>113</ruleid>
+        <rulename>关影音</rulename>
+        <timexml>
             <time>
                 <hour>20</hour>
                 <minute>59</minute>
@@ -10,94 +10,32 @@
                 <endTime>1719127800</endTime>
                 <repeats>
                     <type>weekly</type>
-                    <daysOfWeek>4</daysOfWeek>
+                    <daysOfWeek>2,3,4,5,7</daysOfWeek>
                 </repeats>
             </time>
-        </timeXML>
-        <RuleContent>
+        </timexml>
+        <rulecontent>
             <RuleCondition/>
+
             <RuleCommands>
                 <RuleCommand>
                     <DeviceId>109</DeviceId>
-                    <Operator>2</Operator>
-                    <CommandName>TurnPlayerOff</CommandName>
+                    <Operator>1</Operator>
+                    <CommandName>TurnPlayerOn</CommandName>
                 </RuleCommand>
                 <RuleCommand>
                     <DeviceId>112</DeviceId>
-                    <Operator>2</Operator>
-                    <CommandName>TurnTvOff</CommandName>
-                </RuleCommand>
-            </RuleCommands>
-        </RuleContent>
-    </Rule>
-    <Rule>
-        <RuleId>114</RuleId>
-        <RuleName>除湿</RuleName>
-        <timeXML>
-            <time>
-                <hour>09</hour>
-                <minute>00</minute>
-                <startTime>1403508780</startTime>
-                <endTime>1782199980</endTime>
-                <repeats>
-                    <type>daily</type>
-                    <interval>10</interval>
-                </repeats>
-            </time>
-        </timeXML>
-        <RuleContent>
-            <RuleCondition>
-                <conditionGroup>
-                    <conditionRelation>or</conditionRelation>
-                    <condition>
-                        <ConditionID>31</ConditionID>
-                        <NodeID>108</NodeID>
-                        <VarID>1000</VarID>
-                        <VarName>亮度</VarName>
-                        <VarOper>&amp;gt;</VarOper>
-                        <VarValue>40</VarValue>
-                    </condition>
-                    <condition>
-                        <ConditionID>32</ConditionID>
-                        <NodeID>108</NodeID>
-                        <VarID>1000</VarID>
-                        <VarName>亮度</VarName>
-                        <VarOper>&amp;lt;</VarOper>
-                        <VarValue>20</VarValue>
-                    </condition>
-                </conditionGroup>
-                <conditionGroup>
-                    <conditionRelation>and</conditionRelation>
-                    <condition>
-                        <ConditionID>33</ConditionID>
-                        <NodeID>112</NodeID>
-                        <VarID>1000</VarID>
-                        <VarName>音量</VarName>
-                        <VarOper>&amp;gt;</VarOper>
-                        <VarValue>20</VarValue>
-                    </condition>
-                </conditionGroup>
-                <groupRelation>and</groupRelation>
-            </RuleCondition>
-            <RuleCommands>
-                <RuleCommand>
-                    <DeviceId>119</DeviceId>
                     <Operator>1</Operator>
-                    <CommandName>打开空调</CommandName>
-                </RuleCommand>
-                <RuleCommand>
-                    <DeviceId>119</DeviceId>
-                    <Operator>20</Operator>
-                    <CommandName>除湿模式</CommandName>
+                    <CommandName>TurnTvOn</CommandName>
                 </RuleCommand>
             </RuleCommands>
-        </RuleContent>
-    </Rule>
-    <Rule>
-        <RuleId>129</RuleId>
-        <RuleName>播放节目</RuleName>
-        <timeXML></timeXML>
-        <RuleContent>
+        </rulecontent>
+    </rule>
+    <rule>
+        <ruleid>88</ruleid>
+        <rulename>fgv</rulename>
+        <timexml></timexml>
+        <rulecontent>
             <RuleCondition/>
             <RuleCommands>
                 <RuleCommand>
@@ -107,38 +45,28 @@
                 </RuleCommand>
                 <RuleCommand>
                     <DeviceId>109</DeviceId>
-                    <Operator>1</Operator>
-                    <CommandName>TurnPlayerOn</CommandName>
-                </RuleCommand>
-                <RuleCommand>
-                    <DeviceId>109</DeviceId>
-                    <Operator>0:smb://DLINK/Volume_1/a.mp4</Operator>
+                    <Operator>0:A</Operator>
                     <CommandName></CommandName>
                 </RuleCommand>
-                <RuleCommand>
-                    <DeviceId>109</DeviceId>
-                    <Operator>3</Operator>
-                    <CommandName>PlayFile</CommandName>
-                </RuleCommand>
             </RuleCommands>
-        </RuleContent>
-    </Rule>
-    <Rule>
-        <RuleId>112</RuleId>
-        <RuleName>定时开影音</RuleName>
-        <timeXML>
+        </rulecontent>
+    </rule>
+    <rule>
+        <ruleid>112</ruleid>
+        <rulename>开影音</rulename>
+        <timexml>
             <time>
-                <hour>20</hour>
-                <minute>00</minute>
+                <hour>18</hour>
+                <minute>59</minute>
                 <startTime>1403452800</startTime>
                 <endTime>1719158340</endTime>
                 <repeats>
                     <type>weekly</type>
-                    <daysOfWeek>3</daysOfWeek>
+                    <daysOfWeek>3,4,7</daysOfWeek>
                 </repeats>
             </time>
-        </timeXML>
-        <RuleContent>
+        </timexml>
+        <rulecontent>
             <RuleCondition/>
             <RuleCommands>
                 <RuleCommand>
@@ -152,37 +80,165 @@
                     <CommandName>TurnTvOn</CommandName>
                 </RuleCommand>
             </RuleCommands>
-        </RuleContent>
-    </Rule>
-    <Rule>
-        <RuleId>110</RuleId>
-        <RuleName>空调制热</RuleName>
-        <timeXML></timeXML>
-        <RuleContent>
+        </rulecontent>
+    </rule>
+    <rule>
+        <ruleid>109</ruleid>
+        <rulename>灯光开</rulename>
+        <timexml></timexml>
+        <rulecontent>
+            <RuleCondition/>
+            <RuleCommands>
+                <RuleCommand>
+                    <DeviceId>108</DeviceId>
+                    <Operator>1</Operator>
+                    <CommandName>TurnLightOn</CommandName>
+                </RuleCommand>
+                <RuleCommand>
+                    <DeviceId>115</DeviceId>
+                    <Operator>1</Operator>
+                    <CommandName>TurnOn</CommandName>
+                </RuleCommand>
+            </RuleCommands>
+        </rulecontent>
+    </rule>
+    <rule>
+        <ruleid>108</ruleid>
+        <rulename>灯光关</rulename>
+        <timexml></timexml>
+        <rulecontent>
+            <RuleCondition/>
+            <RuleCommands>
+                <RuleCommand>
+                    <DeviceId>108</DeviceId>
+                    <Operator>2</Operator>
+                    <CommandName>TurnLightOff</CommandName>
+                </RuleCommand>
+                <RuleCommand>
+                    <DeviceId>115</DeviceId>
+                    <Operator>2</Operator>
+                    <CommandName>TurnOff</CommandName>
+                </RuleCommand>
+            </RuleCommands>
+        </rulecontent>
+    </rule>
+
+    <rule>
+        <ruleid>91</ruleid>
+        <rulename>test</rulename>
+        <timexml></timexml>
+        <rulecontent>
+            <RuleCondition>
+                <conditionGroup>
+                    <conditionRelation>or</conditionRelation>
+                    <condition>
+                        <ConditionID>6</ConditionID>
+                        <NodeID>108</NodeID>
+                        <VarID>1000</VarID>
+                        <VarName>亮度</VarName>
+                        <VarOper>==</VarOper>
+                        <VarValue>1</VarValue>
+                    </condition>
+                    <condition>
+                        <ConditionID>7</ConditionID>
+                        <NodeID>112</NodeID>
+                        <VarID>1000</VarID>
+                        <VarName>音量</VarName>
+                        <VarOper>&amp;lt;</VarOper>
+                        <VarValue>33</VarValue>
+                    </condition>
+                    <condition>
+                        <ConditionID>8</ConditionID>
+                        <NodeID>116</NodeID>
+                        <VarID>1000</VarID>
+                        <VarName>状态</VarName>
+                        <VarOper>&amp;gt;=</VarOper>
+                        <VarValue>11</VarValue>
+                    </condition>
+                </conditionGroup>
+                <conditionGroup>
+                    <conditionRelation>and</conditionRelation>
+                    <condition>
+                        <ConditionID>9</ConditionID>
+                        <NodeID>118</NodeID>
+                        <VarID>1001</VarID>
+                        <VarName>字符串</VarName>
+                        <VarOper>!=</VarOper>
+                        <VarValue>23</VarValue>
+                    </condition>
+                </conditionGroup>
+                <conditionGroup>
+                    <conditionRelation>and</conditionRelation>
+                    <condition>
+                        <ConditionID>10</ConditionID>
+                        <NodeID>109</NodeID>
+                        <VarID>1000</VarID>
+                        <VarName>文件路径</VarName>
+                        <VarOper>&amp;lt;</VarOper>
+                        <VarValue>1122</VarValue>
+                    </condition>
+                    <condition>
+                        <ConditionID>8</ConditionID>
+                        <NodeID>116</NodeID>
+                        <VarID>1000</VarID>
+                        <VarName>状态</VarName>
+                        <VarOper>&amp;gt;=</VarOper>
+                        <VarValue>11</VarValue>
+                    </condition>
+                </conditionGroup>
+                <conditionGroup>
+                    <conditionRelation>and</conditionRelation>
+                    <condition>
+                        <ConditionID>10</ConditionID>
+                        <NodeID>109</NodeID>
+                        <VarID>1000</VarID>
+                        <VarName>文件路径</VarName>
+                        <VarOper>&amp;lt;</VarOper>
+                        <VarValue>1122</VarValue>
+                    </condition>
+                </conditionGroup>
+                <conditionGroup>
+                    <conditionRelation>and</conditionRelation>
+                    <condition>
+                        <ConditionID>10</ConditionID>
+                        <NodeID>109</NodeID>
+                        <VarID>1000</VarID>
+                        <VarName>文件路径</VarName>
+                        <VarOper>&amp;lt;</VarOper>
+                        <VarValue>1122</VarValue>
+                    </condition>
+                </conditionGroup>
+                <groupRelation>and</groupRelation>
+                <groupRelation>or</groupRelation>
+                <groupRelation>or</groupRelation>
+                <groupRelation>or</groupRelation>
+            </RuleCondition>
+            <RuleCommands>
+                <RuleCommand>
+                    <DeviceId>112</DeviceId>
+                    <Operator>1</Operator>
+                    <CommandName>TurnTvOn</CommandName>
+                </RuleCommand>
+            </RuleCommands>
+        </rulecontent>
+    </rule>
+    <rule>
+        <ruleid>110</ruleid>
+        <rulename>空调制热</rulename>
+        <timexml></timexml>
+        <rulecontent>
             <RuleCondition>
                 <conditionGroup>
                     <conditionRelation>and</conditionRelation>
                     <condition>
-                        <ConditionID>35</ConditionID>
+                        <ConditionID>29</ConditionID>
                         <NodeID>108</NodeID>
                         <VarID>1000</VarID>
                         <VarName>亮度</VarName>
-                        <VarOper>&amp;gt;</VarOper>
-                        <VarValue>40</VarValue>
+                        <VarOper>&amp;gt;=</VarOper>
+                        <VarValue>57</VarValue>
                     </condition>
                 </conditionGroup>
-                <conditionGroup>
-                    <conditionRelation>and</conditionRelation>
-                    <condition>
-                        <ConditionID>36</ConditionID>
-                        <NodeID>121</NodeID>
-                        <VarID>1000</VarID>
-                        <VarName></VarName>
-                        <VarOper>&amp;lt;</VarOper>
-                        <VarValue>20</VarValue>
-                    </condition>
-                </conditionGroup>
-                <groupRelation>and</groupRelation>
             </RuleCondition>
             <RuleCommands>
                 <RuleCommand>
@@ -201,6 +257,82 @@
                     <CommandName>设置26度</CommandName>
                 </RuleCommand>
             </RuleCommands>
-        </RuleContent>
-    </Rule>
-</Rules>
+        </rulecontent>
+    </rule>
+    <rule>
+        <ruleid>107</ruleid>
+        <rulename>TestAir</rulename>
+        <timexml>
+            <time>
+                <hour>16</hour>
+                <minute>40</minute>
+                <startTime>1403252400</startTime>
+                <endTime>1403252400</endTime>
+                <repeats>
+                    <type>daily</type>
+                    <interval>2</interval>
+                </repeats>
+            </time>
+        </timexml>
+        <rulecontent>
+            <RuleCondition>
+                <conditionGroup>
+                    <conditionRelation>and</conditionRelation>
+                    <condition>
+                        <ConditionID>26</ConditionID>
+                        <NodeID>108</NodeID>
+                        <VarID>1000</VarID>
+                        <VarName>亮度</VarName>
+                        <VarOper>&amp;gt;=</VarOper>
+                        <VarValue>1</VarValue>
+                    </condition>
+                </conditionGroup>
+            </RuleCondition>
+            <RuleCommands>
+                <RuleCommand>
+                    <DeviceId>119</DeviceId>
+                    <Operator>1</Operator>
+                    <CommandName>打开空调</CommandName>
+                </RuleCommand>
+            </RuleCommands>
+        </rulecontent>
+    </rule>
+    <rule>
+        <ruleid>111</ruleid>
+        <rulename>空调制冷</rulename>
+        <timexml></timexml>
+        <rulecontent>
+            <RuleCondition>
+                <conditionGroup>
+                    <conditionRelation>and</conditionRelation>
+                    <condition>
+                        <ConditionID>30</ConditionID>
+                        <NodeID>108</NodeID>
+                        <VarID>1000</VarID>
+                        <VarName>亮度</VarName>
+                        <VarOper>&amp;lt;</VarOper>
+                        <VarValue>40</VarValue>
+                    </condition>
+                </conditionGroup>
+            </RuleCondition>
+            <RuleCommands>
+                <RuleCommand>
+                    <DeviceId>119</DeviceId>
+                    <Operator>1</Operator>
+                    <CommandName>打开空调</CommandName>
+                </RuleCommand>
+                <RuleCommand>
+                    <DeviceId>119</DeviceId>
+                    <Operator>21</Operator>
+                    <CommandName>制冷模式</CommandName>
+                </RuleCommand>
+                <RuleCommand>
+                    <DeviceId>119</DeviceId>
+                    <Operator>13</Operator>
+                    <CommandName>设置26度</CommandName>
+                </RuleCommand>
+            </RuleCommands>
+        </rulecontent>
+    </rule>
+
+</rules>

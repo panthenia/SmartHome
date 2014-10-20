@@ -3,7 +3,6 @@ package com.SmartHome.Activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -33,6 +32,8 @@ public class SecureActivity extends Activity {
         textView.setText("当前用户："+ps.user_act);
         ps.secure_adp = new SecureAdaptor(this);
         ps.validSecureAdaptor();
+        ps.current_ui_content = this;
+        ps.activitis.put(getClass().getName(),this);
         room_name = (TextView)findViewById(R.id.room_name);
         room_name.setText(ps.selected_room.name);
         GridView gridView = (GridView) findViewById(R.id.content_grid);

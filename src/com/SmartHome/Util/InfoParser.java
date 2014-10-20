@@ -37,7 +37,7 @@ public class InfoParser {
 
         while (eventType != XmlPullParser.END_DOCUMENT) {
             if (eventType == XmlPullParser.START_DOCUMENT) {
-                Log.d("XML", "Start document");
+                //Log.d("XML", "Start document");
             } else if (eventType == XmlPullParser.START_TAG) {
                 String tagnm = parser.getName();
                 String text ;
@@ -51,8 +51,10 @@ public class InfoParser {
 
                     vname = parser.nextText().trim();
 
+
                 } else if (tagnm.equals("VarValue")) {
                     text = parser.nextText().trim();
+
                     if(cdevice != null){
                         cdevice.addVar(vname,text);
                     }
@@ -139,7 +141,7 @@ public class InfoParser {
         XmlPullParser parser = Xml.newPullParser();
 
         InputStream xml = new ByteArrayInputStream(ps.rule_info.getBytes());
-        Log.d("rule_info:",ps.rule_info);
+        //Log.d("rule_info:",ps.rule_info);
         parser.setInput(xml, "UTF-8");
         eventType = parser.getEventType();
 
@@ -273,8 +275,8 @@ public class InfoParser {
             eventType = parser.next();
         }
         if(crule == null){
-            Log.d("rule_info:","crule==null");
-        }else Log.d("rule_info:","crule!=null");
+            //Log.d("rule_info:","crule==null");
+        }else ;//Log.d("rule_info:","crule!=null");
         ps.rule_list = rlist;
 
     }
@@ -296,7 +298,7 @@ public class InfoParser {
 
         while (eventType != XmlPullParser.END_DOCUMENT) {
             if (eventType == XmlPullParser.START_DOCUMENT) {
-                Log.d("XML", "Start document");
+                //Log.d("XML", "Start document");
             } else if (eventType == XmlPullParser.START_TAG) {
                 String tagnm = parser.getName();
                 String text ;
@@ -370,8 +372,45 @@ public class InfoParser {
         }
         ps.room_list = rooms;
         ps.device_list = devices;
-        for(int i=0;i<ps.device_list.size();++i)
-            Log.d("device_list",ps.device_list.get(i).id);
+        for(int i=0;i<ps.device_list.size();++i);
+            //Log.d("device_list",ps.device_list.get(i).id);
+    }
+    public static void parsePlayListInfo(String info) throws IOException,XmlPullParserException {
+        ArrayList<String> play_list = new ArrayList<String>();
+
+        XmlPullParser parser = Xml.newPullParser();
+
+        PublicState ps = PublicState.getInstance();
+        int eventType = 0;
+
+
+        InputStream xml = new ByteArrayInputStream(info.getBytes());
+        parser.setInput(xml, "UTF-8");
+        eventType = parser.getEventType();
+
+        while (eventType != XmlPullParser.END_DOCUMENT) {
+            if (eventType == XmlPullParser.START_DOCUMENT) {
+                //Log.d("XML", "Start document");
+            } else if (eventType == XmlPullParser.START_TAG) {
+                String tagnm = parser.getName();
+                String text ;
+
+                if (tagnm.equals("FileName")) {
+
+                   text = parser.nextText();
+                   play_list.add(text);
+                }
+            } else if (eventType == XmlPullParser.TEXT) {
+                // Log.d("XML", "Text ");
+            } else if (eventType == XmlPullParser.END_TAG) {
+
+            }
+
+            eventType = parser.next();
+
+        }
+
+        ps.play_list = play_list;
     }
     public static String makeRuleTimeInfo(Rule crule,ArrayList<String> tri_time) throws IOException,XmlPullParserException{
         XmlSerializer serializer = Xml.newSerializer();
@@ -441,8 +480,7 @@ public class InfoParser {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        String r=rst.toString();
-        return r;
+        return rst.toString();
     }
     public static String makeRuleConditionInfo(Rule crule, int grp, int cdt) throws IOException,XmlPullParserException{
         XmlSerializer serializer = Xml.newSerializer();
@@ -504,8 +542,7 @@ public class InfoParser {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        String r=rst.toString();
-        return r;
+        return rst.toString();
     }
 
 }

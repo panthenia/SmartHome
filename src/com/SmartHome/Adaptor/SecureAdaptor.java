@@ -2,18 +2,14 @@ package com.SmartHome.Adaptor;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.SmartHome.Activity.CameraActivity;
 import com.SmartHome.DataType.Device;
-import com.SmartHome.DataType.DeviceSatus;
 import com.SmartHome.DataType.PublicState;
 import com.SmartHome.R;
 
@@ -41,17 +37,17 @@ public class SecureAdaptor extends BaseAdapter {
     public void changeRoom(){
         room_devices.clear();
 
-        for(int i=0;i<devices.size();++i)
-            if(devices.get(i).room.equals(ps.selected_room.id)){
-                room_devices.add(devices.get(i));
+        for (Device device : devices)
+            if (device.room.equals(ps.selected_room.id)) {
+                room_devices.add(device);
             }
     }
     @Override
     public int getCount() {
-//        if(ps.user_act.contains("bupt") && ps.selected_room.name.contains("902"))
-//            return 1;
-//        else return 0;
-        return room_devices.size();
+        if(ps.user_act.contains("bupt") && ps.selected_room.name.contains("902"))
+            return 1;
+        else return 0;
+        //return room_devices.size();
     }
 
     @Override
@@ -71,13 +67,14 @@ public class SecureAdaptor extends BaseAdapter {
         TextView text = (TextView) v.findViewById(R.id.block_text);
         icon.setImageResource(R.drawable.security_camera);
 
-        DeviceSatus status = ps.getDeviceStatusById(room_devices.get(i).id);
+        //DeviceSatus status = ps.getDeviceStatusById(room_devices.get(i).id);
 
-        Log.d("status",String.valueOf(ps.status_list.size()));
-        text.setText(room_devices.get(i).name);
-        final String device_id = room_devices.get(i).id;
-        status.printInfo();
-        if(status.getVar("DEVICE_STATUS").contains("online")){
+       // Log.d("status",String.valueOf(ps.status_list.size()));
+        //text.setText(room_devices.get(i).name);
+        text.setText("一号摄像头");
+        //final String device_id = room_devices.get(i).id;
+        //status.printInfo();
+        /*if(status.getVar("DEVICE_STATUS").contains("online")){
 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -96,8 +93,15 @@ public class SecureAdaptor extends BaseAdapter {
                     Toast.makeText(context, "当前设备已离线", Toast.LENGTH_SHORT).show();
                 }
             });
-        }
-
+        }*/
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, CameraActivity.class);
+                //intent.putExtra("device_id",device_id);
+                context.startActivity(intent);
+            }
+        });
 
 
         return v;

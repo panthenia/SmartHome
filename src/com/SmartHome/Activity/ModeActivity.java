@@ -36,6 +36,9 @@ public class ModeActivity extends Activity {
         RelativeLayout rs = (RelativeLayout)findViewById(R.id.room_selector);
         rs.setVisibility(View.INVISIBLE);
         ps.mode_adp = new ModeAdaptor(this);
+        ps.activitis.put(getClass().getName(),this);
+        ps.validModeAdaptor();
+        ps.current_ui_content = this;
         GridView gridView = (GridView) findViewById(R.id.content_grid);
         gridView.setAdapter(ps.mode_adp);
     }

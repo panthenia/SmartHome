@@ -3,14 +3,15 @@ package com.SmartHome.DataType;
 import android.util.Log;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**
+ *
  * Created by p on 2014/9/1.
+ * 设备状态类
  */
 public class DeviceSatus {
-    String device_id;
+    public String device_id;
     Map<String,String> status = null;
     public DeviceSatus(String device_id){
         this.device_id = device_id;
@@ -20,7 +21,11 @@ public class DeviceSatus {
         status.put(vname,vvar);
     }
     public String getVar(String vname){
+
         return status.get(vname);
+    }
+    public void setVar(String name,String val){
+        status.put(name,val);
     }
     public void printInfo(){
         for (Object o : status.entrySet()) {

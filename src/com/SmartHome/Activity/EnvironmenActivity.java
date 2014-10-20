@@ -32,7 +32,9 @@ public class EnvironmenActivity extends Activity {
         setContentView(R.layout.second_level_layout);
         TextView textView = (TextView)findViewById(R.id.current_user);
         textView.setText("当前用户："+ps.user_act);
+        ps.current_ui_content = this;
         ps.envi_adp = new EnvironmentAdaptor(this);
+        ps.activitis.put(getClass().getName(),this);
         ps.validEnviAdaptor();
         GridView gridView = (GridView) findViewById(R.id.content_grid);
         TextView editText = (TextView) findViewById(R.id.acitivity_name);

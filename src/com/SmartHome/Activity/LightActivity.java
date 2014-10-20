@@ -30,7 +30,8 @@ public class LightActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.second_level_layout);
 
-
+        ps.current_ui_content = this;
+        ps.activitis.put(getClass().getName(),this);
         GridView gridView = (GridView) findViewById(R.id.content_grid);
         TextView editText = (TextView) findViewById(R.id.acitivity_name);
         room_name = (TextView)findViewById(R.id.room_name);

@@ -7,7 +7,7 @@ public abstract class DESCoder {
 	public  static final  String KEY_ALGORITHM = "DES";//加密算法DES
 	
 	//加密算法/工作模式/填充方式
-	public  static final  String CIPHER_ALGORITHM = "DES/ECB/PKCS5Padding";
+	public  static final  String CIPHER_ALGORITHM = "DES/ECB/PKCS7Padding";
 	
 	/*转换密钥
 	 * @param key 二进制密钥

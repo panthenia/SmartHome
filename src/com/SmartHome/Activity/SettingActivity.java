@@ -24,6 +24,8 @@ public class SettingActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.second_level_layout);
 
+        ps.current_ui_content = this;
+        ps.activitis.put(getClass().getName(),this);
         TextView tv = (TextView)findViewById(R.id.acitivity_name);
         tv.setText("设置");
         TextView textView = (TextView)findViewById(R.id.current_user);

@@ -1,13 +1,10 @@
 package com.SmartHome.Activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -23,15 +20,13 @@ import com.SmartHome.Util.ServiceRequest;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.TooManyListenersException;
-import java.util.zip.Inflater;
 
 /**
  * Created by p on 14-5-16.
+ * 显示规则的activity！
  */
 public class RuleActivity extends Activity {
 
@@ -54,6 +49,8 @@ public class RuleActivity extends Activity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.rule_activity);
+        ps.current_ui_content = this;
+        ps.activitis.put(getClass().getName(),this);
         Intent intent = getIntent();
         if(intent.hasExtra("ruleid"))  {
            crule = ps.getRuleById(intent.getStringExtra("ruleid"));
@@ -121,9 +118,9 @@ public class RuleActivity extends Activity {
                 for(int i=0;i<7;++i){
                     toggleButtons[i].setVisibility(View.VISIBLE);
                 }
-                for(int i=0;i<arrstr.length;++i){
+                for (String anArrstr : arrstr) {
 
-                    toggleButtons[Integer.valueOf(arrstr[i])-1].setChecked(true);
+                    toggleButtons[Integer.valueOf(anArrstr) - 1].setChecked(true);
                 }
             }else if(crule.cycle_type.contains("daily")){
                 interDay.setVisibility(View.VISIBLE);
@@ -186,7 +183,7 @@ public class RuleActivity extends Activity {
         listView.setVisibility(View.INVISIBLE);
         relativeLayout[0].setVisibility(View.VISIBLE);
         relativeLayout[1].setVisibility(View.INVISIBLE);
-        if(crule.has_time != true)
+        if(!crule.has_time)
             relativeLayout[0].setVisibility(View.INVISIBLE);
 
         for(int i=0;i<textViews.length;++i){
@@ -256,9 +253,19 @@ public class RuleActivity extends Activity {
         String weeks = "";
         String getmode_url="http://"+ps.getNetAddress();
         ArrayList<String> tri_time = new ArrayList<String>();
+
+        String start_date_str = String.valueOf(crule.st_date[0])+String.valueOf(crule.st_date[1])+String.valueOf(crule.st_date[2]);
+        String end_date_str = String.valueOf(crule.ed_date[0])+String.valueOf(crule.ed_date[1])+String.valueOf(crule.ed_date[2]);
+
+        if(end_date_str.compareTo(start_date_str) <0){
+            Toast.makeText(this, "结束日期早于起始日期，请修改！", Toast.LENGTH_SHORT).show();
+            return;
+        }
         tri_time.add(start_hour.getText().toString());
         tri_time.add(start_mini.getText().toString());
         tri_time.add(tem_cycle);
+        crule.hour = start_hour.getText().toString();
+        crule.minute = start_mini.getText().toString();
         if(tem_cycle.contains("weekly")){
             for(int i=0;i<toggleButtons.length;++i){
                 if(toggleButtons[i].isChecked()){

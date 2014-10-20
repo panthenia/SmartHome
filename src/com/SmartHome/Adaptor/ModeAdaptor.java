@@ -40,6 +40,14 @@ public class ModeAdaptor extends BaseAdapter {
     public void changeRoom(){
 
     }
+
+    public void showResult(String rst,String rsn){
+        if(rst.contains("success")){
+            Toast.makeText(context, "场景操作成功！", Toast.LENGTH_SHORT).show();
+
+        }
+        else Toast.makeText(context, "场景操作失败！原因："+rsn, Toast.LENGTH_LONG).show();
+    }
     @Override
     public int getCount() {
         return mlist.size();
@@ -65,26 +73,31 @@ public class ModeAdaptor extends BaseAdapter {
         final Mode cmode = mlist.get(i);
         final int mode_index = i;
         text.setText(cmode.name);
-        if(mode_state[i]){
+        if(mlist.get(i).status.contains("true")){
             text.setTextColor(Color.rgb(107, 193, 242));
-        }else text.setTextColor(Color.rgb(0x48,0x6a,0x00));
+
+        }else {
+            text.setTextColor(Color.rgb(0x48,0x6a,0x00));
+
+        }
 
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String url="http://"+ps.getNetAddress();
-                if(mode_state[i]){
+                if(mlist.get(i).status.contains("true")){
                     mode_state[i] = false;
-                    cmode.status = "false";
+                    mlist.get(i).status = "false";
                     url += "/wsnRest/sceneClose/"+ps.user_act+"/"+ps.getMd5();
-                    Toast.makeText(context, cmode.name+"已关闭", Toast.LENGTH_SHORT).show();
+
                 }
                 else {
                     mode_state[i] = true;
-                    cmode.status = "true";
-                    Toast.makeText(context, cmode.name+"已启动", Toast.LENGTH_SHORT).show();
+                    mlist.get(i).status = "true";
+
                     url += "/wsnRest/sceneAdopt/"+ps.user_act+"/"+ps.getMd5();
                 }
+                Toast.makeText(context,"开始执行操作..", Toast.LENGTH_LONG).show();
                 Log.d("start-scine:",url);
                 String edata = null;
                 try {
@@ -92,7 +105,7 @@ public class ModeAdaptor extends BaseAdapter {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                ps.controlRequest(url,edata);
+                ps.controlRequest(url,edata,context);
                 notifyDataSetChanged();
             }
         });

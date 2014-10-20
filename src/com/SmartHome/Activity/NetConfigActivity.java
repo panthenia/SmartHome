@@ -28,7 +28,7 @@ public class NetConfigActivity extends Activity {
         PublicState ps = PublicState.getInstance();
         ipEdit = (EditText)findViewById(R.id.net_ip);
         portEdit = (EditText)findViewById(R.id.net_port);
-
+        ps.activitis.put(getClass().getName(),this);
         if(ps.net_ip.length() > 0 && ps.net_port.length() > 0){
             ipEdit.setText(ps.net_ip);
             portEdit.setText(ps.net_port);

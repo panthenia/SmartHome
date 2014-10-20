@@ -1,6 +1,7 @@
 package com.SmartHome.Adaptor;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,6 +77,12 @@ public class LightAdaptor extends BaseAdapter {
 
 
             if (status.getVar("DEVICE_STATUS").contains("online")) {
+                if(!status.getVar("LIGHT_LEVEL").contains("readed")){
+                    int value = Integer.parseInt(status.getVar("LIGHT_LEVEL"));
+                    value /= 2;
+                    dv.status.put("light_level",String.valueOf(value));
+                    status.setVar("LIGHT_LEVEL","readed");
+                }
                 seekBar.setEnabled(true);
                 if (dv.status.containsKey("light_level"))
                     seekBar.setProgress(Integer.valueOf(dv.status.get("light_level")));
@@ -107,13 +114,21 @@ public class LightAdaptor extends BaseAdapter {
                         }
                         Log.d("request-url:", url);
 
-                        ps.controlRequest(url);
+                        ps.controlRequest(url,context);
                         adaptorSelf.notifyDataSetChanged();
 
                     }
                 });
             } else {
                 seekBar.setEnabled(false);
+                TextView textView = (TextView) v.findViewById(R.id.block_text);
+                textView.setTextColor(Color.rgb(0,0,0));
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(context, "当前设备已离线", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         } else if (dv.type.equals("lamp")) {
             v = inflater.inflate(R.layout.normal_light, null);
@@ -136,13 +151,15 @@ public class LightAdaptor extends BaseAdapter {
                         } else url += "/2/" + ps.user_act + "/2434";
                         Log.d("request-url:", url);
 
-                        ps.controlRequest(url);
+                        ps.controlRequest(url,context);
                         adaptorSelf.notifyDataSetChanged();
 
                     }
                 });
             } else {
                 toggleButton.setEnabled(false);
+                TextView textView = (TextView) v.findViewById(R.id.block_text);
+                textView.setTextColor(Color.rgb(0,0,0));
             }
 
         } else if (dv.type.equals("curtain")) {
@@ -165,7 +182,7 @@ public class LightAdaptor extends BaseAdapter {
                             url += "/1/" + ps.user_act + "/2434";
                         } else url += "/2/" + ps.user_act + "/2434";
                         Log.d("request-url:", url);
-                        ps.controlRequest(url);
+                        ps.controlRequest(url,context);
 
                         adaptorSelf.notifyDataSetChanged();
 
@@ -174,6 +191,8 @@ public class LightAdaptor extends BaseAdapter {
                 });
             } else {
                 swt.setEnabled(false);
+                TextView textView = (TextView) v.findViewById(R.id.block_text);
+                textView.setTextColor(Color.rgb(0,0,0));
             }
 
         }

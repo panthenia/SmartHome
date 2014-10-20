@@ -32,7 +32,8 @@ public class ModeDetailActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.second_level_layout);
         TextView tv = (TextView)findViewById(R.id.acitivity_name);
-
+        ps.current_ui_content = this;
+        ps.activitis.put(getClass().getName(),this);
         Intent intent = getIntent();
         if(intent.hasExtra("modenum")){
             mode_index = intent.getIntExtra("modenum",-1);

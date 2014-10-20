@@ -5,6 +5,8 @@
     <uses-permission
             android:name="android.permission.INTERNET"
             />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name = "android.permission.GET_TASKS"/>
     <uses-sdk android:minSdkVersion="14"/>
     <application
             android:icon="@drawable/home"
@@ -35,5 +37,6 @@
         <activity android:name=".Activity.ModeActivity"/>
         <activity android:name=".Activity.RuleActivity"/>
         <activity android:name=".Activity.ModeDetailActivity"/>
+        <activity android:name=".Activity.GlobalDialogActivity"/>
     </application>
 </manifest>

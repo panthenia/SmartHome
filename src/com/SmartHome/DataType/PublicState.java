@@ -1,12 +1,10 @@
 package com.SmartHome.DataType;
 
 import android.app.Application;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.hardware.Camera;
-import android.util.Base64;
 import android.util.Log;
-import android.widget.BaseAdapter;
 import com.SmartHome.Adaptor.*;
 import com.SmartHome.Cription.security.SecurityDemo;
 import com.SmartHome.R;
@@ -16,12 +14,12 @@ import com.SmartHome.Util.ServiceRequest;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -40,6 +38,7 @@ public class PublicState extends Application {
     public ArrayList<Area> room_list = null;
     public ArrayList<Rule> rule_list = null;
     public ArrayList<Mode> mode_list = null;
+    public ArrayList<String> play_list = null;
     public ArrayList<DeviceSatus> status_list = null;
     public ArrayList<Device> device_list = null;
     public boolean login_result = false;
@@ -49,6 +48,7 @@ public class PublicState extends Application {
     public String mode_info = "";
     public String status_info = "";
     public String md5 = "";
+    public Context current_ui_content = null;
 
     public MediaAdaptor media_adp = null;
     public LightAdaptor light_adp = null;
@@ -56,8 +56,8 @@ public class PublicState extends Application {
     public EnvironmentAdaptor envi_adp = null ;
     public ModeAdaptor mode_adp = null;
     public int current_adp = -1;
-
     public DataUtil du;
+    public HashMap<String,Context> activitis = null;
     public MessageDigest md5_encriptor = null;
     public void onCreate(){
 
@@ -67,6 +67,7 @@ public class PublicState extends Application {
         device_list = new ArrayList<Device>();
         rule_list = new ArrayList<Rule>();
         mode_list = new ArrayList<Mode>();
+        activitis = new HashMap<String, Context>();
         try {
             md5_encriptor = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
@@ -167,27 +168,36 @@ public class PublicState extends Application {
             e.printStackTrace();
         }
     }
+    public void handlePlayListInfo(String info){
+        try {
+            InfoParser.parsePlayListInfo(info);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+    }
     public String getNetAddress(){
         return net_ip+":"+net_port;
     }
     public Rule getRuleById(String id){
-        for(int i=0;i<rule_list.size();++i)
-            if(rule_list.get(i).id.equals(id))
-                return rule_list.get(i);
+        for (Rule aRule_list : rule_list)
+            if (aRule_list.id.equals(id))
+                return aRule_list;
         return null;
     }
     public Device getDeviceById(String id){
-        for(int i=0;i<device_list.size();++i)
-            if(device_list.get(i).id.equals(id))
-                return device_list.get(i);
+        for (Device aDevice_list : device_list)
+            if (aDevice_list.id.equals(id))
+                return aDevice_list;
         return null;
     }
     public DeviceSatus getDeviceStatusById(String id){
 
         synchronized (status_list){
-            for(int i=0;i<status_list.size();++i)
-                if(status_list.get(i).device_id.equals(id))
-                    return status_list.get(i);
+            for (DeviceSatus aStatus_list : status_list)
+                if (aStatus_list.device_id.equals(id))
+                    return aStatus_list;
             return null;
         }
     }
@@ -213,35 +223,35 @@ public class PublicState extends Application {
         }
     }
     public String getIdByType(String type){
-        for(int i=0;i<device_list.size();++i){
-            if(device_list.get(i).type.contains(type))
-                return device_list.get(i).id;
+        for (Device aDevice_list : device_list) {
+            if (aDevice_list.type.contains(type))
+                return aDevice_list.id;
         }
+
         return null;
     }
     public void printModes(){
-        for(int i=0;i<mode_list.size();++i)
-            mode_list.get(i).printInfo();
+        for (Mode aMode_list : mode_list) aMode_list.printInfo();
     }
     public void printAreas(){
-        for(int i=0;i<room_list.size();++i){
-            room_list.get(i).printInfo();
+        for (Area aRoom_list : room_list) {
+            aRoom_list.printInfo();
         }
     }
     public ArrayList<Device> getDeviceByType(String... types ){//获取设备信息
         ArrayList<Device> dl = new ArrayList<Device>();
         HashSet<String> type_set = new HashSet<String>(Arrays.asList(types));
-        Device dv = null;
+        Device dv;
 
-        for(int i=0;i<device_list.size();++i){
-            dv = device_list.get(i);
-            if(type_set.contains(dv.type))
+        for (Device aDevice_list : device_list) {
+            dv = aDevice_list;
+            if (type_set.contains(dv.type))
                 dl.add(dv);
         }
 
         return dl;
     }
-    public void controlRequest(String url){
+    public void controlRequest(String url ,Context ctx){
 
         String[] split_url = url.split("/");
         split_url[split_url.length-1] = getMd5();
@@ -270,7 +280,7 @@ public class PublicState extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            controlRequest(new_url,edata);
+            controlRequest(new_url,edata,ctx);
         }else if(split_url.length == 10){//三个参数的url
             String new_url = "";
             String data = "";
@@ -287,21 +297,21 @@ public class PublicState extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            controlRequest(new_url,edata);
+            controlRequest(new_url,edata,ctx);
         }
     }
-    public void controlRequest(String url,String data){
+    public void controlRequest(String url,String data,Context ctx){
         RequestInfo rf= null;
         try {
             rf = new RequestInfo(url,data);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        ServiceRequest sr=new ServiceRequest("control");
+        ServiceRequest sr=new ServiceRequest("control",ctx);
         sr.execute(rf);
     }
     public String getMd5(){
-        Log.d("md5:",md5);
+        //Log.d("md5:",md5);
         return md5;
     }
     public void makeMd5(){
@@ -311,20 +321,19 @@ public class PublicState extends Application {
         data_byte = data.getBytes();
 
         byte[] hash_data = md5_encriptor.digest(data_byte);
-        StringBuffer md5StrBuff = new StringBuffer();
+        StringBuilder md5StrBuff = new StringBuilder();
 
-        for (int i = 0; i < hash_data.length; i++) {
-            if (Integer.toHexString(0xFF & hash_data[i]).length() == 1)
-                md5StrBuff.append("0").append(Integer.toHexString(0xFF & hash_data[i]));
+        for (byte aHash_data : hash_data) {
+            if (Integer.toHexString(0xFF & aHash_data).length() == 1)
+                md5StrBuff.append("0").append(Integer.toHexString(0xFF & aHash_data));
             else
-                md5StrBuff.append(Integer.toHexString(0xFF & hash_data[i]));
+                md5StrBuff.append(Integer.toHexString(0xFF & aHash_data));
         }
 
         md5 = md5StrBuff.toString();
     }
     public ArrayList<EnviSensor> getSensorInfo(String type,String date){
         SQLiteDatabase db = du.getReadableDatabase();
-        String sql;
         ArrayList<EnviSensor> sensor_list = new ArrayList<EnviSensor>();
 
         Cursor rst = db.rawQuery("select * from sensor "+"where area = '"+selected_room.name+

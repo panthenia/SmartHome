@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.SmartHome.Activity.PlayListActivity;
+import com.SmartHome.DataType.PublicState;
 import com.SmartHome.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by p on 14-5-9.
@@ -21,9 +23,9 @@ public class PlayListAdaptor extends BaseAdapter {
     ArrayList<String> file_names = new ArrayList<String>();
     ArrayList<String> sub_content = null;
     Context context =null;
-    View.OnClickListener listener = null;
     LayoutInflater inflater = null;
     PlayListActivity playListActivity;
+    PublicState ps = PublicState.getInstance();
 
     /*由于于同一个listview 需要显示 所有的歌曲，或者作者然后点了作者在进入该作者的
     歌曲列表 所以用show_level变量记录当前listview显示的层次，0是歌曲层点击后直接返回播放，1是歌曲的
@@ -40,11 +42,13 @@ public class PlayListAdaptor extends BaseAdapter {
     }
     public PlayListAdaptor(Context ctx,String[] lst,int level,PlayListActivity act){
         list_content = new ArrayList<String>();
-        for(int i=0;i<lst.length;++i)
-            list_content.add(lst[i]);
-        file_names.add("control4驱动设计教学");
-        file_names.add("2nix激战系列宣传片");
+        Collections.addAll(list_content, lst);
+        for(int i=0;i<ps.play_list.size();++i){
+            file_names.add(ps.play_list.get(i));
+        }
+        /*file_names.add("Control4驱动教学");
         file_names.add("红尘客栈");
+        file_names.add("激战英雄联盟");*/
         show_level = level;
         context = ctx;
         playListActivity = act;
@@ -55,8 +59,7 @@ public class PlayListAdaptor extends BaseAdapter {
     }
     public void setContent(String[] arr){
         list_content = new ArrayList<String>();
-        for(int i=0;i<arr.length;++i)
-            list_content.add(arr[i]);
+        Collections.addAll(list_content, arr);
     }
     public void setShowLevel(int level){
         show_level = level;
@@ -66,8 +69,7 @@ public class PlayListAdaptor extends BaseAdapter {
     }
     public void setSubContent(String[] ar){
         sub_content = new ArrayList<String>();
-        for(int i=0;i<ar.length;++i)
-            sub_content.add(ar[i]);
+        Collections.addAll(sub_content, ar);
     }
     @Override
     public int getCount() {

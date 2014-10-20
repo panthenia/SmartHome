@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<re>
+    请求返回结果为一个字符串：
+    :TYPE-:ID-:RESULT
+    TYPE:请求的类型，当是控制设备时 type=device
+                    当是控制场景时 type=scene
+    ID：设备或场景的ID
+    RESULT：结果，暂定为 sccess/fail
+</re>

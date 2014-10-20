@@ -21,125 +21,42 @@
             <NodeID>108</NodeID>
             <NodeName>light1</NodeName>
             <NodeType>light</NodeType>
-            <NodeVariables>
-                <VariableName>LIGHT_LEVEL</VariableName>
-                <VariableValue>86</VariableValue>
-            </NodeVariables>
         </Node>
         <Node>
             <AreaID>1</AreaID>
             <NodeID>109</NodeID>
             <NodeName>player</NodeName>
             <NodeType>player</NodeType>
-            <NodeVariables>
-                <VariableName>FILELOCATION</VariableName>
-                <VariableValue>error! no key</VariableValue>
-            </NodeVariables>
         </Node>
         <Node>
             <AreaID>1</AreaID>
             <NodeID>112</NodeID>
             <NodeName>tv</NodeName>
             <NodeType>television</NodeType>
-            <NodeVariables>
-                <VariableName>TV_VOLUME</VariableName>
-                <VariableValue>0</VariableValue>
-                <VariableName>TV_CHANNEL</VariableName>
-                <VariableValue>1</VariableValue>
-            </NodeVariables>
-        </Node>
-        <Node>
-            <AreaID>1</AreaID>
-            <NodeID>113</NodeID>
-            <NodeName>1</NodeName>
-            <NodeType></NodeType>
-            <NodeVariables>
-                <VariableName>LightValue</VariableName>
-                <VariableValue>0</VariableValue>
-                <VariableName>CurtainState</VariableName>
-                <VariableValue>0</VariableValue>
-                <VariableName>StringValue</VariableName>
-                <VariableValue>123</VariableValue>
-            </NodeVariables>
-        </Node>
-        <Node>
-            <AreaID>1</AreaID>
-            <NodeID>114</NodeID>
-            <NodeName>sb1</NodeName>
-            <NodeType>subsystem</NodeType>
-            <NodeVariables>
-                <VariableName>SB_LightValue</VariableName>
-                <VariableValue>77</VariableValue>
-                <VariableName>SB_CurtainState</VariableName>
-                <VariableValue>0</VariableValue>
-            </NodeVariables>
         </Node>
         <Node>
             <AreaID>1</AreaID>
             <NodeID>115</NodeID>
             <NodeName>slight</NodeName>
-            <NodeType>sblight</NodeType>
-            <NodeVariables>
-                <VariableName>SB_Status</VariableName>
-                <VariableValue>0</VariableValue>
-            </NodeVariables>
-        </Node>
-        <Node>
-            <AreaID>1</AreaID>
-            <NodeID>116</NodeID>
-            <NodeName>scurtain</NodeName>
-            <NodeType>sbcurtain</NodeType>
-            <NodeVariables>
-                <VariableName>SB_Status</VariableName>
-                <VariableValue>0</VariableValue>
-            </NodeVariables>
-        </Node>
-        <Node>
-            <AreaID>1</AreaID>
-            <NodeID>117</NodeID>
-            <NodeName>c4</NodeName>
-            <NodeType>control4</NodeType>
-            <NodeVariables>
-                <VariableName>LightValue</VariableName>
-                <VariableValue>0</VariableValue>
-                <VariableName>CurtainState</VariableName>
-                <VariableValue>0</VariableValue>
-                <VariableName>StringValue</VariableName>
-                <VariableValue>123</VariableValue>
-            </NodeVariables>
-        </Node>
-        <Node>
-            <AreaID>1</AreaID>
-            <NodeID>118</NodeID>
-            <NodeName>curtain</NodeName>
-            <NodeType>c4_curtain</NodeType>
-            <NodeVariables>
-                <VariableName>LightValue</VariableName>
-                <VariableValue>0</VariableValue>
-                <VariableName>StringValue</VariableName>
-                <VariableValue>123</VariableValue>
-            </NodeVariables>
+            <NodeType>light</NodeType>
         </Node>
         <Node>
             <AreaID>1</AreaID>
             <NodeID>119</NodeID>
             <NodeName>ac</NodeName>
             <NodeType>air</NodeType>
-            <NodeVariables/>
         </Node>
         <Node>
             <AreaID>1</AreaID>
-            <NodeID>120</NodeID>
-            <NodeName>s1</NodeName>
-            <NodeType>sensor</NodeType>
-            <NodeVariables>
-                <VariableName>gTemperatureValue</VariableName>
-                <VariableValue>0</VariableValue>
-                <VariableName>gHumidityValue</VariableName>
-                <VariableValue>0</VariableValue>
-                <VariableName>gLightValue</VariableName>
-                <VariableValue>0</VariableValue>
-            </NodeVariables>
+            <NodeID>121</NodeID>
+            <NodeName>camera_ps</NodeName>
+            <NodeType>camera</NodeType>
+        </Node>
+        <Node>
+            <AreaID>1</AreaID>
+            <NodeID>122</NodeID>
+            <NodeName>dns_test</NodeName>
+            <NodeType>dns</NodeType>
         </Node>
     </NodeInfo>
 </Login>

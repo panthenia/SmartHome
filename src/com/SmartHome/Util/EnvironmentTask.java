@@ -30,7 +30,7 @@ public class EnvironmentTask extends TimerTask{
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Log.d("envitask-url=", url);
+                //Log.d("envitask-url=", url);
 				RequestInfo rf;
 				try {
 					rf = new RequestInfo(url,decode_data);

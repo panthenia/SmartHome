@@ -32,6 +32,8 @@ public class MediaActivity extends Activity {
         tv.setText("影音");
         TextView textView = (TextView)findViewById(R.id.current_user);
         textView.setText("当前用户："+ps.user_act);
+        ps.current_ui_content = this;
+        ps.activitis.put(getClass().getName(),this);
         room_name = (TextView)findViewById(R.id.room_name);
         room_name.setText(ps.selected_room.name);
         ps.media_adp = new MediaAdaptor(this);

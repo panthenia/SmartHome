@@ -48,12 +48,19 @@ public class SecurityDemo {
 	 * @param metadata �������
 	 * @return byte[] �������
 	 * */
-	public String getEncodeData(String data) throws Exception{
+	public String getFirstEncodeData(String data) throws Exception{
 		//data = data+"|"+time.getStringDate()  +"|"+ MD5Coder.sign(data.getBytes());//��Ԫ����м���ʱ���
-		data = time.getStringDate()  +"|"+ MD5Coder.sign(data.getBytes())+"|"+data;//��Ԫ����м���ʱ���
-		byte[] encodedData = DESCoder.encrypt(data.getBytes(), DESkey);
+		//String public_deskey = "helloworld";
+
+        data = time.getStringDate()  +"|"+ MD5Coder.sign(data.getBytes())+"|"+data;//��Ԫ����м���ʱ���
+		byte[] encodedData = DESCoder.encrypt(data.getBytes(), new String("12345678").getBytes());
 		return base64Demo.encode(encodedData);
 	}
+    public String getEncodeData(String data) throws Exception{
+        data = time.getStringDate()  +"|"+ MD5Coder.sign(data.getBytes())+"|"+data;//��Ԫ����м���ʱ���
+        byte[] encodedData = DESCoder.encrypt(data.getBytes(), DESkey);
+        return base64Demo.encode(encodedData);
+    }
 	/*��ý�����ݡ���DES����
 	 * @param metadata �������
 	 * @return byte[] �������
@@ -62,6 +69,10 @@ public class SecurityDemo {
 		byte[] decodeData = DESCoder.decrypt(base64Demo.decode(encodeData).getBytes("iso8859-1"), DESkey);
 		return new String(decodeData);
 	}
+    public String getFirstDecodeData(String encodeData)throws Exception{
+        byte[] decodeData = DESCoder.decrypt(base64Demo.decode(encodeData).getBytes("iso8859-1"), new String("12345678").getBytes());
+        return new String(decodeData);
+    }
 	public String getData(String decodeData){
 		String[] data = decodeData.split("\\|");
 		return data[2];

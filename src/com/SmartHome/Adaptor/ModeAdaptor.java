@@ -33,9 +33,7 @@ public class ModeAdaptor extends BaseAdapter {
         mlist = ps.mode_list;
         mode_state = new boolean[mlist.size()];
         for(int i=0;i<mode_state.length;++i)
-            if(mlist.get(i).status.contains("true"))
-                mode_state[i] = true;
-            else mode_state[i] = false;
+            mode_state[i] = mlist.get(i).status.contains("true");
     }
     public void changeRoom(){
 
@@ -71,7 +69,6 @@ public class ModeAdaptor extends BaseAdapter {
         icon.setImageResource(R.drawable.scine);
 
         final Mode cmode = mlist.get(i);
-        final int mode_index = i;
         text.setText(cmode.name);
         if(mlist.get(i).status.contains("true")){
             text.setTextColor(Color.rgb(107, 193, 242));
@@ -113,7 +110,7 @@ public class ModeAdaptor extends BaseAdapter {
             @Override
             public boolean onLongClick(View view) {
                 Intent intent = new Intent(context, ModeDetailActivity.class);
-                intent.putExtra("modenum",mode_index);
+                intent.putExtra("modenum", i);
                 context.startActivity(intent);
                 return true;
             }

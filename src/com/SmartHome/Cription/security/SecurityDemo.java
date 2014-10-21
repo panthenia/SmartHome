@@ -53,7 +53,7 @@ public class SecurityDemo {
 		//String public_deskey = "helloworld";
 
         data = time.getStringDate()  +"|"+ MD5Coder.sign(data.getBytes())+"|"+data;//��Ԫ����м���ʱ���
-		byte[] encodedData = DESCoder.encrypt(data.getBytes(), new String("12345678").getBytes());
+		byte[] encodedData = DESCoder.encrypt(data.getBytes(), "12345678".getBytes());
 		return base64Demo.encode(encodedData);
 	}
     public String getEncodeData(String data) throws Exception{
@@ -70,7 +70,7 @@ public class SecurityDemo {
 		return new String(decodeData);
 	}
     public String getFirstDecodeData(String encodeData)throws Exception{
-        byte[] decodeData = DESCoder.decrypt(base64Demo.decode(encodeData).getBytes("iso8859-1"), new String("12345678").getBytes());
+        byte[] decodeData = DESCoder.decrypt(base64Demo.decode(encodeData).getBytes("iso8859-1"), "12345678".getBytes());
         return new String(decodeData);
     }
 	public String getData(String decodeData){
@@ -103,11 +103,7 @@ public class SecurityDemo {
 		if(time.distanceBetweenCurren(data[0]) <= 180){//���յ������֮ǰ����ݣ�����Ϊ�������Ч
 			
 			//��֤ժҪ��Ϣ�Ƿ�һ�£����һ�£���ʾ�������
-			if(data[1].equals(MD5Coder.sign(data[2].getBytes()))){
-				return true;
-			}else {
-				return false;
-			}
+            return data[1].equals(MD5Coder.sign(data[2].getBytes()));
 		}else {
 			return false;
 		}
@@ -127,7 +123,7 @@ public class SecurityDemo {
 		byte[] decodekey = des.getRSADecodeKey(encodeKey);
 		System.err.println("���ܺ���Կ��\t"+bDemo.encode(decodekey));
 		
-		String encodedata =des.getEncodeData(inputString);
+		String encodedata =des. getEncodeData(inputString);
 		System.err.println("���ܺ�\t"+encodedata);
 		
 		String dncodedata = des.getDecodeData(encodedata);

@@ -22,7 +22,10 @@ public class DeviceSatus {
     }
     public String getVar(String vname){
 
-        return status.get(vname);
+                if(status.get(vname) == null)
+                    return "";
+                else return status.get(vname);
+
     }
     public void setVar(String name,String val){
         status.put(name,val);

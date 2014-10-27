@@ -95,7 +95,11 @@ public class RuleConditionAdaptor extends BaseExpandableListAdapter {
         ArrayList<String> cd = crule.getGroupCondition(grp,cdt);
         String op;
         TextView vname = (TextView)v.findViewById(R.id.val_name);
-        vname.setText("当:"+cd.get(cd.size()-1)+"的 "+cd.get(0));
+        String dnm = cd.get(cd.size()-1);
+        if(dnm.length() < 1){
+            dnm = "未知设备";
+        }
+        vname.setText("当:"+dnm+"的 "+cd.get(0));
 
         if(cdt != 0){
             vname = (TextView)v.findViewById(R.id.cdt_relation);

@@ -26,7 +26,8 @@ import java.util.Timer;
  * Created by p on 14-4-24.
  */
 public class MainActivity extends Activity {
-
+    Timer envi_timer = null;
+    Timer fresh_timer = null;
     PublicState ps = PublicState.getInstance();
     public void onCreate(Bundle savedInstanceState) {
 
@@ -39,6 +40,7 @@ public class MainActivity extends Activity {
 
        // Log.d("rule_info:","start");
         ps.current_ui_content = this;
+        ps.main_activity = this;
         try {
             InfoParser.parseDeviceInfo();
         } catch (IOException e) {
@@ -94,13 +96,13 @@ public class MainActivity extends Activity {
             ps.selected_room = ps.room_list.get(0);
         else ps.selected_room = new Area("未知区域","null");
         ps.activitis.put(getClass().getName(),this);
-        Timer envi_timer=new Timer(true);
+        envi_timer=new Timer(true);
         EnvironmentTask mtask=new EnvironmentTask(ps);
         envi_timer.schedule(mtask, 100,1000*60*10);
 
-        Timer fresh_timer=new Timer(true);
+        fresh_timer=new Timer(true);
         FreshStatusTask mtask2=new FreshStatusTask(ps);
-        fresh_timer.schedule(mtask2, 10,1000*60*5);
+        fresh_timer.schedule(mtask2, 150,1000*60*5);
     }
 
    public void printDevices(){
@@ -145,6 +147,8 @@ public class MainActivity extends Activity {
                     .setPositiveButton("确定",new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+                            envi_timer.cancel();
+                            fresh_timer.cancel();
                             Intent intent = new Intent(MainActivity.this,FinishActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);

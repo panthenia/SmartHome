@@ -64,7 +64,7 @@ public class AirActivity extends Activity {
         leftright_views[1] = (TextView)findViewById(R.id.t28);
         for(int i=0;i<ps.status_list.size();++i){
             if(ps.status_list.get(i).device_id.contains(device_id)){
-                current_tem = Integer.parseInt(ps.status_list.get(i).getVar("AC_TEMPERATURE"));
+                //current_tem = Integer.parseInt(ps.status_list.get(i).getVar("AC_TEMPERATURE"));
                 setTem.setText(String.valueOf(current_tem)+"℃");
                 if(ps.status_list.get(i).getVar("AC_STATUS").contains("1")){
                     power_views[0].setTextColor(Color.rgb(0x6b, 0xc1, 0xf2));

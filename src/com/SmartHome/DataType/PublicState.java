@@ -57,6 +57,7 @@ public class PublicState extends Application {
     public ModeAdaptor mode_adp = null;
     public int current_adp = -1;
     public DataUtil du;
+    public Context main_activity = null;
     public HashMap<String,Context> activitis = null;
     public MessageDigest md5_encriptor = null;
     public void onCreate(){

@@ -79,6 +79,7 @@ public class PlayListActivity extends Activity {
         imageView[0].setVisibility(View.VISIBLE);
     }
     public void onAuthorClicked(View v){//1
+        Log.d("Check Author","on author click");
         list_adapter.setContent(author_list);
         list_adapter.setShowLevel(1);
         list_adapter.setSubContent(play_list);

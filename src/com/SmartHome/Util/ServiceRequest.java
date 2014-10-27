@@ -78,11 +78,17 @@ public class ServiceRequest extends AsyncTask<RequestInfo, Void, String> {
         if(request_mode.contains("control")){
             PublicState ps = PublicState.getInstance();
             if(!rst_ok){
-                if(context != null){
+                /*if(context != null){
                     Intent intent = new Intent(context,GlobalDialogActivity.class);
                     intent.putExtra("msg","按确定键以退出程序！");
                     intent.putExtra("title","网关无法连接！");
                     context.startActivity(intent);
+                }*/
+                if(ps.main_activity != null){
+                    Intent intent = new Intent(ps.main_activity,GlobalDialogActivity.class);
+                    intent.putExtra("msg","按确定键以退出程序！");
+                    intent.putExtra("title","网关无法连接！");
+                    ps.main_activity.startActivity(intent);
                 }
             }else{
                 String[] crst = rst.split("-");

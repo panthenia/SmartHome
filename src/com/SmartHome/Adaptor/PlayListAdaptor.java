@@ -91,7 +91,7 @@ public class PlayListAdaptor extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         View v = inflater.inflate(R.layout.play_list_item,null);
         TextView textView = (TextView)v.findViewById(R.id.play_list_item);
-        textView.setText(file_names.get(i));
+        textView.setText(list_content.get(i));
 
         if(show_level == 0)
             v.setOnClickListener(new ZeroLevelClicked(i));

@@ -5,11 +5,7 @@
         <Variables>
             <Variable>
                 <VarName>DEVICE_STATUS</VarName>
-                <VarValue>unknown</VarValue>
-            </Variable>
-            <Variable>
-                <VarName>LIGHT_LEVEL</VarName>
-                <VarValue>200</VarValue>
+                <VarValue>online</VarValue>
             </Variable>
         </Variables>
     </NodeStatus>
@@ -18,15 +14,7 @@
         <Variables>
             <Variable>
                 <VarName>DEVICE_STATUS</VarName>
-                <VarValue>unknown</VarValue>
-            </Variable>
-            <Variable>
-                <VarName>FILELOCATION</VarName>
-                <VarValue>3.mp4</VarValue>
-            </Variable>
-            <Variable>
-                <VarName>PLAYROOT</VarName>
-                <VarValue>smb://DLINK/Volume_1/</VarValue>
+                <VarValue>online</VarValue>
             </Variable>
         </Variables>
     </NodeStatus>
@@ -35,7 +23,7 @@
         <Variables>
             <Variable>
                 <VarName>DEVICE_STATUS</VarName>
-                <VarValue>unknown</VarValue>
+                <VarValue>online</VarValue>
             </Variable>
             <Variable>
                 <VarName>TV_VOLUME</VarName>
@@ -43,14 +31,6 @@
             </Variable>
             <Variable>
                 <VarName>TV_CHANNEL</VarName>
-                <VarValue>1</VarValue>
-            </Variable>
-            <Variable>
-                <VarName>TV_STATUS</VarName>
-                <VarValue>0</VarValue>
-            </Variable>
-            <Variable>
-                <VarName>TV_MODE</VarName>
                 <VarValue>1</VarValue>
             </Variable>
         </Variables>
@@ -63,31 +43,19 @@
                 <VarValue>online</VarValue>
             </Variable>
             <Variable>
-                <VarName>AC_STATUS</VarName>
-                <VarValue>0</VarValue>
-            </Variable>
-            <Variable>
-                <VarName>AC_SPEED</VarName>
-                <VarValue>0</VarValue>
-            </Variable>
-            <Variable>
-                <VarName>AC_ORIENT</VarName>
-                <VarValue>2</VarValue>
-            </Variable>
-            <Variable>
-                <VarName>AC_TEMPERATURE</VarName>
-                <VarValue>27</VarValue>
-            </Variable>
-            <Variable>
-                <VarName>AC_MODE</VarName>
-                <VarValue>3</VarValue>
-            </Variable>
-            <Variable>
                 <VarName>AC_ORIENT_LR</VarName>
                 <VarValue>0</VarValue>
             </Variable>
             <Variable>
                 <VarName>AC_ORIENT_UD</VarName>
+                <VarValue>0</VarValue>
+            </Variable>
+            <Variable>
+                <VarName>AC_STATUS</VarName>
+                <VarValue>0</VarValue>
+            </Variable>
+            <Variable>
+                <VarName>AC_SPEED</VarName>
                 <VarValue>0</VarValue>
             </Variable>
         </Variables>
@@ -99,10 +67,6 @@
                 <VarName>DEVICE_STATUS</VarName>
                 <VarValue>unknown</VarValue>
             </Variable>
-            <Variable>
-                <VarName>SB_Status</VarName>
-                <VarValue>0</VarValue>
-            </Variable>
         </Variables>
     </NodeStatus>
     <NodeStatus>
@@ -110,16 +74,7 @@
         <Variables>
             <Variable>
                 <VarName>DEVICE_STATUS</VarName>
-                <VarValue>unknown</VarValue>
-            </Variable>
-            <Variable>
-                <VarName>CAMERA_STATUS</VarName>
-                <VarValue>0</VarValue>
-            </Variable>
-            <Variable>
-                <VarName>CAMERA_GETIMAGE</VarName>
-                <VarValue>http://192.168.1.102:50000/SnapshotJPEG?Resolution=[640x480]&amp;amp;Quality=[Clarity]
-                </VarValue>
+                <VarValue>online</VarValue>
             </Variable>
         </Variables>
     </NodeStatus>
@@ -128,15 +83,7 @@
         <Variables>
             <Variable>
                 <VarName>DEVICE_STATUS</VarName>
-                <VarValue>unknown</VarValue>
-            </Variable>
-            <Variable>
-                <VarName>FILELIST</VarName>
-                <VarValue>;1.mp3;3.mp4;4.mp4;a.mp4;相忘于江湖.mp3;童年.mp3;让我们荡起双桨.mp3</VarValue>
-            </Variable>
-            <Variable>
-                <VarName>FILEDIR</VarName>
-                <VarValue>/mnt/HD/HD_a2/</VarValue>
+                <VarValue>offline</VarValue>
             </Variable>
         </Variables>
     </NodeStatus>
@@ -146,10 +93,6 @@
             <Variable>
                 <VarName>DEVICE_STATUS</VarName>
                 <VarValue>unknown</VarValue>
-            </Variable>
-            <Variable>
-                <VarName>SB_Status</VarName>
-                <VarValue>0</VarValue>
             </Variable>
         </Variables>
     </NodeStatus>

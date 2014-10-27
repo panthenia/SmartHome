@@ -78,7 +78,11 @@ public class LightAdaptor extends BaseAdapter {
 
             if (status.getVar("DEVICE_STATUS").contains("online")) {
                 if(!status.getVar("LIGHT_LEVEL").contains("readed")){
-                    int value = Integer.parseInt(status.getVar("LIGHT_LEVEL"));
+                    int value = 0;
+                    if(status.getVar("LIGHT_LEVEL").length() > 0){
+                        value = Integer.parseInt(status.getVar("LIGHT_LEVEL"));
+                    }
+
                     value /= 2;
                     dv.status.put("light_level",String.valueOf(value));
                     status.setVar("LIGHT_LEVEL","readed");

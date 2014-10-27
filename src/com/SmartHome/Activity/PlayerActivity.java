@@ -43,6 +43,8 @@ public class PlayerActivity extends Activity {
         current_text = (TextView)findViewById(R.id.textView5);
         mute_view = (TextView)findViewById(R.id.textView3);
         TextView textView = (TextView)findViewById(R.id.acitivity_name);
+        power_views[1].setTextColor(Color.rgb(0x6b,0xc1,0xf2));
+        power_views[0].setTextColor(Color.rgb(0x48,0x6a,0x00));
         textView.setText("播放器控制");
     }
     public void onPlayListClicked(View v){

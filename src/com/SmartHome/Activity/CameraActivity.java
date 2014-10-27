@@ -67,7 +67,7 @@ public class CameraActivity extends Activity {
         textView.setText("当前用户："+ps.user_act);
         if(ps.net_ip.startsWith("10."))
             cam_ip = ps.net_ip;
-        else cam_ip = "192.168.1.108";
+        else cam_ip = "192.168.1.100";
 
         left.setOnClickListener(new View.OnClickListener() {
             @Override

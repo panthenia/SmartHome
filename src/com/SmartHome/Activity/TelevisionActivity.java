@@ -49,6 +49,7 @@ public class TelevisionActivity extends Activity {
 
         for(int i=0;i<ps.status_list.size();++i){
             if(ps.status_list.get(i).device_id.contains(device_id)){
+                Log.d("Television","TV_STATUS = "+ps.status_list.get(i).getVar("TV_STATUS"));
                 if(ps.status_list.get(i).getVar("TV_STATUS").contains("1")){
                     power_views[0].setTextColor(Color.rgb(0x6b, 0xc1, 0xf2));
                     power_views[1].setTextColor(Color.rgb(0x48,0x6a,0x00));
